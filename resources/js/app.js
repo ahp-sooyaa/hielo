@@ -19,7 +19,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('chart-component', require('./components/ChartComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +29,15 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+});
+
+require('medium-editor/dist/css/medium-editor.css');
+require('medium-editor/dist/css/themes/beagle.css');
+import MediumEditor from 'medium-editor';
+
+var editor = new MediumEditor('.editable', {
+    placeholder: {
+        text: `Begin your story ...`,
+        hideOnClick: true
+    }
 });

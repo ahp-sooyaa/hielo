@@ -19,11 +19,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-primary text-white">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand font-weight-bold" href="{{ url('/posts') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -51,11 +51,41 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Illuminate\Support\Str::limit(Auth::user()->name, 9, '') }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <div class="d-flex dropdown-item align-items-center py-2">
+                                        <a 
+                                            href="/{{current_user()->name}}">
+                                            <i class="fas fa-user-circle fa-2x mr-2"></i>
+                                        </a>
+                                        <a href="/{{current_user()->name}}">
+                                            {{current_user()->name}}
+                                        </a>
+                                    </div>
+                                    <hr class="my-2">
+                                    <a 
+                                        class="dropdown-item mb-2" 
+                                        href="/{{current_user()->name}}/posts?type=all">
+                                        Posts
+                                    </a>
+                                    <a 
+                                        class="dropdown-item mb-2" 
+                                        href="/{{current_user()->name}}/posts?type=all">
+                                        Setting
+                                    </a>
+                                    <a 
+                                        class="dropdown-item mb-2" 
+                                        href="/{{current_user()->name}}/readingList?type=saved">
+                                        ReadingList
+                                    </a>
+                                    <a 
+                                        class="dropdown-item mb-2" 
+                                        href="/{{current_user()->name}}">
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item pb-2" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -73,7 +103,7 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            {{ $slot }}
         </main>
     </div>
 </body>

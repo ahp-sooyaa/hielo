@@ -22,7 +22,10 @@ class PostsController extends Controller
     {
         request()->session()->push('posts.recently_viewed', $post->getKey());
 
-        return view('posts.show', compact('post'));
+        return view('posts.show', [
+            'post' => $post,
+            'relatedPosts' => $post->relatedPosts()
+        ]);
     }
 
     public function create()
@@ -74,7 +77,7 @@ class PostsController extends Controller
             'content' => 'nullable',
             'featured_image' => 'nullable|mimes:jpeg,bmp,png,jpg'
         ]);
-        
+
         if (request()->hasFile('featured_image')) {
             $attributes['featured_image'] = request('featured_image')->store('featured_images');
         }

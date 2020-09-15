@@ -17273,7 +17273,13 @@ blockquote:after {
 /* posts */
 
 .featured-image {
+  /* show post featured image */
   width: 200px;
   height: 100px;
+}
+
+.featured-image-sg {
+  width: 680px;
+  height: 400px;
 }
 

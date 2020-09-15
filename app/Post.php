@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -11,6 +12,7 @@ class Post extends Model
     protected $guarded = [];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
     protected $withCount = ['comments', 'likes'];
+    protected $with = ['author'];
 
     public function path()
     {
@@ -48,5 +50,15 @@ class Post extends Model
     public function isEdited()
     {
         return $this->created_at < $this->updated_at;
+    }
+
+    public function relatedPosts()
+    {
+        return $this->whereHas('tags', function (Builder $query) {
+            return $query->whereIn('name', $this->tags->pluck('name'));
+        })->where([
+            ['id', '!=', $this->id],
+            ['published_at', '!=', NULL]
+        ])->latest()->take(3)->get();
     }
 }

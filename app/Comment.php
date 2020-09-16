@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\RecordActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model

@@ -1,6 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Traits;
+
+use App\Activity;
 
 /**
  * 
@@ -32,6 +34,6 @@ trait RecordActivity
 
     public function activiy()
     {
-        return $this->morphMany('App\Activity', 'subject');
+        return $this->morphMany(Activity::class, 'subject');
     }
 }

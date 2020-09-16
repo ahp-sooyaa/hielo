@@ -3,6 +3,10 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\Followable;
+use App\Traits\Bookmarkable;
+use App\Traits\RecordActivity;
+use App\Traits\Reportable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 

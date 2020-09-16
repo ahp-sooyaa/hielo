@@ -2,12 +2,16 @@
 
 namespace App;
 
+use App\Traits\Shareable;
+use App\Traits\Likable;
+use App\Traits\RecordActivity;
+use App\Traits\Reportable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use Likable, RecordActivity, Reportable;
+    use Likable, RecordActivity, Reportable, Shareable;
 
     protected $guarded = [];
     protected $dates = ['published_at', 'created_at', 'updated_at'];
@@ -60,5 +64,17 @@ class Post extends Model
             ['id', '!=', $this->id],
             ['published_at', '!=', NULL]
         ])->latest()->take(3)->get();
+    }
+
+    protected $shareOptions = [
+        'columns' => [
+            'title' => 'title'
+        ],
+        'url' => null
+    ];
+
+    public function getUrlAttribute()
+    {
+        return route('posts.show', $this->title);
     }
 }

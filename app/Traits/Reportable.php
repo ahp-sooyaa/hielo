@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Traits;
 
+use App\Report;
 /**
  * 
  */
@@ -16,8 +17,6 @@ trait Reportable
     {
         return $this->reports()->create([
             'reporter_id' => current_user()->id,
-            // 'subject_id' => $user->id,
-            // 'subject_type' => $type,
             'description' => $description
         ]);
     }

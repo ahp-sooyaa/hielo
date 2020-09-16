@@ -13,7 +13,6 @@ class ChartController extends Controller
     {
         return [
             'userArr' => $this->registeredUserByMonth(),
-            // 'postArr' => [21, 32, 9, 20, 38, 29, 45, 76, 84, 12, 11, 56]
             'postArr' => $this->publishedPostsByMonth()
         ];
     }
@@ -23,8 +22,7 @@ class ChartController extends Controller
         $users = User::select('id', 'created_at')
             ->get()
             ->groupBy(function ($date) {
-                //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
-                return Carbon::parse($date->created_at)->format('m'); // grouping by months
+                return Carbon::parse($date->created_at)->format('m');
             });
 
         $usermcount = [];

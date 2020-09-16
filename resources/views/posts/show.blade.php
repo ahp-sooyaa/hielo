@@ -39,10 +39,14 @@
                                 <button class="like text-secondary">
                                     <i class="{{ $post->isLiked() ? 'fas' : 'far'}} fa-heart fa-lg"> {{$post->likes_count}}</i> 
                                 </button>
-                                |
                             </form>
-                            <i class="fab fa-twitter-square fa-lg mx-2"></i>
-                            <i class="fab fa-facebook-square fa-lg mr-2"></i>
+                            
+                            <a class="text-white" href="{{$post->getShareUrl('twitter')}}">
+                                <i class="fab fa-twitter-square fa-lg mx-2"></i>
+                            </a>
+                            <a class="text-white" href="{{$post->getShareUrl('facebook')}}">
+                                <i class="fab fa-facebook-square fa-lg mr-2"></i>
+                            </a>
                             <i class="far fa-bookmark fa-lg"></i>
                         </div>
                     </div>

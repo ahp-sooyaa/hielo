@@ -12,8 +12,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // $this->authorize('access_admin_panel', current_user());
-        // return Activity::latest()->get();
         return view('admin.dashboard.index', [
             'posts' => Post::all(),
             'users' => User::all(),

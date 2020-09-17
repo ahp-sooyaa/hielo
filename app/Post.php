@@ -8,13 +8,14 @@ use App\Traits\RecordActivity;
 use App\Traits\Reportable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\NewComment;
 
 class Post extends Model
 {
     use Likable, RecordActivity, Reportable, Shareable;
 
     protected $guarded = [];
-    protected $dates = ['published_at', 'created_at', 'updated_at'];
+    protected $dates = ['published_at'];
     protected $withCount = ['comments', 'likes'];
     protected $with = ['author'];
 
@@ -43,12 +44,19 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function addComment($body)
+    public function addComment($comment)
     {
-        return $this->comments()->create([
-            'author_id' => auth()->id(),
-            'body' => $body
-        ]);
+        $comment = $this->comments()->create($comment);
+
+        $ids = current_user()->followers()->pluck('id');
+
+        foreach (current_user()->followers as $follower) {
+            if ($ids->contains($this->author->id)) {
+                $follower->notify(new NewComment($this, $comment));
+            }
+        }
+
+        return $comment;
     }
 
     public function isEdited()

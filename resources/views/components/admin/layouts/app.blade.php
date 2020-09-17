@@ -48,33 +48,33 @@
                             </h4>                  
                         </div>
                     </div>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-item hover">
                           <a class="nav-link {{ request()->segment(2)=='dashboard' ? 'active' : ''}}" href="/admin/dashboard">DashBoard</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hover">
                           <a class="nav-link {{ request()->segment(2)=='reports' ? 'active' : ''}}" href="/admin/reports">Reports</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hover">
                           <a class="nav-link {{ request()->segment(2)=='roles' ? 'active' : ''}}" href="/admin/roles">Roles</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hover">
                           <a class="nav-link {{ request()->segment(2)=='users' ? 'active' : ''}}" href="/admin/users">Users</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hover">
                           <a class="nav-link {{ request()->segment(2)=='posts' ? 'active' : ''}}" href="/admin/posts">Posts</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hover">
                           <a class="nav-link {{ request()->segment(2)=='comments' ? 'active' : ''}}" href="/admin/comments">Comments</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hover">
                           <a class="nav-link {{ request()->segment(2)=='themes' ? 'active' : ''}}" href="/admin/themes">Themes</a>
                         </li>
                         <hr class="border border-primary w-100">
-                        <li class="nav-item">
+                        <li class="nav-item hover">
                           <a class="nav-link {{ request()->segment(2)=='profile' ? 'active' : ''}}" href="/admin/profile">My account</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hover">
                           <a href="{{ url('/logout') }}" class="nav-link">Logout</a>
                         </li>
                       </ul>

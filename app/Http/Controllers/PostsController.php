@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\PostPublished;
 use App\Post;
 use App\Tag;
 
@@ -56,9 +57,13 @@ class PostsController extends Controller
             $attributes['featured_image'] = request('featured_image')->store('featured-images');
         }
 
-        $post = auth()->user()->posts()->create($attributes);
+        $post = current_user()->posts()->create($attributes);
 
         $post->tags()->attach(request('tags'));
+
+        foreach (current_user()->followers as $follower) {
+            $follower->notify(new PostPublished($post));
+        }
 
         return redirect('/posts');
     }

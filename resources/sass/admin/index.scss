@@ -2,12 +2,17 @@
 .nav-item:not(:last-child){
     margin-bottom: 3px;
 }
-.nav-item{
+
+.hover{
     a:hover, .active{
         background-color: $primary;
         border-radius: 5px;
         color: white;
     }
+}
+
+.nav-link{
+    padding: 10px 15px 10px 15px !important;
 }
 
 .avatar{

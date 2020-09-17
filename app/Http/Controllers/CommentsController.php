@@ -12,7 +12,10 @@ class CommentsController extends Controller
             'body' => 'required'
         ]);
 
-        $post->addComment(request('body'));
+        $post->addComment([
+            'author_id' => auth()->id(),
+            'body' => request('body')
+        ]);
 
         return redirect($post->path());
     }

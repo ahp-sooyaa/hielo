@@ -18,7 +18,7 @@
         <div class="row mx-m3">
             <div class="col-8 px-3">
                 <div class="card p-3 mt-4">
-                    <chart-component></chart-component>
+                    <chart></chart>
                 </div>
             </div>
             <div class="col-4 px-3">

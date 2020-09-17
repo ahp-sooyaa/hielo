@@ -49,6 +49,7 @@
                                 </li>
                             @endif --}}
                         @auth
+                            <user-notification :user={{auth()->id()}}></user-notification>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Illuminate\Support\Str::limit(Auth::user()->name, 9, '') }} <span class="caret"></span>

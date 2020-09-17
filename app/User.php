@@ -52,6 +52,7 @@ class User extends Authenticatable
     public function timeline()
     {
         $ids = $this->follows()->pluck('id');
+        
         $ids->push($this->id);
 
         return Post::where('published_at', '<=', date('Y-m-d H:i:s'))

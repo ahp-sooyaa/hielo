@@ -112,5 +112,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/postReports/{post}/create', 'PostReportsController@create');
     Route::post('/postReports/{post}', 'PostReportsController@store');
 
+    /* notifications */
+    Route::get('/{user}/notifications', 'UserNotificationsController@index');
+    Route::delete('/{user}/notifications/{notifications}', 'UserNotificationsController@destroy');
+
     Route::get('/home', 'HomeController@index')->name('home');
 });

@@ -17274,11 +17274,15 @@ blockquote:after {
   margin-bottom: 3px;
 }
 
-.nav-item a:hover,
-.nav-item .active {
+.hover a:hover,
+.hover .active {
   background-color: #494D5F;
   border-radius: 5px;
   color: white;
+}
+
+.nav-link {
+  padding: 10px 15px 10px 15px !important;
 }
 
 .avatar-1x {

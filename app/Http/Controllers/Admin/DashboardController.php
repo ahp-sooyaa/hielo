@@ -12,6 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // return Activity::all();
         return view('admin.dashboard.index', [
             'posts' => Post::all(),
             'users' => User::all(),

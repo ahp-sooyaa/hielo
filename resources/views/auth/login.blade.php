@@ -1,60 +1,92 @@
 <x-layouts.app>
 <div class="container">
     <div class="row justify-content-center text-primary">
-        <div class="col-md-8">
-            <div class="card">
-
-                <div class="card-body">
-                    <h1 class="text-center">{{ __('login') }}</h1>
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group mx-auto col-6">
-                            <label for="email" class="col-form-label text-md-left">{{ __('E-Mail Address') }}</label>
-
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-6 mx-auto">
-                            <label for="password" class="col-form-label text-md-left">{{ __('Password') }}</label>
-
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-6 mx-auto">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                <label class="form-check-label" for="remember">
-                                    {{ __('Remember Me') }}
-                                </label>
+        <div class="col-md-9">
+            <div class="card border-0">
+                <div class="d-flex">
+                    <div class="col-6 p-0 position-relative">
+                        <img class="h-100 b-l-tb" src="https://hielo.dev/appImage/3255309.jpg" alt="" data-toggle="tooltip" title="Idea vector created by stories - www.freepik.com">
+                    </div>
+                    <div class="col-6 p-5">
+                        <div class="d-flex mx-auto justify-content-end mt-n4 mb-5">
+                            <div class="bg-info shadow-sm b-l-tb px-2">
+                                <a class="text-white" href="{{route('login')}}">SignIn</a>
+                            </div>
+                            <div class="bg-white shadow-sm b-r-tb px-2">
+                                <a class="text-info" href="{{route('register')}}">SignUp</a>
                             </div>
                         </div>
+                        <h1 class="text-center mb-4">
+                            Hello there, welcome Back
+                        </h1>
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
 
-                        <div class="form-group col-6 mx-auto">
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Login') }}
-                            </button>
+                            <div class="form-group mx-auto">
+                                {{-- <label for="email" class="col-form-label text-md-left">{{ __('E-Mail Address') }}</label> --}}
 
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror border-bottom-1 border-0" name="email" value="{{ old('email') }}" placeholder="Email" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mx-auto">
+                                {{-- <label for="password" class="col-form-label text-md-left">{{ __('Password') }}</label> --}}
+
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror border-bottom-1 border-0" name="password" placeholder="Password" required autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <div class="form-check mr-auto">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                                <div>
+                                    @if (Route::has('password.request'))
+                                    <a class="btn btn-link pr-0" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                                </div>
+                            </div>
+
+                            <div class="mx-auto mb-5">
+                                <button type="submit" class="btn btn-info w-100">
+                                    SignIn
+                                </button>
+                            </div>
+
+                            <div>
+                                SignIn with Social media or <a class="text-info" href="{{route('register')}}">SignUp</a>
+                            </div>
+
+                            <div class="d-flex align-items-center mt-1"> 
+                                <a href="/login/facebook">
+                                    <button class="btn btn-sm btn-warning badge-pill mr-2">
+                                        <i class="fab fa-facebook-f text-white mr-1"></i>Facebook
+                                    </button>
                                 </a>
-                            @endif
-                        </div>
-                    </form>
+                                <a href="/login/github">
+                                    <button class="btn btn-sm btn-dark badge-pill">
+                                        <i class="fab fa-github"> GitHub</i> 
+                                    </button>
+                                </a> 
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

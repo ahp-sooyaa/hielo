@@ -11,10 +11,14 @@ trait RecordActivity
 {
     protected static function bootRecordActivity()
     {
-        foreach (static::getActivitiesToRecord() as $event) {
-            static::$event(function ($model) use ($event) {
-                $model->recordActivity($event);
-            });
+        if (auth()->check()) {
+            if (current_user()->isSuperAdmin() || current_user()->isAdmin()) {
+                foreach (static::getActivitiesToRecord() as $event) {
+                    static::$event(function ($model) use ($event) {
+                        $model->recordActivity($event);
+                    });
+                }
+            };
         }
     }
 

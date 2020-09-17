@@ -19,6 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('login/github', 'Auth\LoginController@redirectGithub');
+Route::get('login/github/callback', 'Auth\LoginController@githubCallback');
+
+Route::get('login/facebook', 'Auth\LoginController@redirectFacebook');
+Route::get('login/facebook/callback', 'Auth\LoginController@facebookCallback');
 
 /* admin routes */
 Route::group(['middleware' => ['auth', 'Admin'], 'prefix' => 'admin'], function () {

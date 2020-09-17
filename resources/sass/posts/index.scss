@@ -90,8 +90,21 @@ img{
 }
 
 /* profile */
+.border-bottom-1{
+    border-bottom: 1px solid #ff4f5a !important;
+}
+
 .border-bottom-3{
     border-bottom: 3px solid #A0D2EB !important;
+}
+
+.blue{
+    &-btn{
+        background-color: #3b5998;
+    }
+    &-bg{
+        background-color: #3c4352;
+    }
 }
 
 .profile{
@@ -105,6 +118,13 @@ img{
 input[type=file]{
     border-bottom: 1px solid $secondary;
 }
+
+/* remove form focus outline */
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
 
 .text-box{
     color: $secondary !important;
@@ -214,11 +234,12 @@ blockquote:after {
     }
 }
 
-// .carousel-control-prev{
-//     width: 60px;
-//     // height: 60px;
-//     border-top-left-radius: 20px;
-//     border-bottom-left-radius: 20px;
-//     left: -6%;
-//     // top: calc(50% - 30px);
-// }
+.b-r-tb{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.b-l-tb{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}

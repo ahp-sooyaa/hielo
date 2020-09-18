@@ -17,6 +17,6 @@ class CommentsController extends Controller
             'body' => request('body')
         ]);
 
-        return redirect($post->path());
+        return redirect($post->path())->with('status', 'Comment success');
     }
 }

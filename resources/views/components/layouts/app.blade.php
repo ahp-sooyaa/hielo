@@ -106,6 +106,8 @@
         <main class="py-4">
             {{ $slot }}
         </main>
+
+        <flash message="{{ session('status') }}"></flash>
     </div>
 </body>
 </html>

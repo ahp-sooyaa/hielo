@@ -65,7 +65,7 @@ class PostsController extends Controller
             $follower->notify(new PostPublished($post));
         }
 
-        return redirect('/posts');
+        return redirect('/posts')->with('status', 'Post Published');
     }
 
     public function edit(Post $post)

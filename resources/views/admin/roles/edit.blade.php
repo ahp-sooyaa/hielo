@@ -6,7 +6,12 @@
             @method('PATCH')
 
             <div class="form-group">
-                <input name="name" class="form-control" type="text" value="{{$role->name}}">
+                <input name="name" class="form-control @error('name') is-invalid @enderror" type="text" value="{{$role->name}}">
+                @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="form-group">
                 <select name="abilities[]" multiple>

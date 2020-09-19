@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Comment;
+use App\Http\Requests\StoreCommentRequest;
 
 class CommentsController extends Controller
 {
@@ -28,12 +29,9 @@ class CommentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Comment $comment)
+    public function update(Comment $comment, StoreCommentRequest $request)
     {
-        $attribute = request()->validate(['body' => 'required']);
-
-        // update method won't work with object, require array
-        $comment->update($attribute);
+        $comment->update($request->validated());
 
         return redirect('/admin/comments');
     }

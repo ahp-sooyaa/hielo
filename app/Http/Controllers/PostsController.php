@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Notifications\PostPublished;
 use App\Post;
 use App\Tag;
+use Illuminate\Auth\Access\Gate;
 
 class PostsController extends Controller
 {
@@ -36,7 +38,7 @@ class PostsController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(StorePostRequest $request)
     {
         switch (request()->input('action')) {
             case 'Draft':
@@ -44,16 +46,10 @@ class PostsController extends Controller
                 break;
 
             case 'Publish':
-                $attributes = request()->validate([
-                    'title' => 'required',
-                    'excerpt' => 'required',
-                    'content' => 'required',
-                    'featured_image' => 'required|mimes:jpeg,bmp,png,jpg',
-                    'published_at' => 'required'
-                ]);
+                $attributes = $request->validated();
                 break;
         };
-        if (request('featured_image')) {
+        if ($request()->hasFile('featured_image')) {
             $attributes['featured_image'] = request('featured_image')->store('featured-images');
         }
 
@@ -73,16 +69,8 @@ class PostsController extends Controller
         return view('posts.edit', compact('post'));
     }
 
-    public function update(Post $post)
+    public function update(Post $post, StorePostRequest $request)
     {
-        /* does validation requrie? */
-        $attributes = request()->validate([
-            'title' => 'nullable',
-            'excerpt' => 'nullable',
-            'content' => 'nullable',
-            'featured_image' => 'nullable|mimes:jpeg,bmp,png,jpg'
-        ]);
-
         if (request()->hasFile('featured_image')) {
             $attributes['featured_image'] = request('featured_image')->store('featured_images');
         }

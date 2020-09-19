@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 use App\Post;
 use App\Tag;
 
@@ -28,15 +29,9 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+    public function store(StorePostRequest $request)
     {
-        $attributes = request()->validate([
-            'title' => 'required',
-            'excerpt' => 'required',
-            'content' => 'required',
-            'featured_image' => 'required|mimes:jpeg,bmp,png,jpg',
-            'published_at' => 'required'
-        ]);
+        $attributes = $request->validated();
 
         $attributes['featured_image'] = request('featured_image')->store('featured-images');
 
@@ -56,17 +51,11 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Post $post)
+    public function update(Post $post, StorePostRequest $request)
     {
-        $attributes = request()->validate([
-            'title' => 'required',
-            'excerpt' => 'required',
-            'content' => 'required',
-            'featured_image' => 'nullable|mimes:jpeg,bmp,png,jpg',
-            'published_at' => 'required'
-        ]);
+        $attributes = $request->validated();
 
-        if (request('featured_image')) {
+        if ($request->hasFile('featured_image')) {
             $attributes['featured_image'] = request('featured_image')->store('featured-images');
         }
 

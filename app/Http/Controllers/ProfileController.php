@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
 use App\User;
 
 class ProfileController extends Controller
@@ -17,19 +17,13 @@ class ProfileController extends Controller
         return view('profile.edit', compact('user'));
     }
 
-    public function update(User $user)
+    public function update(User $user, StoreUserRequest $request)
     {
-        $attributes = request()->validate([
-            'name' => 'required',
-            'short_bio' => 'nullable|string|max:160',
-            'avatar' => 'nullable|mimes:jpeg,bmp,png,jpg'
-        ]);
-
-        if (request()->hasFile('avatar')) {
+        if ($request->hasFile('avatar')) {
             $attributes['avatar'] = request('avatar')->store('avatars');
         }
 
-        $user->update($attributes);
+        $user->update($request->validated());
 
         return redirect($user->path());
     }

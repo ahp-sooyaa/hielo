@@ -22,9 +22,7 @@ class RolesController extends Controller
 
     public function store(Role $role)
     {
-        $attribute = request()->validate(['name' => 'required']);
-
-        $role->create($attribute);
+        $role->create(request()->validate(['name' => 'required']));
 
         return redirect('/admin/roles');
     }
@@ -39,9 +37,7 @@ class RolesController extends Controller
 
     public function update(Role $role)
     {
-        $attribute = request()->validate(['name']);
-
-        $role->update($attribute);
+        $role->update(request()->validate(['name']));
 
         $role->abilities()->sync(request('abilities'));
 

@@ -8,10 +8,22 @@
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
-                    <input class="form-control" name="name" type="text" value="{{$user->name}}">
+                    <input class="form-control @error('name') is-invalid @enderror" name="name" type="text" value="{{$user->name}}">
+                    
+                    @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
-                    <input class="form-control" name="email" type="text" value="{{$user->email}}">
+                    <input class="form-control @error('email') is-invalid @enderror" name="email" type="text" value="{{$user->email}}">
+
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <select name="role">

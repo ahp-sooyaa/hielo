@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('login/github', 'Auth\LoginController@redirectGithub');
 Route::get('login/github/callback', 'Auth\LoginController@githubCallback');
 

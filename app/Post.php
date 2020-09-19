@@ -9,6 +9,7 @@ use App\Traits\Reportable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Notifications\NewComment;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -80,6 +81,11 @@ class Post extends Model
         ],
         'url' => null
     ];
+
+    public function wasJustPublished()
+    {
+        return $this->created_at->gt(Carbon::now()->subMinute());
+    }
 
     public function getUrlAttribute()
     {

@@ -14,9 +14,14 @@
             <div class="form-group">
                 <input
                     type="text" name="body" 
-                    class="form-control mt-3"
+                    class="form-control mt-3 @error('password') is-invalid @enderror"
                     value="{{$comment->body}}"
                 >
+                @error('body')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             
             <button type="submit" class="btn btn-primary mr-3">

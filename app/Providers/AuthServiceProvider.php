@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Policies\PostPolicy;
+use App\Policies\CommentPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,10 +27,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Gate::before(function ($user, $ability) {
-        //     if ($user->abilities()->contains($ability)) {
-        //         return true;
-        //     }
-        // });
+        Gate::define('create-post', [PostPolicy::class, 'create']);
+
+        Gate::define('create-comment', [CommentPolicy::class, 'create']);
     }
 }

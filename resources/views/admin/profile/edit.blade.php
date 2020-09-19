@@ -18,31 +18,34 @@
                 <div class="form-group row">
                     <label class="col-3 col-form-label" for="name">User Name</label>
                     <div class="col-9">
-                        <input class="form-control" name="name" value="{{current_user()->name}}">
+                        <input class="form-control @error('name') is-invalid @enderror" name="name" value="{{current_user()->name}}">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-3 col-form-label">Email</label>
+                    <label for="email" class="col-3 col-form-label">Email</label>
                     <div class="col-9">
-                    <input type="email" name="email" class="form-control" value="{{current_user()->email}}">
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{current_user()->email}}">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-3 col-form-label">Bio</label>
+                    <label for="short_bio" class="col-3 col-form-label">Bio</label>
                     <div class="col-9">
-                    <textarea class="form-control" name="short_bio" cols="30" rows="5">{{current_user()->short_bio}}</textarea>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-3 col-form-label">Password</label>
-                    <div class="col-9">
-                    <input class="form-control" type="password" name="password" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-3 col-form-label">Password Confirmation</label>
-                    <div class="col-9">
-                    <input class="form-control" type="password" name="password_confirmation" required>
+                        <textarea class="form-control @error('short_bio') is-invalid @enderror" name="short_bio" cols="30" rows="5">{{current_user()->short_bio}}</textarea>
+                        @error('short_bio')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary mr-3">Update</button>

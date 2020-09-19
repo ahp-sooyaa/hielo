@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use App\Role;
 use App\User;
 
@@ -20,15 +21,9 @@ class UsersController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(User $user)
+    public function store(StoreUserRequest $request)
     {
-        $attributes = request()->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-
-        $user->create($attributes);
+        User::create($request->validated());
 
         return redirect('/admin/users');
     }
@@ -41,14 +36,9 @@ class UsersController extends Controller
         ]);
     }
 
-    public function update(User $user)
+    public function update(User $user, StoreUserRequest $request)
     {
-        $attributes = request()->validate([
-            'name' => 'required',
-            'email' => 'required'
-        ]);
-
-        $user->update($attributes);
+        $user->update($request->validated());
 
         $user->assignRole(request('role'));
 

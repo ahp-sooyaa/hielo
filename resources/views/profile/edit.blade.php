@@ -19,11 +19,32 @@
                             </a>
                         </div>
                         <div class="text-center w-50 mx-auto pt-5">
-                            <input class="mb-3" type="file" name="avatar">
-                            <input class="form-control mb-3" name="name" type="text" value="{{$user->name}}">
-                            <textarea class="form-control" name="short_bio" cols="50" rows="3">
-                                {{$user->short_bio ?? ''}}
-                            </textarea>
+                            <div class="form-group">
+                                <input type="file" name="avatar">
+                                @error('avatar')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="name" type="text" value="{{$user->name}}">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="short_bio" cols="50" rows="3">
+                                    {{$user->short_bio ?? ''}}
+                                </textarea>
+                                @error('short_bio')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                     </form>
                 </div>

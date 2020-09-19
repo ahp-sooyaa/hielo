@@ -5,7 +5,12 @@
             @csrf
 
             <div class="form-group">
-                <input name="name" class="form-control" type="text" placeholder="Role name">
+                <input name="name" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Role name">
+                @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <button class="btn btn-primary mr-3">Create</button>
             <a href="/admin/roles">back</a>

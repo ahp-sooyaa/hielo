@@ -9,7 +9,6 @@ class ReportsController extends Controller
 {
     public function index()
     {
-        // return Report::latest()->get();
         return view('admin.reports.index', [
             'reports' => Report::latest()->get()
         ]);

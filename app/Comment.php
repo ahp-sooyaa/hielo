@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\RecordActivity;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Comment extends Model
 {
@@ -21,5 +22,10 @@ class Comment extends Model
     public function post()
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function wasJustLeft()
+    {
+        return $this->created_at->gt(Carbon::now()->subMinute());
     }
 }

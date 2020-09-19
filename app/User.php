@@ -52,7 +52,7 @@ class User extends Authenticatable
     public function timeline()
     {
         $ids = $this->follows()->pluck('id');
-        
+
         $ids->push($this->id);
 
         return Post::where('published_at', '<=', date('Y-m-d H:i:s'))
@@ -126,6 +126,16 @@ class User extends Authenticatable
     public function addCollection($name)
     {
         return $this->collections()->create(compact('name'));
+    }
+
+    public function lastPost()
+    {
+        return $this->hasOne(Post::class, 'author_id')->latest();
+    }
+
+    public function lastComment()
+    {
+        return $this->hasOne(Comment::class, 'author_id')->latest();
     }
 
     public function path($append = '')

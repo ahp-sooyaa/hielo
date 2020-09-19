@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use App\User;
 
 class ProfileController extends Controller
@@ -17,21 +18,13 @@ class ProfileController extends Controller
         return view('admin.profile.edit', compact('user'));
     }
 
-    public function update(User $user)
+    public function update(User $user, StoreUserRequest $request)
     {
-        $attributes = request()->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'short_bio' => 'nullable|string|max:160',
-            'avatar' => 'nullable|mimes:jpeg,bmp,png,jpg',
-            'password' => 'required|confirmed|min:8'
-        ]);
-
         if (request()->hasFile('avatar')) {
             $attributes['avatar'] = request('avatar')->store('avatars');
         }
 
-        $user->update($attributes);
+        $user->update($request->validated());
 
         return redirect('/admin/profile');
     }

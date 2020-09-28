@@ -53,11 +53,11 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         // spam detection validate fail response
-        if ($exception instanceof ValidationException) {
-            if ($request->expectsJson()) {
-                return response('Sorry, Span detected. Not Allowed!', 422);
-            }
-        }
+        // if ($exception instanceof ValidationException) {
+        //     if ($request->expectsJson()) {
+        //         return response('Sorry, Span detected. Not Allowed!', 422);
+        //     }
+        // }
 
         // request too much within one minute reponse
         if ($exception instanceof ThrottleException) {

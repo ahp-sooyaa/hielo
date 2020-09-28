@@ -150,35 +150,35 @@ select{
     padding: 5px 6px;
 }
 
-medium-editor-element{
-    padding-left: 1rem !important;
-}
+// medium-editor-element{
+//     padding-left: 1rem !important;
+// }
 
-blockquote {
-	font-weight: 100;
-    font-size: 18px;
-    font-style: italic;
-    max-width: 600px;
-    text-align: justify;
-	margin-top: 20px;
-    padding-left: 40px;
-}
+// blockquote {
+// 	font-weight: 100;
+//     font-size: 18px;
+//     font-style: italic;
+//     max-width: 600px;
+//     text-align: justify;
+// 	margin-top: 20px;
+//     padding-left: 40px;
+// }
 
-blockquote:before,
-blockquote:after {
-	color: #f1efe6;
-	font-size: 2rem;
-	width: 1rem;
-	height: 1rem;
-}
+// blockquote:before,
+// blockquote:after {
+// 	color: #f1efe6;
+// 	font-size: 2rem;
+// 	width: 1rem;
+// 	height: 1rem;
+// }
 
-blockquote:before {
-	content: '“';
-}
+// blockquote:before {
+// 	content: '“';
+// }
 
-blockquote:after {
-	content: '”';
-}
+// blockquote:after {
+// 	content: '”';
+// }
 
 /* comment hover */
 .hover:hover{
@@ -242,4 +242,8 @@ blockquote:after {
 .b-l-tb{
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+}
+
+.ql-editor{
+    color: black !important;
 }

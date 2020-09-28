@@ -37,8 +37,9 @@ class StorePostRequest extends FormRequest
             'title' => 'required|string|max:255',
             'excerpt' => 'required|string|max:255',
             'content' => 'required|string',
-            'featured_image' => 'sometimes|required|mimes:jpeg,png,jpg',
+            'featured_image' => 'sometimes|required|image|mimes:jpeg,png,jpg',
             'published_at' => 'sometimes|required'
+            // 'tags' => 'required'
         ];
     }
 }

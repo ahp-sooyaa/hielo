@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('api')->group(function () {
     Route::get('/chart', 'ChartController@index');
+    Route::get('/posts/{post}', 'PostController@edit');
+    Route::get('/tags', 'TagController@index');
 });

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import LineChart from "../LineChart";
+import LineChart from "../lineChart";
 import axios from "axios";
 
 export default {

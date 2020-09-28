@@ -18,7 +18,7 @@ class Post extends Model
     protected $guarded = [];
     protected $dates = ['published_at'];
     protected $withCount = ['comments', 'likes'];
-    protected $with = ['author'];
+    protected $with = ['author', 'tags'];
 
     public function path()
     {

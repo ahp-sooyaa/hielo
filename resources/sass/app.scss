@@ -1,5 +1,6 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
 
 // Variables
 @import 'variables';
@@ -18,3 +19,5 @@
 
 // admin
 @import 'admin/index.scss';
+
+@import '~instantsearch.css/themes/algolia-min';

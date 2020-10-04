@@ -10,9 +10,12 @@ use App\Tag;
 class PostsController extends Controller
 {
     public function index()
+
     {
         if (request('tag')) {
-            $posts = Tag::where('name', request('tag'))->firstOrFail()->posts;
+            $posts = Tag::where('name', request('tag'))
+                ->firstOrFail()
+                ->posts->whereNotNull('published_at');
         } else {
             $posts = auth()->user()->timeline();
         }

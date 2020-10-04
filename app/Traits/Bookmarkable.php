@@ -19,9 +19,35 @@ trait Bookmarkable
         return $this->hasMany(Bookmark::class, 'author_id')->whereNull('status');
     }
 
+    public function toggleBookmark($postId)
+    {
+        if($this->isBookmark($postId)){
+            return $this->unbookmark($postId);
+        }
+        $this->bookmark($postId);
+    }
+
+    public function isBookmark($postId)
+    {
+        return $this->bookmarks()
+            ->where([
+                ['post_id' , $postId],
+                ['author_id', auth()->id()]
+            ])
+            ->exists();
+    }
+
+    public function bookmark($postId)
+    {
+        $this->bookmarks()->create([
+            'post_id' => $postId,
+            'author_id' => auth()->id()
+        ]);
+    }
+
     public function unbookmark($postId)
     {
-        return $this->bookmarks()->where('post_id', $postId)->delete();
+        $this->bookmarks()->where('post_id', $postId)->delete();
     }
 
     public function toggleArchieve($postId)

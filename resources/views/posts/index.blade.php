@@ -27,7 +27,17 @@
                                 {{$post->title}}
                             </a>
                         </h4>
-                        <i class="far fa-bookmark text-dark mt-1"></i>
+                        <form 
+                            method="POST" action="/readingList/{{$post->id}}" 
+                            class="pt-1"
+                        >
+                            @csrf
+                            <button class="like text-primary">
+                                <i 
+                                    class="{{ current_user()->isBookmark($post->id) ? 'fas' : 'far'}} fa-bookmark fa-lg"
+                                ></i> 
+                            </button>
+                        </form>
                     </div>
                     <div class="text-muted mb-auto">                    
                         {{ Str::limit($post->excerpt, 80) }}

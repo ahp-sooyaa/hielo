@@ -34,6 +34,12 @@ class ReadingListController extends Controller
         }
     }
 
+    public function store($postId)
+    {
+        current_user()->toggleBookmark($postId);
+        return back();
+    }
+
     public function destroy($postId)
     {
         current_user()->unbookmark($postId);

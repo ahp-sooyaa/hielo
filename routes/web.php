@@ -68,8 +68,11 @@ Route::group(['middleware' => ['auth', 'Admin'], 'prefix' => 'admin'], function 
 
 /* user routes */
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/search', 'SearchController@show');
+
     Route::get('/posts', 'PostsController@index');
     Route::get('/posts/create', 'PostsController@create');
+    // Route::get('/posts/search', 'SearchController@show');
     Route::post('/posts', 'PostsController@store');
     Route::get('/posts/{post}', 'PostsController@show');
     Route::get('/posts/{post}/edit', 'PostsController@edit');
@@ -90,17 +93,18 @@ Route::group(['middleware' => 'auth'], function () {
 
     /* readingList */
     Route::get('/{user:name}/readingList', 'ReadingListController@index');
+    Route::post('/readingList/{postId}', 'ReadingListController@store');
     Route::delete('/readingList/{postId}', 'ReadingListController@destroy');
     Route::patch('/readingList/{postId}', 'ReadingListController@archieve');
-    Route::get('/{user:name}/readingList/{collection:name}', 'ReadingListController@collection');
 
+    Route::get('/{user:name}/readingList/{collection:name}', 'ReadingListController@collection');
     Route::post('/{user:name}/collection', 'CollectionController@store');
     /* individual user posts */
     Route::get('/{user:name}/posts', 'AuthorPostsController@index');
     Route::delete('/posts/{postId}', 'AuthorPostsController@destroy'); // need condition check
 
-    /* post comments routes */
-    Route::post('/posts/{post}/like', 'LikesController@store');
+    /* post like routes */
+    Route::post('/posts/{post}/like', 'LikesController@store'); // at first segment '/posts' shouldn't use, it may cause route conflict with (eg. '/posts/search')
 
     /* post comments routes */
     Route::post('/posts/{post}/comment', 'CommentsController@store');
@@ -115,6 +119,8 @@ Route::group(['middleware' => 'auth'], function () {
     /* notifications */
     Route::get('/{user}/notifications', 'UserNotificationsController@index');
     Route::delete('/{user}/notifications/{notifications}', 'UserNotificationsController@destroy');
+
+    /* Search */
 
     Route::get('/home', 'HomeController@index')->name('home');
 });

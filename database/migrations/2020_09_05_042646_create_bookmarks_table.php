@@ -18,7 +18,7 @@ class CreateBookmarksTable extends Migration
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
             $table->string('status')->nullable();
-            $table->string('collection')->nullable();
+            // $table->string('collection')->nullable();
             $table->timestamps();
 
             $table->unique(['post_id', 'author_id']);

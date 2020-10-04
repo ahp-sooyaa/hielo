@@ -9,10 +9,11 @@ use App\Traits\RecordActivity;
 use App\Traits\Reportable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
-    use Notifiable, Followable, Bookmarkable, RecordActivity, Reportable;
+    use Notifiable, Followable, Bookmarkable, RecordActivity, Reportable, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -141,5 +142,10 @@ class User extends Authenticatable
     public function path($append = '')
     {
         return $append ? "/{$this->name}/{$append}" : "/{$this->name}";
+    }
+
+    public function toSearchableArray()
+    {
+        return $this->toArray() + ['path' => $this->path()];
     }
 }

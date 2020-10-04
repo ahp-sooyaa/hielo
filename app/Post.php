@@ -6,6 +6,7 @@ use App\Traits\Shareable;
 use App\Traits\Likable;
 use App\Traits\RecordActivity;
 use App\Traits\Reportable;
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Notifications\NewComment;
@@ -13,7 +14,7 @@ use Carbon\Carbon;
 
 class Post extends Model
 {
-    use Likable, RecordActivity, Reportable, Shareable;
+    use Likable, RecordActivity, Reportable, Shareable, Searchable;
 
     protected $guarded = [];
     protected $dates = ['published_at'];
@@ -90,5 +91,10 @@ class Post extends Model
     public function getUrlAttribute()
     {
         return route('posts.show', $this->title);
+    }
+
+    public function toSearchableArray()
+    {
+        return $this->toArray() + ['path' => $this->path()];
     }
 }

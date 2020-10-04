@@ -47,7 +47,17 @@
                             <a class="text-white" href="{{$post->getShareUrl('facebook')}}">
                                 <i class="fab fa-facebook-square fa-lg mr-2"></i>
                             </a>
-                            <i class="far fa-bookmark fa-lg"></i>
+                            <form 
+                                method="POST" action="/readingList/{{$post->id}}" 
+                                class="pt-1"
+                            >
+                                @csrf
+                                <button class="like text-secondary">
+                                    <i 
+                                        class="{{ current_user()->isBookmark($post->id) ? 'fas' : 'far'}} fa-bookmark fa-lg"
+                                    ></i> 
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <div style="font-size: 21px; line-height: 2rem;" class="overflow-hidden">

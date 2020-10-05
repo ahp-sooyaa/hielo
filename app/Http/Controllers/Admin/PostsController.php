@@ -12,7 +12,7 @@ class PostsController extends Controller
     public function index()
     {
         return view('admin.posts.index', [
-            'posts' => Post::paginate(3)
+            'posts' => Post::all()
         ]);
     }
 

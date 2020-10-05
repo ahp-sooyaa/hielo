@@ -11,12 +11,7 @@
             </div>
             <p class="text-dark-50">All Roles are shown in below</p>
         </header>
-        <table class="table table-striped table-hover table-responsive-md">
-            <caption>
-                <span class="text-dark font-weight-bold">
-                    {{ $roles->count() }}
-                </span> rows of total
-            </caption>
+        <table id="datatable" class="table table-striped table-hover table-responsive-md">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -60,7 +55,5 @@
                 @endforelse
             </tbody>
         </table>
-
-        {{-- {{ $roles->links() }} --}}
     </div>
 </x-admin.layouts.app>

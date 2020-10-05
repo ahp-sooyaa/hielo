@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Hielo') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body class="bg-primary">
     <div id="app">
@@ -86,4 +88,17 @@
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" defer></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" defer></script>
+<script>
+  $(document).ready(function() {
+      $('#datatable').DataTable({
+        "oLanguage": {
+          "sLengthMenu": "_MENU_ entries per page",
+          "sInfo": "Showing (_START_ - _END_) of total _TOTAL_ entries"
+        }
+      });
+  } );
+</script>
 </html>

@@ -14,7 +14,7 @@ class CommentsController extends Controller
     public function index()
     {
         return view('admin.comments.index', [
-            'comments' => Comment::paginate(3)
+            'comments' => Comment::all()
         ]);
     }
 

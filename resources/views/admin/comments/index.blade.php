@@ -4,12 +4,7 @@
             <h1>Comments</h1>
             <p class="text-dark-50">All of comments are shown in below</p>
         </header>
-        <table class="table table-striped table-responsive-md">
-            <caption>
-                <span class="text-dark font-weight-bold">
-                    {{ $comments->count() }}
-                </span> rows of total
-            </caption>
+        <table id="datatable" class="table table-striped table-responsive-md">
             <thead>
                 <tr>
                     {{-- multi language is not yet @lang('comments.attributes.post') --}}
@@ -50,7 +45,5 @@
                 @endforelse
             </tbody>
         </table>
-    
-        {{ $comments->links() }}
     </div>
 </x-admin.layouts.app>

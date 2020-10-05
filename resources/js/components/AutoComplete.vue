@@ -1,16 +1,39 @@
 <template>
-    <div>
-        <li class="nav-item dropdown">
-            <form method="GET" action="/search">
-                <div class="d-flex search-box rounded-20">
-                    <input type="text" placeholder="Search something..." name="posts[query]" class="mr-2 search-text" autocomplete="off">
-                    <a href="#" class="search-btn">
-                        <i class="fas fa-search text-dark"></i>
-                    </a>
-                </div>
-            </form>
-        </li>
-    </div>
+    <ais-instant-search
+        :search-client="searchClient"
+        index-name="posts"
+    >
+        <header class="row justify-content-center">
+        <div class="col-md-10">
+            <ais-search-box 
+            class="mb-3" placeholder="Search posts..." :autofocus='true'
+            :show-loading-indicator='true'
+            ></ais-search-box>
+        </div>
+        <div class="container-header container-options">
+            <ais-hits-per-page
+            class="container-option"
+            :items="[
+                {
+                label: '16 hits per page',
+                value: 16,
+                default: getSelectedHitsPerPageValue() === 16 || !getSelectedHitsPerPageValue(),
+                },
+                {
+                label: '32 hits per page',
+                value: 32,
+                default: getSelectedHitsPerPageValue() === 32,
+                },
+                {
+                label: '64 hits per page',
+                value: 64,
+                default: getSelectedHitsPerPageValue() === 64,
+                },
+            ]"
+            />
+        </div>
+        </header>        
+    </ais-instant-search>
 </template>
 
 <script>

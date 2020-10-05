@@ -11,12 +11,12 @@
             </div>
             <p class="text-dark-50">All Posts are shown in below</p>
         </header>
-        <table class="table table-striped table-hover table-responsive-md">
-            <caption>
+        <table id="datatable" class="table table-striped table-hover table-responsive-md">
+            {{-- <caption>
                 <span class="text-dark font-weight-bold">
                     {{ $posts->count() }}
                 </span> rows of total
-            </caption>
+            </caption> --}}
             <thead>
                 <tr>
                     {{-- multi language is not yet @lang('posts.attributes.post') --}}
@@ -65,6 +65,6 @@
             </tbody>
         </table>
 
-        {{ $posts->links() }}
+        {{-- {{ $posts->links() }} --}}
     </div>
 </x-admin.layouts.app>

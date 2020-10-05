@@ -11,12 +11,7 @@
             </div>
             <p class="text-dark-50">All of Users are shown in below</p>
         </header>
-        <table class="table table-striped table-responsive-md">
-            <caption>
-                <span class="text-dark font-weight-bold">
-                    {{ $users->count() }}
-                </span> rows of total
-            </caption>
+        <table id="datatable" class="table table-striped table-responsive-md">
             <thead>
                 <tr>
                     {{-- multi language is not yet @lang('users.attributes.post') --}}
@@ -64,6 +59,6 @@
             </tbody>
         </table>
         
-        {{ $users->links() }}
+        {{-- {{ $users->links() }} --}}
     </div>
 </x-admin.layouts.app>

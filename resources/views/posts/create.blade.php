@@ -1,7 +1,7 @@
 <x-layouts.app>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 vh-100">
+            <div class="col-12">
                 <div class="card w-100 p-4">
                     <create-blog></create-blog>
                 </div>

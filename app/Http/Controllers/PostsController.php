@@ -20,7 +20,10 @@ class PostsController extends Controller
             $posts = auth()->user()->timeline();
         }
 
-        return view('posts.index', compact('posts'));
+        return view('posts.index', [
+            'posts' => $posts,
+            'tags' => Tag::has('posts')->get()
+        ]);
     }
 
     public function show(Post $post)

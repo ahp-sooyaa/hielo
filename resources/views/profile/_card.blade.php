@@ -1,12 +1,12 @@
-<div class="card text-primary rounded-20 px-4 py-3">
+<div class="card rounded-20 px-4 py-3">
     <div class="d-flex">
         <div class="mr-4">
-            <img src="{{asset('storage/'. $user->image)}}" alt="avatar"
+            <img src="{{$user->avatar}}" alt="avatar"
             class="rounded-circle" style="width: 60px; height: 60px">
         </div>
         <div>
-            <h5>{{$user->name}}</h5>
-            <span>{{$user->short_bio}}</span>
+            <a href="{{$user->path()}}">{{$user->name}}</a>
+            <div class="text-black-50">{{$user->short_bio}}</div>
         </div>
     </div>
 </div>

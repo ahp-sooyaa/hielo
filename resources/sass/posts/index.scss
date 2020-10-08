@@ -4,8 +4,31 @@
 }
 
 body{
+    font-family: $font-family-fira-code;
+    font-size: $font-size-base;
     font-weight: 300;
-    color: black;
+    color: $font-color-base;
+    background-color: $body-bg;
+}
+
+main{
+    min-height: 100vh;
+}
+
+a{
+    color: $font-color-base;
+    text-decoration: none;
+}
+
+a:hover{
+    color: rgb(87, 86, 86);
+    text-decoration: none;
+}
+
+.brand{
+    font-family: $font-family-fira-code;
+    font-size: $font-size-brand;
+    font-weight: 900;
 }
 
 /* for post create text editor */
@@ -13,7 +36,7 @@ b{
     font-weight: 700;
 }
 
-.like{
+.bg-border-none{
     background: none;
     border: none;
 }
@@ -42,6 +65,9 @@ b{
     }
     &-200-px{
         height: 200px;
+    }
+    &-210-px{
+        height: 210px;
     }
     &-270-px{
         min-height: 270px;
@@ -80,7 +106,14 @@ img{
 }
 
 .border-left-3{
-    border-left: 3px solid #A0D2EB !important;
+    border-left: 3px solid $info !important;
+}
+
+.border-info-3{
+    border-right: 3px solid $info;
+    border-top: 3px solid rgba($color: #ff4f5a, $alpha: 0);
+    border-left: 3px solid $info;
+    border-bottom: 3px solid rgba($color: #ff4f5a, $alpha: 0);
 }
 
 .bl-3{
@@ -91,13 +124,14 @@ img{
 
 /* profile */
 .border-bottom-1{
-    border-bottom: 1px solid #ff4f5a !important;
+    border-bottom: 1px solid $info !important;
 }
 
 .border-bottom-3{
-    border-bottom: 3px solid #A0D2EB !important;
+    border-bottom: 3px solid $info !important;
 }
 
+/* little miss understanding hehe */
 .blue{
     &-btn{
         background-color: #3b5998;
@@ -181,56 +215,28 @@ select{
 // }
 
 /* comment hover */
-.hover:hover{
-    background-color: $secondary;
-    color: $primary !important;
+.comment-container:hover{
+    background-color: white;
+    color: $font-color-base !important;
     border-radius: 20px;
 }
 
-.hover:hover .badge-secondary{
-    background-color: $primary !important;
-    color: $secondary !important;
-}
-
-/* posts.blade.php */
-.vertical-menu{
-    text-align: left;
-    border: 1px solid $secondary;
-    margin-top: 3px;
-    a{
-        color: $secondary;
-        display: block;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 18px;
-    };
-    .active{
-        color: #A0D2EB;
-    };
-    a:not(:first-child):not(:last-child){
-        padding: 6px 0px 6px 0px;
-    };
-    a:hover{
-        color: #A0D2EB;
-    }
+.comment-container:hover .badge-secondary{
+    background-color: black !important;
+    color: white !important;
 }
 
 /* reading list */
 .list-item{
     list-style: none;
-    a {
-        text-decoration: none;
-        color: $secondary;
-        font-weight: bold;
-        font-size: 18px;
-    }
     a:hover{
-        background-color: $secondary;
+        background-color: $info;
         border-radius: 5px;
-        color: #A0D2EB;
+        color: white;
     }
     .active{
-        color: #A0D2EB;
+        color: $info;
+        font-weight: 600;
     }
 }
 
@@ -248,41 +254,54 @@ select{
     color: black !important;
 }
 
-.search-box{
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    height: 40px;
-    padding: 0px 4px;
-    background-color: black;
+// .search-box{
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, 0%);
+//     height: 40px;
+//     padding: 0px 4px;
+//     background-color: black;
+// }
+
+// .search-btn{
+//     justify-content: center;
+//     align-items: center;
+//     width: 40px;
+//     height: 40px;
+// }
+
+// .search-text, .search-text:focus{
+//     background: none;
+//     border: none;
+//     outline: none;
+//     color: white;
+//     transition: 0.4s;
+//     width: 0;
+// }
+
+.ais-Panel-header{
+    border-bottom: none;
 }
 
-.search-btn{
-    justify-content: center;
+.ais-RefinementList-checkbox{
+    margin-right: 10px;
+}
+
+.ais-RefinementList-label{
+    display: flex;
     align-items: center;
-    width: 40px;
-    height: 40px;
 }
 
-.search-text, .search-text:focus{
-    background: none;
-    border: none;
-    outline: none;
-    color: white;
-    transition: 0.4s;
-    width: 0;
+.ais-RefinementList-labelText{
+    display:block;
+    width:200px;
+    word-wrap:break-word;
+    margin-right: auto;
+    white-space: normal
 }
 
-// .container-menu > ul{
-//     display: flex;
-//     list-style: none;
-// }
-
-// .menu-items > li {
-//     margin-right: 5px;
-// }
-
-// .active {
-//     border-bottom: 2px solid white;
-//     font-weight: 600;
-// }
+.ais-RefinementList-count{
+    color: #fff !important;
+    background-color: $info !important;
+    display: inline-block;
+}

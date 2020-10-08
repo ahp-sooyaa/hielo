@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="card p-3 text-primary">
+                <div class="card p-3">
                     <h1>Report</h1>
                     <form action="/userReports/{{$user->id}}" method="POST">
                         @csrf
@@ -16,7 +16,7 @@
                             >
                         </div>
                         
-                        <button type="submit" class="btn btn-primary mr-3">
+                        <button type="submit" class="btn btn-success mr-3">
                             Submit
                         </button>
                         <a href="/{{$user->name}}">

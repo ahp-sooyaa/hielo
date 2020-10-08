@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="Update">
-        <h1 class="text-dark">Create new Post</h1>
+        <h1 class="text-dark">Edit Post</h1>
         <div class="form-group">
             <input type="file" class="form-control" @change="imageSelected" />
             <div v-if="post.previewImage">
@@ -37,7 +37,7 @@
                 placeholder="Search or add tags" @input="updateSelected"
             ></multiselect>
         </div>
-        <button class="btn btn-sm btn-primary mb-3">Update</button>
+        <button class="btn btn-sm btn-success mb-3">Update</button>
     </form>
   </div>
 </template>

@@ -58,7 +58,7 @@ class User extends Authenticatable
 
         return Post::where('published_at', '<=', date('Y-m-d H:i:s'))
             ->whereIn('author_id', $ids)
-            ->latest('published_at')->get();
+            ->latest('published_at')->paginate(10);
     }
 
     public function roles()

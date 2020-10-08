@@ -22,7 +22,7 @@ class ReadingListController extends Controller
 
             case 'recentlyViewed':
                 $posts_id = session()->get('posts.recently_viewed');
-
+                // need to check session exist or not otherwise it will throw error
                 $recentPosts = Post::whereIn('id', $posts_id)->take(10)->get();
 
                 return view('readinglist.recentlyViewed', compact('user', 'recentPosts'));

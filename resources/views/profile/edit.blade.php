@@ -36,8 +36,9 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="short_bio" cols="50" rows="3">
-                                    {{$user->short_bio ?? ''}}
+                                <textarea 
+                                    class="form-control" name="short_bio" cols="50" rows="3"
+                                >{{$user->short_bio ?? ''}}
                                 </textarea>
                                 @error('short_bio')
                                     <span class="invalid-feedback" role="alert">

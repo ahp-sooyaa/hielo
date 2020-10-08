@@ -1,0 +1,39 @@
+@forelse ($posts as $post)
+    <div class="card shadow border-bottom-3 rounded-20 p-4 mb-4 border-0">
+        <div class="m-n4">
+            <img src="{{ $post->featured_image }}" alt="Featured Image" class="rounded-top-20 h-300-px w-100">
+        </div>
+        <div class="d-flex mt-5">
+            <h4 class="mr-auto">
+                <a href="{{ $post->path() }}" class="text-dark text-decoration-none">
+                    {{$post->title}}
+                </a>
+            </h4>
+            <form 
+                method="POST" action="/readingList/{{$post->id}}" 
+                class="pt-1"
+            >
+                @csrf
+                <button class="bg-border-none">
+                    <i 
+                        class="{{ current_user()->isBookmark($post->id) ? 'fas' : 'far'}} fa-bookmark fa-lg"
+                    ></i> 
+                </button>
+            </form>
+        </div>
+        <div class="text-muted mb-auto">                    
+            {{ Str::limit($post->excerpt, 80) }}
+        </div>
+        <div class="d-flex text-muted align-items-center mt-3">
+            <img src="{{$post->author->avatar}}" alt="avatar" class="avatar mr-2">
+            <div class="mr-auto">{{$post->author->name}}</div>
+            {{$post->published_at->format('M d,Y')}}
+        </div>
+    </div>
+{{-- </div>   --}}
+@empty
+    <div class="mx-auto text-center">
+        No Posts yet! :) <br>
+        According to post index logic, user & following user created posts will be showed.
+    </div>
+@endforelse

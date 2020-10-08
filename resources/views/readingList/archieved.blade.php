@@ -1,9 +1,9 @@
 <x-layouts.reading-list-layout :user="$user">
     @forelse ($bookmarks as $bookmark)
-    <div class="border-left-3 w-100 mt-5 mb-5 px-4 w-75 text-white-50">
+    <div class="card shadow rounded-20 border-0 border-left-3 mb-5 p-4 text-black-50">
         <div class="d-flex justify-content-between">
-            <h5>
-                <a href="{{ $bookmark->post->path() }}" class="text-white text-decoration-none">
+            <h5 class="mr-3">
+                <a href="{{ $bookmark->post->path() }}" class="font-weight-bold">
                     {{$bookmark->post->title}}
                 </a>
             </h5>
@@ -20,31 +20,30 @@
                         </div>
                     </button>
                 </form>
-                {{-- <div class="badge badge-pill badge-danger">
-                    <span class="text-sm">Remove</span>
-                </div> --}}
             </div>
         </div>
         <div class="mb-2">
-            {{$bookmark->post->excerpt}}
+            {{ str_limit($bookmark->post->excerpt, 80)}}
         </div>
         @if ($bookmark->collection)
-            <div class="mb-2 text-white-50">
+            <div class="mb-2 text-black-50">
                 Saved to 
-                <span class="font-weight-bold text-white">
+                <span class="font-weight-bold">
                     {{$bookmark->collection ??''}}
                 </span>
             </div>
         @endif
-        <div class="d-flex justify-content-between">
-            <div>
-                <img style="width: 40px; height: 40px; border-radius: 50%" src="{{ asset('avatars/default.jpg') }}" alt="">
-                <span class="font-weight-bold text-white ml-2">
-                    {{$bookmark->post->author->name}}
+        <div class="d-flex align-items-center">
+            <div class="mr-auto">
+                <img src="{{ asset('avatars/default.jpg') }}" alt="avatar" class="avatar">
+                <span class="font-weight-bold ml-2">
+                    <a href="{{$bookmark->post->author->path()}}">
+                        {{$bookmark->post->author->name}}
+                    </a>
                 </span>
             </div>
             <div>
-                {{$bookmark->created_at->diffForHumans()}}
+                {{$bookmark->created_at->diffForHumans(null, true, true)}}
             </div>
         </div>
     </div>

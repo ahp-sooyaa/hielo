@@ -23,12 +23,12 @@
     {{-- <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/js/froala_editor.pkgd.min.js"></script> --}}
 </head>
-<body class="bg-primary text-white">
+<body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm">
+        <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container">
-                <a class="navbar-brand font-weight-bold" href="{{ url('/posts') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand brand" href="{{ url('/posts') }}">
+                    <h2 class="m-0 text-info">{{ config('app.name', 'Hielo') }}</h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -41,26 +41,33 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto align-items-center">
                         @auth 
                             <a href="/search" class="search-btn d-flex text-decoration-none">
                                 <i class="fas fa-search text-dark"></i>
                             </a>
+                            
                             {{-- <auto-complete></auto-complete> --}}
                             <user-notification :user={{auth()->id()}}></user-notification>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Illuminate\Support\Str::limit(Auth::user()->name, 9, '') }} <span class="caret"></span>
+                                    {{ str_limit(Auth::user()->name, 9, '...') }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <div class="d-flex dropdown-item align-items-center py-2">
-                                        <a 
-                                            href="/{{current_user()->name}}">
-                                            <i class="fas fa-user-circle fa-2x mr-2"></i>
+                                        <img 
+                                            src="{{current_user()->avatar}}" alt="avatar" class="avatar mr-2"
+                                        >
+                                        <a href="/{{current_user()->name}}" class="text-dark">
+                                            {{str_limit(current_user()->name, 13, '')}}
                                         </a>
-                                        <a href="/{{current_user()->name}}">
-                                            {{current_user()->name}}
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="/posts/create" class="text-decoration-none">
+                                            <button type="button" class="btn btn-sm btn-outline-info rounded-pill px-2 mx-auto">
+                                                <i class="fas fa-plus"></i> New Post
+                                            </button>
                                         </a>
                                     </div>
                                     <hr class="my-2">
@@ -68,11 +75,6 @@
                                         class="dropdown-item mb-2" 
                                         href="/{{current_user()->name}}/posts?type=all">
                                         Posts
-                                    </a>
-                                    <a 
-                                        class="dropdown-item mb-2" 
-                                        href="/{{current_user()->name}}/posts?type=all">
-                                        Setting
                                     </a>
                                     <a 
                                         class="dropdown-item mb-2" 
@@ -105,7 +107,24 @@
             {{ $slot }}
         </main>
 
+        <footer class="bg-secondary text-center py-5">
+            Made with <i class="fas fa-grin-hearts text-danger"></i> by Aung Htet Paing.
+            &#169; Hielo 2020
+        </footer>
+
         <flash message="{{ session('status') }}"></flash>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = localStorage.getItem('activeTab');
+            if(activeTab){
+                $('#myTab a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+    </script>        
 </body>
 </html>

@@ -51,7 +51,7 @@
                     class="text-danger" v-text="errors.get('tags')"
                 ></span>
             </div>
-        <button class="btn btn-sm btn-primary mb-3">Publish</button>
+        <button class="btn btn-sm btn-success mb-3">Publish</button>
     </form>
   </div>
 </template>
@@ -99,7 +99,7 @@ export default {
                 fd.append("tags", JSON.stringify(this.tags));
 
             axios.post(`/posts`, fd)
-                .then(res => flash("post published") )
+                .then(response => flash("post published") )
                 .catch(err => this.errors.record(err.response.data.errors));
         },
         fetchTag() {

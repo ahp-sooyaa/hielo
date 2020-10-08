@@ -1,8 +1,8 @@
 <x-layouts.app>
 <div class="container">
-    <div class="row justify-content-center text-primary">
+    <div class="row justify-content-center">
         <div class="col-md-9">
-            <div class="card border-0">
+            <div class="card shadow border-0">
                 <div class="d-flex">
                     <div class="col-6 p-0 position-relative">
                         <img class="h-100 b-l-tb" src="https://hielo.dev/appImage/3255309.jpg" alt="" data-toggle="tooltip" title="Idea vector created by stories - www.freepik.com">
@@ -46,7 +46,7 @@
                                 @enderror
                             </div>
 
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center mb-2">
                                 <div class="form-check mr-auto">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -56,7 +56,7 @@
                                 </div>
                                 <div>
                                     @if (Route::has('password.request'))
-                                    <a class="btn btn-link pr-0" href="{{ route('password.request') }}">
+                                    <a class="pr-0" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
@@ -76,7 +76,7 @@
                             <div class="d-flex align-items-center mt-1"> 
                                 <a href="/login/facebook">
                                     <button class="btn btn-sm btn-warning badge-pill mr-2">
-                                        <i class="fab fa-facebook-f text-white mr-1"></i>Facebook
+                                        <i class="fab fa-facebook-f mr-1"></i>Facebook
                                     </button>
                                 </a>
                                 <a href="/login/github">

@@ -43,7 +43,7 @@ class PostPublished extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => auth()->user()->name . ' published a new post ' . $this->post->title,
+            'message' => auth()->user()->name . ' published a new post "' . $this->post->title . '"',
             'link' => $this->post->path()
         ];
     }

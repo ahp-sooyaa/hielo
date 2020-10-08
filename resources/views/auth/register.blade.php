@@ -1,8 +1,8 @@
 <x-layouts.app>
 <div class="container">
-    <div class="row justify-content-center text-primary">
+    <div class="row justify-content-center">
         <div class="col-md-9">
-            <div class="card border-0">
+            <div class="card shadow border-0">
                 <div class="d-flex">
                     <div class="col-6 p-0 position-relative">
                         <img class="h-100 b-l-tb" src="https://hielo.dev/appImage/3255469.jpg" alt="" data-toggle="tooltip" title="Idea vector created by stories - www.freepik.com">

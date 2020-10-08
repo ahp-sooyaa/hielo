@@ -96,7 +96,7 @@
       $('#datatable').DataTable({
         "oLanguage": {
           "sLengthMenu": "_MENU_ entries per page",
-          "sInfo": "Showing (_START_ - _END_) of total _TOTAL_ entries"
+          "sInfo": "Showing (_START_ - _END_) of _TOTAL_ entries"
         }
       });
   } );

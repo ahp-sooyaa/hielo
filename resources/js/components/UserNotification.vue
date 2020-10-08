@@ -1,16 +1,14 @@
 <template>
-    <div>
-        <li class="nav-item dropdown" v-if="notifications.length">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">
-                <i class="fas fa-bell"></i> Notification
-            </a>
-            <ul class="dropdown-menu">
-                <li v-for="notification in notifications" class="dropdown-item">
-                    <a :href="notification.data.link" v-text="notification.data.message" @click="markAsRead(notification)"></a>
-                </li>
-            </ul>
-        </li>
-    </div>
+    <li class="nav-item dropdown m-0" v-if="notifications.length">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">
+            <i class="fas fa-bell fa-lg"></i> <span class="badge badge-info">{{notifications.length}}</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li v-for="notification in notifications" class="dropdown-item">
+                <a class="text-dark" :href="notification.data.link" v-text="notification.data.message" @click="markAsRead(notification)"></a>
+            </li>
+        </ul>
+    </li>
 </template>
 
 <script>

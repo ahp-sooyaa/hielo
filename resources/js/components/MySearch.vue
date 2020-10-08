@@ -6,41 +6,35 @@
     <header class="row justify-content-center">
       <div class="col-md-10">
         <ais-search-box 
-          class="mb-3" placeholder="Search posts..." :autofocus='true'
+          class="mb-3" placeholder="Search posts, tags & people" :autofocus='true'
           :show-loading-indicator='true'
         ></ais-search-box>
       </div>
-      <div class="container-header container-options">
-        <ais-hits-per-page
-          class="container-option"
-          :items="[
-            {
-              label: '16 hits per page',
-              value: 16,
-              default: getSelectedHitsPerPageValue() === 16 || !getSelectedHitsPerPageValue(),
-            },
-            {
-              label: '32 hits per page',
-              value: 32,
-              default: getSelectedHitsPerPageValue() === 32,
-            },
-            {
-              label: '64 hits per page',
-              value: 64,
-              default: getSelectedHitsPerPageValue() === 64,
-            },
-          ]"
-        />
-      </div>
     </header>
 
-    <div class="container-menu">
-      <router-link to="/search">BlogPosts</router-link>
-      <router-link to="/search/tags">Tags</router-link>
-      <router-link to="/search/people">People</router-link>
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <nav class="mb-3">
+          <div class="nav" id="myTab" role="tablist">
+            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Posts</a>
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tags" role="tab" aria-controls="profile" aria-selected="false">Tags</a>
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#people" role="tab" aria-controls="contact" aria-selected="false">People</a>
+            </div>
+        </nav>
+      </div>
     </div>
-
-    <router-view></router-view>
+    
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+        <posts-search></posts-search>
+      </div>
+      <div class="tab-pane fade" id="tags" role="tabpanel" aria-labelledby="profile-tab">
+        <tags-search></tags-search>
+      </div>
+      <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="contact-tab">
+        <people-search :user='user'></people-search>
+      </div>
+    </div>
     
   </ais-instant-search>
 </template>
@@ -52,6 +46,7 @@ import { history as historyRouter } from 'instantsearch.js/es/lib/routers';
 import { simple as simpleStateMapping } from 'instantsearch.js/es/lib/stateMappings';
 
 export default {
+  props: ['user'],
   data() {
     return {
       moment,
@@ -66,10 +61,6 @@ export default {
     };
   },
   methods: {
-    getSelectedHitsPerPageValue() {
-      const [, hitsPerPage] = document.location.search.match(/hitsPerPage=([0-9]+)/) || [];
-      return Number(hitsPerPage);
-    },
     makeActive: function(item){
         this.active = item;
     }
@@ -78,12 +69,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .container-menu > a {
-    text-decoration: none;
+  .nav-pills .nav-link.active{
     color: white;
-    margin-right: 5px;
+    background: #ff4f5a;
   }
-  .router-link-active{
-    border-bottom: 2px solid black;
+  .nav-pills a{
+    color: black;
+  }
+  .nav-link{
+    padding: 5px 10px 5px 10px !important;
+  }
+  .nav > .active{
+    border-bottom: 3px solid #ff4f5a;
   }
 </style>

@@ -4,7 +4,7 @@
             {{$user->name}} <span class="text-black-50">follows</span>
         </div>
         @foreach ($user->follows as $follow)
-            @include('profile._card', ['user' => $follow])
+            @include('profile._followCard', ['user' => $follow])
         @endforeach
     </div>
 </x-layouts.profile-layout>

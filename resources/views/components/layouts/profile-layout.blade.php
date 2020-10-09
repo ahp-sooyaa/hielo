@@ -37,23 +37,22 @@
                                 </button>
                             </a>
                             @else
-                                <x-follow-button :user="$user"></x-follow-button>
-                                <button class="btn btn-sm btn-outline-danger mx-3 py-0">
+                                <follow-button 
+                                    :user="{{$user}}" class="pr-3"
+                                ></follow-button>
+                                {{-- <button class="btn btn-sm btn-outline-danger mx-3 py-0">
                                     Block
-                                </button> 
-                                <span class="text-danger">
-                                    Report
-                                </span>
+                                </button>  --}}
+                                <a 
+                                    href="/userReports/{{$user->id}}/create"
+                                    class="text-danger"
+                                >Report</a>
                             @endcan
                         </div>
                     </div>
                     <div class="text-center w-50 mx-auto mt-3">
                         <div>
                             <div class="font-weight-bold mr-3 d-inline-block text-dark">{{$user->name}}</div>
-                            <a 
-                                href="/userReports/{{$user->id}}/create"
-                                class="text-danger"
-                            >report</a>
                         </div>
                         <p class="text-dark">{{$user->short_bio ?? ''}}</p>
                     </div>

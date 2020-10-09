@@ -12,14 +12,8 @@
             <p class="text-dark-50">All Posts are shown in below</p>
         </header>
         <table id="datatable" class="table table-striped table-hover table-responsive-md">
-            {{-- <caption>
-                <span class="text-dark font-weight-bold">
-                    {{ $posts->count() }}
-                </span> rows of total
-            </caption> --}}
             <thead>
                 <tr>
-                    {{-- multi language is not yet @lang('posts.attributes.post') --}}
                     <th>Title</th>
                     <th>Excerpt</th>
                     <th>Content</th>
@@ -64,7 +58,5 @@
                 @endforelse
             </tbody>
         </table>
-
-        {{-- {{ $posts->links() }} --}}
     </div>
 </x-admin.layouts.app>

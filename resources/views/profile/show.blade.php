@@ -4,9 +4,7 @@
             <div class="font-weight-bold mb-3">Latest Posts</div>
         </div>
         @forelse ($user->posts as $post)
-            @if ($post->published_at != NULL)
-                @include('profile._postCard', ['post' => $post])
-            @endif
+            @include('profile._postCard', ['post' => $post])
         @empty
             <div class="w-50 mx-auto text-center mt-5">
                 <img src="https://hielo.dev/appImage/kingdom-premium-upgrade.png" alt="">

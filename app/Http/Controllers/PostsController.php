@@ -10,7 +10,6 @@ use App\Tag;
 class PostsController extends Controller
 {
     public function index()
-
     {
         if (request('tag')) {
             $posts = Tag::where('name', request('tag'))

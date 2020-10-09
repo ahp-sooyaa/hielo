@@ -6,10 +6,18 @@ use App\User;
 
 class FollowsController extends Controller
 {
+    public function index()
+    {
+        $follows = current_user()->follows->pluck('id');
+
+        return response()->json(['follows' => $follows]);
+    }
+
     public function store(User $user)
     {
         auth()->user()->toggleFollows($user);
-        return back();
+
+        return 'successful';
     }
 
     public function following(User $user)

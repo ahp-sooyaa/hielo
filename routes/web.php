@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/{user:name}/comments', 'ProfileController@comments');
 
     Route::post('/{user:name}/follow', 'FollowsController@store');
+    Route::get('/{user:name}/follow', 'FollowsController@index');
     Route::get('/{user:name}/following', 'FollowsController@following');
     Route::get('/{user:name}/follower', 'FollowsController@follower');
 

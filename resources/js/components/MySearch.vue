@@ -32,7 +32,7 @@
         <tags-search></tags-search>
       </div>
       <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="contact-tab">
-        <people-search :user='user'></people-search>
+        <people-search></people-search>
       </div>
     </div>
     
@@ -59,11 +59,6 @@ export default {
         stateMapping: simpleStateMapping(),
       },
     };
-  },
-  methods: {
-    makeActive: function(item){
-        this.active = item;
-    }
   }
 };
 </script>

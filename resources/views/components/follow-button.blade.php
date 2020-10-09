@@ -1,13 +1,11 @@
-<follow-button inline-template>
-    <form 
-        action="{{ '/'. $user->name. '/follow'}}" method="POST"
+<form 
+    action="{{ '/'. $user->name. '/follow'}}" method="POST"
+>
+@csrf
+    <button 
+        type="submit" 
+        class="btn btn-sm {{auth()->user()->isFollowing($user) ? 'btn-info' : 'btn-outline-info'}} py-0"
     >
-    @csrf
-        <button 
-            type="submit" 
-            class="btn btn-sm {{auth()->user()->isFollowing($user) ? 'btn-info' : 'btn-outline-info'}} py-0"
-        >
-            {{auth()->user()->isFollowing($user) ? 'Following' : 'Follow'}}
-        </button>
-    </form>
-</follow-button>
+        {{auth()->user()->isFollowing($user) ? 'Following' : 'Follow'}}
+    </button>
+</form>

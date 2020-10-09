@@ -14,7 +14,6 @@
         <table id="datatable" class="table table-striped table-responsive-md">
             <thead>
                 <tr>
-                    {{-- multi language is not yet @lang('users.attributes.post') --}}
                     <th>Name</th>
                     <th>Email</th>
                     <th>Registered_at</th>
@@ -58,7 +57,5 @@
                 @endforelse
             </tbody>
         </table>
-        
-        {{-- {{ $users->links() }} --}}
     </div>
 </x-admin.layouts.app>

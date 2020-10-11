@@ -19,7 +19,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm">
+        <nav class="navbar navbar-expand-md sticky-top shadow-sm bg-white">
             <div class="container">
                 <a class="navbar-brand brand" href="{{ url('/posts') }}">
                     <h2 class="m-0 text-info">{{ config('app.name', 'Hielo') }}</h2>
@@ -101,7 +101,7 @@
             {{ $slot }}
         </main>
 
-        <footer class="bg-secondary text-center py-5">
+        <footer class="text-center py-5">
             Made with <i class="fas fa-grin-hearts text-danger"></i> by Aung Htet Paing.
             &#169; Hielo 2020
         </footer>

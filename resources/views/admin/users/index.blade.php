@@ -1,15 +1,15 @@
 <x-admin.layouts.app>
     <div class="card p-3">
-        <header class="text-black">
+        <header>
             <div class="d-flex align-items-center">
-                <h1 class="my-0 mr-3">Users</h1>
+                <h1 class="mb-0 mr-3">Users</h1>
                 <a href="/admin/users/create">
-                    <button class="btn btn-sm btn-primary shadow">
+                    <button class="btn btn-sm btn-info">
                         + ADD NEW
                     </button>
                 </a>
             </div>
-            <p class="text-dark-50">All of Users are shown in below</p>
+            <p class="text-black-50">All of Users are shown in below</p>
         </header>
         <table id="datatable" class="table table-striped table-responsive-md">
             <thead>
@@ -34,8 +34,8 @@
                         </td>
                         <td class="d-flex">
                             <a href="/admin/users/{{$user->id}}/edit" class="mr-3">
-                                <button class="btn btn-info" name="delete">
-                                    <i class="fas fa-pen"></i>
+                                <button class="btn btn-sm btn-link" name="delete">
+                                    <i class="fas fa-pen text-primary"></i>
                                 </button>
                             </a>
                             @can('delete', $user)
@@ -43,8 +43,8 @@
                                     @csrf
                                     @method('DELETE')
         
-                                    <button class="btn btn-danger" type="submit" name="delete">
-                                        <i class="fas fa-trash"></i>
+                                    <button class="btn btn-sm btn-info" type="submit" name="delete">
+                                        <i class="fas fa-trash text-danger"></i>
                                     </button>
                                 </form>
                             @endcan

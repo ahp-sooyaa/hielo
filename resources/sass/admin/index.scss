@@ -1,14 +1,38 @@
 /* this scss effecting nav bar styles at layouts/app */
+#sidebar{
+    width: 300px;
+}
+
+#sidebar.active {
+    margin-left: -300px;
+}
+
+.bg-whitesmoke{
+    background-color: $whitesmoke;
+}
+
+.collapse-item:not(.collapsed) {
+    background:#ff4f5a;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.collapse-item.collapsed{
+    background: $whitesmoke;
+}
+
+.collapse-item:not(.collapsed) > .nav-link{
+    color: #fff;
+}
+
 .nav-item:not(:last-child){
     margin-bottom: 3px;
 }
 
-.hover{
-    a:hover, .active{
-        background-color: $primary;
-        border-radius: 5px;
-        color: white;
-    }
+.nav-link:hover, .nav-item > .active{
+    background-color: $info;
+    color: #fff;
+    border-radius: 5px;
 }
 
 .nav-link{
@@ -31,10 +55,8 @@
     }
 }
 
-.icon{
+.top-n35{
     top: -35px;
-    background-color: white;
-    color: black;
 }
 
 /* posts */
@@ -46,4 +68,16 @@
     }
     width: 200px;
     height: 100px;
+}
+
+.page-link{
+    background-color: #fff;
+    border: 1px solid $info;
+    color: $info;
+}
+
+.page-link:hover, .page-item.active .page-link{
+    background-color: $info;
+    border: 1px solid $info;
+    color: #fff;
 }

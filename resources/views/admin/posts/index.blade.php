@@ -1,15 +1,15 @@
 <x-admin.layouts.app>
     <div class="card p-3">
-        <header class="text-dark">
+        <header>
             <div class="d-flex align-items-center">
                 <h1 class="my-0 mr-3">Posts</h1>
                 <a href="/admin/posts/create">
-                    <button class="btn btn-sm btn-primary shadow">
+                    <button class="btn btn-sm btn-info">
                         + ADD NEW
                     </button>
                 </a>
             </div>
-            <p class="text-dark-50">All Posts are shown in below</p>
+            <p class="text-black-50">All Posts are shown in below</p>
         </header>
         <table id="datatable" class="table table-striped table-hover table-responsive-md">
             <thead>
@@ -37,16 +37,16 @@
                         <td>{{ $post->published_at }}</td>
                         <td class="d-flex">
                             <a class="mr-2" href="/admin/posts/{{$post->id}}/edit">
-                                <button class="btn btn-info" type="submit" name="delete">
-                                    <i class="fas fa-pen"></i>
+                                <button class="btn btn-sm btn-link" type="submit" name="delete">
+                                    <i class="fas fa-pen text-primary"></i>
                                 </button>
                             </a>
                             <form action="/admin/posts/{{$post->id}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 
-                                <button class="btn btn-danger" type="submit" name="delete">
-                                    <i class="fas fa-trash"></i>
+                                <button class="btn btn-sm btn-link" type="submit" name="delete">
+                                    <i class="fas fa-trash text-danger"></i>
                                 </button>
                             </form>
                         </td>

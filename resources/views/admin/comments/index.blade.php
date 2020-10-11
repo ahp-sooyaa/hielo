@@ -1,15 +1,14 @@
 <x-admin.layouts.app>
     <div class="card p-3">
-        <header class="text-black">
+        <header>
             <h1>Comments</h1>
-            <p class="text-dark-50">All of comments are shown in below</p>
+            <p class="text-black-50">All of comments are shown in below</p>
         </header>
         <table id="datatable" class="table table-striped table-responsive-md">
             <thead>
                 <tr>
-                    {{-- multi language is not yet @lang('comments.attributes.post') --}}
-                    <th>Comments</th>
-                    <th>Posts</th>
+                    <th>Comment</th>
+                    <th>Post title</th>
                     <th>Author</th>
                     <th>Posted_at</th>
                     <th></th>
@@ -24,16 +23,16 @@
                         <td>{{ $comment->created_at }}</td>
                         <td class="d-flex">
                             <a class="mr-3" href="/admin/comments/{{$comment->id}}/edit">
-                                <button class="btn btn-info" type="submit" name="delete">
-                                    <i class="fas fa-pen"></i>
+                                <button class="btn btn-sm btn-link" type="submit" name="delete">
+                                    <i class="fas fa-pen text-primary"></i>
                                 </button>
                             </a>
                             <form action="/admin/comments/{{$comment->id}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                         
-                                <button class="btn btn-danger" type="submit" name="delete">
-                                    <i class="fas fa-trash"></i>
+                                <button class="btn btn-sm btn-link" type="submit" name="delete">
+                                    <i class="fas fa-trash text-danger"></i>
                                 </button>
                             </form>
                         </td>

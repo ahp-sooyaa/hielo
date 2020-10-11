@@ -1,7 +1,9 @@
-<div class="card border-0 text-success p-3">
+<div class="card shadow border-0 p-3">
     <div class="d-flex position-relative">
         <div class="mr-auto">
-            <i class="fas fa-envelope fa-3x bg-success position-absolute icon p-3 rounded-20 shadow"></i>
+            <i 
+                class="fas fa-envelope fa-3x text-white bg-primary position-absolute p-3 top-n35 shadow rounded-20"
+            ></i>
         </div>
         <div class="text-center">
             <span class="text-dark-50">{{$posts->count()}}</span> 

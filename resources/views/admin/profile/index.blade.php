@@ -7,7 +7,7 @@
                     <div class="d-flex align-items-center">
                         <h1 class="mr-auto">{{current_user()->name}}</h1>
                         <a href="/admin/profile/edit">
-                            <button class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button class="btn btn-sm btn-outline-info">Edit</button>
                         </a>
                     </div>
                     {{current_user()->email}}

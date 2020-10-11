@@ -1,7 +1,9 @@
-<div class="card border-0 text-danger p-3">
+<div class="card shadow border-0 p-3">
     <div class="d-flex position-relative">
         <div class="mr-auto">
-            <i class="fas fa-comments fa-3x bg-danger position-absolute icon p-3 rounded-20 shadow"></i>
+            <i 
+                class="fas fa-comments fa-3x text-white bg-secondary position-absolute top-n35 p-3 shadow rounded-20"
+            ></i>
         </div>
         <div class="text-center">
             <span class="text-dark-50">{{$comments->count()}}</span> 

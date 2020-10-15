@@ -14,7 +14,7 @@ class PostsController extends Controller
         if (request('tag')) {
             $posts = Tag::where('name', request('tag'))
                 ->firstOrFail()
-                ->posts->whereNotNull('published_at');
+                ->posts->where('published_at', '<=', date('Y-m-d H:i:s'));
         } else {
             $posts = auth()->user()->timeline();
         }
@@ -54,13 +54,17 @@ class PostsController extends Controller
 
         $tags = json_decode(request('tags'));
 
-        $post->tags()->sync($tags);
+        foreach ($tags as $tag) {
+            $tagsId[$tag->id] = ['tag_id' => $tag->id];
+        }
+
+        $post->tags()->sync($tagsId);
 
         foreach (current_user()->followers as $follower) {
             $follower->notify(new PostPublished($post));
         }
 
-        return redirect('/posts')->with('status', 'Post Published');
+        return response()->json(['postId' => $post->id]);
     }
 
     public function edit(Post $post)
@@ -80,9 +84,14 @@ class PostsController extends Controller
 
         $tags = json_decode(request('tags'));
 
-        $post->tags()->sync($tags);
+        foreach ($tags as $tag) {
+            $tagsId[$tag->id] = ['tag_id' => $tag->id];
+        }
 
-        return redirect(current_user()->name . '/posts?type=all');
+        $post->tags()->sync($tagsId);
+
+        // return redirect(current_user()->name . '/posts?type=all');
+        return response()->json(['postId' => $post->id]);
     }
 
     public function delete(Post $post)

@@ -2,13 +2,15 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <main class="col-6">
-                <div class="d-flex align-items-center">
-                    <button type="button" class="btn btn-sm rounded-pill px-4 bg-secondary my-4 mr-auto">
-                        <a href="/posts/create">Updated at Aug, 12 2020</a>
-                    </button>
-                    <a class="text-danger" href="/postReports/{{$post->id}}/create">
+                <div class="d-flex align-items-center mb-3">
+                    @if ($post->isEdited())
+                        <div class="btn btn-sm btn-light rounded-pill mr-auto">
+                            Updated at {{$post->updated_at->format('M d,Y')}}
+                        </div>
+                    @endif
+                    {{-- <a class="text-danger" href="/postReports/{{$post->id}}/create">
                         report
-                    </a>
+                    </a> --}}
                 </div>
                 <div>
                     <img src="{{ $post->featured_image }}" alt="Featured Image" class="mb-4 rounded-20 featured-image-sg">
@@ -141,20 +143,30 @@
                 </div>
             </main>
         </div>
-        <div class="row justify-content-center my-5">
-            <div class="col-9">
+        <div class="row justify-content-center my-5 mx-5">
+            <div class="col-12">
                 <hr class="border-black mb-5">
-                <h3 class="font-weight-bold">Related posts</h3>
-                <div class="d-flex mx-n3 mt-3">
+                <h3 class="font-weight-bold text-black-50 mb-5">Related posts</h3>
+                <div class="d-flex mx-n5 mt-3">
                     @forelse ($relatedPosts as $relatedPost)
-                        <div class="col-4 px-3">
-                            <img class="h-270-px mb-2" src="{{$relatedPost->featured_image}}" alt="relatingPost_featured_image">
-                            <div>
+                        <div class="col-4 px-5">
+                            {{-- <img class="h-270-px" src="{{$relatedPost->featured_image}}" alt="relatingPost_featured_image"> --}}
+                            <h5 class="text-muted">
+                                - 
+                                {{$relatedPost->tags->pluck('name')->join(', ')}}
+                            </h5>
+                            <h4 class="my-4">
                                 <a href="{{$post->path()}}">
-                                    <h4>{{$relatedPost->title}}</h4>
+                                    {{$relatedPost->title}}
                                 </a>
+                            </h4>
+                            <div class="d-flex align-items-center">
+                                <img src="{{$relatedPost->author->avatar}}" alt="avatar" class="avatar mr-3">
+                                <div>
+                                    <a href="{{$relatedPost->author->path()}}" class="font-weight-bold">{{$relatedPost->author->name}}</a>
+                                    <div class="text-black-50">{{$relatedPost->created_at->format('M d, Y')}}</div>
+                                </div>
                             </div>
-                            By {{$relatedPost->author->name}}
                         </div>
                     @empty
                         <div class="col-4">

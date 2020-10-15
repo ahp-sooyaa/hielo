@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="card w-100 p-4">
-                    <create-blog></create-blog>
+                    <create-blog current="{{date('Y-m-d\TH:i:s')}}"></create-blog>
                 </div>
             </div>
         </div>

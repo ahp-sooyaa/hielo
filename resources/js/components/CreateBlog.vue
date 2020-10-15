@@ -44,7 +44,7 @@
             <div class="form-group">
                 <multiselect 
                     v-model="selectedTags" :options="tagOptions" :multiple="true" track-by="id"
-                    label="name" placeholder="Search or add tags" @input="updateSelected"
+                    label="name" placeholder="Search or add tags" 
                 >
                 </multiselect>
                 <span 
@@ -57,8 +57,8 @@
 </template>
 
 <script>
-import moment from 'moment';
-import Errors from '../form'
+// import moment from 'moment';
+import Errors from '../form';
 import Multiselect from "vue-multiselect";
 import { VueEditor } from "vue2-editor";
 import axios from "axios";
@@ -68,15 +68,15 @@ export default {
         VueEditor,
         Multiselect
     },
+    props: ['current'],
     data() {
         return {
             title: "",
             excerpt: "",
             content: "",
             featured_image: "",
-            published_at: moment().format('yyyy-MM-DDThh:mm:ss'),
+            published_at: this.current,
             previewImage: "",
-            tags: null,
             selectedTags: [],
             tagOptions: [],
             errors: new Errors()
@@ -96,10 +96,13 @@ export default {
                 fd.append("excerpt", this.excerpt);
                 fd.append("content", this.content);
                 fd.append("published_at", this.published_at);
-                fd.append("tags", JSON.stringify(this.tags));
+                fd.append("tags", JSON.stringify(this.selectedTags));
 
             axios.post(`/posts`, fd)
-                .then(response => flash("post published") )
+                .then(response => {
+                    window.location.href = `https://hielo.dev/posts/${response.data.postId}`;
+                    flash("post published") 
+                })
                 .catch(err => this.errors.record(err.response.data.errors));
         },
         fetchTag() {
@@ -107,15 +110,6 @@ export default {
                 .then(res => this.tagOptions = res.data.data)
                 .catch(err => this.errors.record(err.response.data));
         },
-        updateSelected(selectedTags){
-            let tags = [];
-
-            selectedTags.forEach((tag) => {
-                tags.push(tag.id);
-            });
-
-            this.tags = tags;
-        }
     },
     created() {
         this.fetchTag();

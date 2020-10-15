@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
 use App\Exceptions\ThrottleException;
 use Throwable;
 
@@ -58,6 +59,13 @@ class Handler extends ExceptionHandler
         //         return response('Sorry, Span detected. Not Allowed!', 422);
         //     }
         // }
+
+        if ($exception instanceof AuthorizationException) {
+            if ($request->expectsJson()) {
+                return response()->json(['error' => 'Unauthorized.'], 403);
+            }
+            return redirect()->back();
+        }
 
         // request too much within one minute reponse
         if ($exception instanceof ThrottleException) {

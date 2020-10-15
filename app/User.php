@@ -45,11 +45,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return asset($value);
     }
 
-    // public function setPasswordAttribute($value)
-    // {
-    //     return $this->attributes['password'] = bcrypt($value);
-    // }
-
     public function timeline()
     {
         $ids = $this->follows()->pluck('id');

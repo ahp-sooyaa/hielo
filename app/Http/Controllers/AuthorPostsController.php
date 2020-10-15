@@ -32,7 +32,7 @@ class AuthorPostsController extends Controller
                 break;
 
             case 'all':
-                $posts = Post::where('author_id', $user->id)->get();
+                $posts = Post::orderBy('updated_at', 'desc')->where('author_id', $user->id)->get();
                 break;
         };
         return view('posts.posts', compact('posts'));

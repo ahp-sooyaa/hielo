@@ -96,7 +96,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{user:name}/follower', 'FollowsController@follower');
 
         /* readingList */
-        Route::get('/{user:name}/readingList', 'ReadingListController@index');
+        Route::get('/{user:name}/readingList', 'ReadingListController@index')->middleware('can:view,user');
         Route::post('/readingList/{postId}', 'ReadingListController@store');
         Route::delete('/readingList/{postId}', 'ReadingListController@destroy');
         Route::patch('/readingList/{postId}', 'ReadingListController@archieve');
@@ -104,7 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{user:name}/readingList/{collection:name}', 'ReadingListController@collection');
         Route::post('/{user:name}/collection', 'CollectionController@store');
         /* individual user posts */
-        Route::get('/{user:name}/posts', 'AuthorPostsController@index');
+        Route::get('/{user:name}/posts', 'AuthorPostsController@index')->middleware('can:view,user');
         Route::delete('/posts/{postId}', 'AuthorPostsController@destroy'); // need condition check
 
         /* post like routes */

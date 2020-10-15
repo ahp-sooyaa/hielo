@@ -3,7 +3,7 @@
     <form @submit.prevent="Update">
         <h1 class="text-dark">Edit Post</h1>
         <div class="form-group">
-            <input type="file" class="form-control" @change="imageSelected" />
+            <input type="file" class="border-0 mb-3" @change="imageSelected" />
             <div v-if="post.previewImage">
               <img :src="post.previewImage" style="height: 200px" class="rounded" />
             </div>

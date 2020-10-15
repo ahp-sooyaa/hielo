@@ -1,10 +1,24 @@
 /* this scss effecting nav bar styles at layouts/app */
+*{
+    box-sizing: 'border-box';
+}
+
 #sidebar{
-    width: 300px;
+    min-width: 250px;
 }
 
 #sidebar.active {
-    margin-left: -300px;
+    margin-left: -250px;
+}
+
+#sidebar .nav-item:not(:last-child){
+    margin-bottom: 3px;
+}
+
+#sidebar .nav-link:hover, #sidebar .nav-item > .active{
+    background-color: $info;
+    color: #fff;
+    border-radius: 5px;
 }
 
 .bg-whitesmoke{
@@ -23,16 +37,6 @@
 
 .collapse-item:not(.collapsed) > .nav-link{
     color: #fff;
-}
-
-.nav-item:not(:last-child){
-    margin-bottom: 3px;
-}
-
-.nav-link:hover, .nav-item > .active{
-    background-color: $info;
-    color: #fff;
-    border-radius: 5px;
 }
 
 .nav-link{

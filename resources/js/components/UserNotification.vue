@@ -1,5 +1,5 @@
 <template>
-    <li class="nav-item dropdown m-0" v-if="notifications.length">
+    <li class="nav-item dropdown ml-3" v-if="notifications.length">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">
             <i class="fas fa-bell fa-lg"></i> <span class="badge badge-info">{{notifications.length}}</span>
         </a>

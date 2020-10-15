@@ -33,7 +33,9 @@
 {{-- </div>   --}}
 @empty
     <div class="mx-auto text-center">
-        No Posts yet! :) <br>
-        According to post index logic, user & following user created posts will be showed.
+        <div>
+            <img src="https://hielo.dev/appImage/kingdom-premium-upgrade.png" alt="" style="height: 300px; width: 300px">
+        </div>
+        No Posts yet!
     </div>
 @endforelse

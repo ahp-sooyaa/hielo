@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, Followable, Bookmarkable, RecordActivity, Reportable, Searchable;
 
@@ -45,10 +45,10 @@ class User extends Authenticatable
         return asset($value);
     }
 
-    public function setPasswordAttribute($value)
-    {
-        return $this->attributes['password'] = bcrypt($value);
-    }
+    // public function setPasswordAttribute($value)
+    // {
+    //     return $this->attributes['password'] = bcrypt($value);
+    // }
 
     public function timeline()
     {

@@ -19,8 +19,8 @@ class Admin
          * Check current_user is authorize or not to access admin routes.
          */
         if (current_user()->isSuperAdmin() || current_user()->isAdmin()) {
-            return $next($request);;
+            return redirect('/posts');
         }
-        return redirect('/posts');
+        return $next($request);
     }
 }

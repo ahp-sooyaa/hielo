@@ -5,8 +5,6 @@
                 <span class="mr-auto mb-0">
                     <a href="/posts" class="text-dark">All Posts</a> / Tag: {{request('tag')}} 
                 </span>
-            @else 
-                {{-- <h4 class="mr-auto mb-0">All Posts</h4> --}}
             @endif
         </header>
         <main class="row">
@@ -14,7 +12,7 @@
                 <x-posts.list :posts="$posts"></x-posts.list>
             </div>
             <div class="col-md-3 offset-md-1">
-                <h5>Popular Tags</h5>
+                <h5>Tags</h5>
                 @forelse ($tags as $tag)
                     <a href="/posts?tag={{$tag->name}}" class="text-decoration-none"> 
                         <div class="btn btn-sm {{ request('tag')==$tag->name ? 'btn-info' : 'btn-outline-info' }} mb-3">
@@ -22,7 +20,7 @@
                         </div>
                     </a>
                 @empty
-                    No tags found. Sorry No sorry :)
+                    No tags yet!
                 @endforelse
             </div>
             {{-- <span class="text-dark">{{ $posts->links() }}</span> --}}

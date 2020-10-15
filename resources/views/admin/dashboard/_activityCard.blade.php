@@ -1,19 +1,19 @@
-<div class="card py-3 mt-4">
+<div class="card p-3 mt-4 text-center">
     <div class="mx-auto">
-        <h2 class="text-info mb-4">Activity Feed</h2>
+        <div class="mb-4">Activity Feed</div>
         <ul class="mb-0 list-unstyled">
-            @foreach ($activities as $activity)
-            <li class="{{$loop->last ? '' : 'mb-2'}} pl-2">
+            @foreach ($activities->slice(0,5) as $activity)
+            <li class="{{$loop->last ? '' : 'mb-2'}}">
                 @if ($activity->subject_type == 'App\Post')
-                    <x-post-activity :activity="$activity"></x-post-activity>
+                    <x-activity.post :activity="$activity"></x-activity.post>
                 @elseif ($activity->subject_type == 'App\User') 
-                    <x-user-activity :activity="$activity"></x-user-activity>
+                    <x-activity.user :activity="$activity"></x-activity.user>
                 @elseif ($activity->subject_type == 'App\Comment') 
-                    <x-comment-activity :activity="$activity"></x-comment-activity>
+                    <x-activity.comment :activity="$activity"></x-activity.comment>
                 @endif   
-                @if (!$loop->last)
+                {{-- @if (!$loop->last)
                     <hr>
-                @endif
+                @endif --}}
             </li>       
             @endforeach
         </ul>

@@ -65,7 +65,7 @@
                 <div>
                     @foreach ($post->tags as $tag)
                         <a href="/posts?tag={{$tag->name}}" class="text-decoration-none">   
-                            <div class="btn btn-sm px-4 bg-secondary my-4 mr-3">
+                            <div class="btn btn-sm px-4 btn-info my-4 mr-3">
                                 {{$tag->name}}
                             </div>
                         </a>

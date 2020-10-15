@@ -11,9 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script>
-        window.authName = "{{current_user()->name}}";
-    </script>
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -40,8 +38,6 @@
                             <a href="/search" class="search-btn d-flex text-decoration-none">
                                 <i class="fas fa-search text-dark"></i>
                             </a>
-                            
-                            {{-- <auto-complete></auto-complete> --}}
                             <user-notification :user={{auth()->id()}}></user-notification>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -64,7 +60,7 @@
                                             </button>
                                         </a>
                                     </div>
-                                    <hr class="my-2">
+                                    <div class="dropdown-divider"></div>
                                     <a 
                                         class="dropdown-item mb-2" 
                                         href="/{{current_user()->name}}/posts?type=all">
@@ -79,6 +75,11 @@
                                         class="dropdown-item mb-2" 
                                         href="/{{current_user()->name}}">
                                         Profile
+                                    </a>
+                                    <a 
+                                        class="dropdown-item mb-2" 
+                                        href="/{{current_user()->name}}/edit">
+                                        Setting
                                     </a>
                                     <a class="dropdown-item pb-2" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

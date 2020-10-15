@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUser;
 use App\User;
 
 class ProfileController extends Controller
@@ -19,11 +20,13 @@ class ProfileController extends Controller
 
     public function update(User $user, StoreUserRequest $request)
     {
+        $attributes = $request->validated();
+
         if ($request->hasFile('avatar')) {
-            $attributes['avatar'] = request('avatar')->store('avatars');
+            $attributes['avatar'] = $request->avatar->store('avatars');
         }
 
-        $user->update($request->validated());
+        $user->update($attributes);
 
         return redirect($user->path());
     }

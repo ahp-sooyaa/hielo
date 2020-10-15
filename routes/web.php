@@ -17,7 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('login/github', 'Auth\LoginController@redirectGithub');
 Route::get('login/github/callback', 'Auth\LoginController@githubCallback');
@@ -68,60 +69,61 @@ Route::group(['middleware' => ['auth', 'Admin'], 'prefix' => 'admin'], function 
 
 /* user routes */
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/search', 'SearchController@show');
+    Route::group(['middleware' => 'verified'], function () {
+        Route::get('/search', 'SearchController@show');
 
-    Route::get('/posts', 'PostsController@index');
-    Route::get('/posts/create', 'PostsController@create');
-    // Route::get('/posts/search', 'SearchController@show');
-    Route::post('/posts', 'PostsController@store');
-    Route::get('/posts/{post}', 'PostsController@show');
-    Route::get('/posts/{post}/edit', 'PostsController@edit');
-    Route::patch('/posts/{post}', 'PostsController@update');
+        Route::get('/posts', 'PostsController@index');
+        Route::get('/posts/create', 'PostsController@create');
+        // Route::get('/posts/search', 'SearchController@show');
+        Route::post('/posts', 'PostsController@store');
+        Route::get('/posts/{post}', 'PostsController@show');
+        Route::get('/posts/{post}/edit', 'PostsController@edit')->middleware('can:update,post');
+        Route::patch('/posts/{post}', 'PostsController@update');
 
-    /* user profile */
-    Route::get('/{user:name}', 'ProfileController@show');
-    Route::get('/{user:name}/edit', 'ProfileController@edit')
-        ->middleware('can:edit,user');
-    Route::patch('/{user:name}', 'ProfileController@update')
-        ->middleware('can:edit,user');
-    Route::get('/{user:name}/likes', 'ProfileController@likes');
-    Route::get('/{user:name}/comments', 'ProfileController@comments');
+        /* user profile */
+        Route::get('/{user:name}', 'ProfileController@show');
+        Route::get('/{user:name}/edit', 'ProfileController@edit')
+            ->middleware('can:edit,user');
+        Route::patch('/{user:name}', 'ProfileController@update')
+            ->middleware('can:edit,user');
+        Route::patch('/{user:name}/password', 'UserPasswordController@update');
+        Route::get('/{user:name}/likes', 'ProfileController@likes');
+        Route::get('/{user:name}/comments', 'ProfileController@comments');
 
-    Route::post('/{user:name}/follow', 'FollowsController@store');
-    Route::get('/{user:name}/follow', 'FollowsController@index');
-    Route::get('/{user:name}/following', 'FollowsController@following');
-    Route::get('/{user:name}/follower', 'FollowsController@follower');
+        Route::post('/{user:name}/follow', 'FollowsController@store');
+        Route::get('/{user:name}/follow', 'FollowsController@index');
+        Route::get('/{user:name}/following', 'FollowsController@following');
+        Route::get('/{user:name}/follower', 'FollowsController@follower');
 
-    /* readingList */
-    Route::get('/{user:name}/readingList', 'ReadingListController@index');
-    Route::post('/readingList/{postId}', 'ReadingListController@store');
-    Route::delete('/readingList/{postId}', 'ReadingListController@destroy');
-    Route::patch('/readingList/{postId}', 'ReadingListController@archieve');
+        /* readingList */
+        Route::get('/{user:name}/readingList', 'ReadingListController@index');
+        Route::post('/readingList/{postId}', 'ReadingListController@store');
+        Route::delete('/readingList/{postId}', 'ReadingListController@destroy');
+        Route::patch('/readingList/{postId}', 'ReadingListController@archieve');
 
-    Route::get('/{user:name}/readingList/{collection:name}', 'ReadingListController@collection');
-    Route::post('/{user:name}/collection', 'CollectionController@store');
-    /* individual user posts */
-    Route::get('/{user:name}/posts', 'AuthorPostsController@index');
-    Route::delete('/posts/{postId}', 'AuthorPostsController@destroy'); // need condition check
+        Route::get('/{user:name}/readingList/{collection:name}', 'ReadingListController@collection');
+        Route::post('/{user:name}/collection', 'CollectionController@store');
+        /* individual user posts */
+        Route::get('/{user:name}/posts', 'AuthorPostsController@index');
+        Route::delete('/posts/{postId}', 'AuthorPostsController@destroy'); // need condition check
 
-    /* post like routes */
-    Route::post('/posts/{post}/like', 'LikesController@store'); // at first segment '/posts' shouldn't use, it may cause route conflict with (eg. '/posts/search')
+        /* post like routes */
+        Route::post('/posts/{post}/like', 'LikesController@store'); // at first segment '/posts' shouldn't use, it may cause route conflict with (eg. '/posts/search')
 
-    /* post comments routes */
-    Route::post('/posts/{post}/comment', 'CommentsController@store');
+        /* post comments routes */
+        Route::post('/posts/{post}/comment', 'CommentsController@store');
 
-    /* report routes */
-    Route::get('/userReports/{user}/create', 'UserReportsController@create');
-    Route::post('/userReports/{user}', 'UserReportsController@store');
+        /* report routes */
+        Route::get('/userReports/{user}/create', 'UserReportsController@create');
+        Route::post('/userReports/{user}', 'UserReportsController@store');
 
-    Route::get('/postReports/{post}/create', 'PostReportsController@create');
-    Route::post('/postReports/{post}', 'PostReportsController@store');
-
+        Route::get('/postReports/{post}/create', 'PostReportsController@create');
+        Route::post('/postReports/{post}', 'PostReportsController@store');
+    });
     /* notifications */
     Route::get('/{user}/notifications', 'UserNotificationsController@index');
     Route::delete('/{user}/notifications/{notifications}', 'UserNotificationsController@destroy');
 
-    /* Search */
-
+    /* home */
     Route::get('/home', 'HomeController@index')->name('home');
 });

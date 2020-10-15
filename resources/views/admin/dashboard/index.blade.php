@@ -20,8 +20,8 @@
                 <chart></chart>
             </div>
         </div>
-        {{-- <div class="col-4 px-3">
+        <div class="mx-auto">
             @include('admin.dashboard._activityCard')
-        </div> --}}
+        </div>
     </div>
 </x-admin.layouts.app>

@@ -2,8 +2,8 @@
   <div>
     <form @submit.prevent="Publish">
         <h1 class="text-dark">Create new Post</h1>
-            <div class="form-group">
-                <input type="file" class="form-control" @change="imageSelected" />
+            <div class="form-group m-0">
+                <input type="file" class="form-control border-0 p-0" @change="imageSelected" />
                 <div v-if="previewImage">
                     <img :src="previewImage" style="height: 200px" class="rounded" />
                 </div>

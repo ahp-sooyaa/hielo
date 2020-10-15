@@ -28,7 +28,7 @@
           <div class="bg-whitesmoke shadow px-3" id="sidebar">
               <div class="d-flex align-items-center mt-3">
                   <a class="navbar-brand brand mr-auto" href="{{ url('/posts') }}">
-                    <h2 class="m-0 text-info">{{ config('app.name', 'Hielo') }}</h2>
+                    <h2 class="m-0">{{ config('app.name', 'Hielo') }}</h2>
                   </a>
                   {{--  --}}
               </div>
@@ -107,15 +107,15 @@
           </div>
           <main class="container-fluid p-5">
               <button type="button" id="sidebarCollapse" class="btn btn-info mt-n4">
-                {{-- <i class="fas fa-align-left"></i> --}}
                 <i class="fas fa-bars fa-1x"></i>
               </button>
               <div class="mt-4">
                 {{ $slot }}
               </div>
               <footer class="text-center py-5">
-                  Made with <i class="fas fa-grin-hearts text-danger"></i> by Aung Htet Paing.
-                  &#169; Hielo 2020
+                Made with <i class="fas fa-grin-hearts text-info"></i> by 
+                <span class="text-info"> Aung Htet Paing</span>.
+                &#169; Hielo 2020
               </footer>
           </main>
       </div>

@@ -9,6 +9,7 @@ class Tag extends Model
 {
     use Searchable;
     protected $guarded = [];
+    protected $withCount = ['posts'];
 
     public function posts()
     {

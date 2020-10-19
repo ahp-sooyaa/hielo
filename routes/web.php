@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth', 'Admin'], 'prefix' => 'admin'], function 
     /* comments routes */
     Route::get('/comments', 'Admin\CommentsController@index');
     Route::get('/comments/{comment}/edit', 'Admin\CommentsController@edit');
+    Route::patch('/comments/{comment}', 'Admin\CommentsController@update');
     Route::delete('/comments/{comment}', 'Admin\CommentsController@destroy');
 
     /* roles routes */
@@ -62,6 +63,12 @@ Route::group(['middleware' => ['auth', 'Admin'], 'prefix' => 'admin'], function 
     Route::get('/roles/{role}/edit', 'Admin\RolesController@edit');
     Route::patch('/roles/{role}', 'Admin\RolesController@update');
     Route::delete('/roles/{role}', 'Admin\RolesController@destroy');
+
+    /* abilities routes */
+    Route::resource('abilities', 'Admin\AbilitiesController');
+
+    /* tags routes */
+    Route::resource('tags', 'Admin\TagsController');
 
     /* reports routes */
     Route::get('/reports', 'Admin\ReportsController@index');
@@ -74,18 +81,16 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/posts', 'PostsController@index');
         Route::get('/posts/create', 'PostsController@create');
-        // Route::get('/posts/search', 'SearchController@show');
         Route::post('/posts', 'PostsController@store');
         Route::get('/posts/{post}', 'PostsController@show');
-        Route::get('/posts/{post}/edit', 'PostsController@edit')->middleware('can:update,post');
+        Route::get('/posts/{post}/edit', 'PostsController@edit');
         Route::patch('/posts/{post}', 'PostsController@update');
+        Route::delete('/posts/{post}', 'PostsController@destroy');
 
         /* user profile */
         Route::get('/{user:name}', 'ProfileController@show');
-        Route::get('/{user:name}/edit', 'ProfileController@edit')
-            ->middleware('can:edit,user');
-        Route::patch('/{user:name}', 'ProfileController@update')
-            ->middleware('can:edit,user');
+        Route::get('/{user:name}/edit', 'ProfileController@edit');
+        Route::patch('/{user:name}', 'ProfileController@update');
         Route::patch('/{user:name}/password', 'UserPasswordController@update');
         Route::get('/{user:name}/likes', 'ProfileController@likes');
         Route::get('/{user:name}/comments', 'ProfileController@comments');
@@ -96,16 +101,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{user:name}/follower', 'FollowsController@follower');
 
         /* readingList */
-        Route::get('/{user:name}/readingList', 'ReadingListController@index')->middleware('can:view,user');
+        Route::get('/{user:name}/readingList', 'ReadingListController@index');
         Route::post('/readingList/{postId}', 'ReadingListController@store');
         Route::delete('/readingList/{postId}', 'ReadingListController@destroy');
         Route::patch('/readingList/{postId}', 'ReadingListController@archieve');
 
         Route::get('/{user:name}/readingList/{collection:name}', 'ReadingListController@collection');
         Route::post('/{user:name}/collection', 'CollectionController@store');
+
         /* individual user posts */
-        Route::get('/{user:name}/posts', 'AuthorPostsController@index')->middleware('can:view,user');
-        Route::delete('/posts/{postId}', 'AuthorPostsController@destroy'); // need condition check
+        Route::get('/{user:name}/posts', 'AuthorPostsController@index');
 
         /* post like routes */
         Route::post('/posts/{post}/like', 'LikesController@store'); // at first segment '/posts' shouldn't use, it may cause route conflict with (eg. '/posts/search')

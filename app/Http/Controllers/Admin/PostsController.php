@@ -17,6 +17,17 @@ class PostsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Post $post)
+    {
+        //
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -31,11 +42,13 @@ class PostsController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $attributes = $request->validated();
+        $attributes = request()->except(['tags']);
 
         $attributes['featured_image'] = request('featured_image')->store('featured-images');
 
-        current_user()->posts()->create($attributes);
+        $post = current_user()->posts()->create($attributes);
+
+        $post->tags()->sync(request('tags'));
 
         return redirect('/admin/posts');
     }
@@ -45,7 +58,10 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', [
+            'post' => $post,
+            'tags' => Tag::all()
+        ]);
     }
 
     /**
@@ -53,13 +69,15 @@ class PostsController extends Controller
      */
     public function update(Post $post, StorePostRequest $request)
     {
-        $attributes = $request->validated();
+        $attributes = request()->except(['tags']);
 
-        if ($request->hasFile('featured_image')) {
+        if (request()->hasFile('featured_image')) {
             $attributes['featured_image'] = request('featured_image')->store('featured-images');
         }
 
         $post->update($attributes);
+
+        $post->tags()->sync(request('tags'));
 
         return redirect('/admin/posts');
     }

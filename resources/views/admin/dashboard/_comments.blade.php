@@ -5,7 +5,7 @@
                 class="fas fa-comments fa-3x text-white bg-secondary position-absolute top-n35 p-3 shadow rounded-20"
             ></i>
         </div>
-        <div class="text-center">
+        <div class="text-center sp-1">
             <span class="text-dark-50">{{$comments->count()}}</span> 
             <h3>Comments</h3>
         </div>

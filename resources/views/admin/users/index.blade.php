@@ -3,11 +3,13 @@
         <header>
             <div class="d-flex align-items-center">
                 <h1 class="mb-0 mr-3">Users</h1>
-                <a href="/admin/users/create">
-                    <button class="btn btn-sm btn-info">
-                        + ADD NEW
-                    </button>
-                </a>
+                @can('create_user', App\User::class)
+                    <a href="/admin/users/create">
+                        <button class="btn btn-sm btn-info">
+                            + ADD NEW
+                        </button>
+                    </a>
+                @endcan
             </div>
             <p class="text-black-50">All of Users are shown in below</p>
         </header>
@@ -33,17 +35,19 @@
                             </span>
                         </td>
                         <td class="d-flex">
-                            <a href="/admin/users/{{$user->id}}/edit" class="mr-3">
-                                <button class="btn btn-sm btn-link" name="delete">
-                                    <i class="fas fa-pen text-primary"></i>
-                                </button>
-                            </a>
-                            @can('delete', $user)
+                            @can('edit_user', $user)
+                                <a href="/admin/users/{{$user->id}}/edit" class="mr-3">
+                                    <button class="btn btn-sm btn-link" name="delete">
+                                        <i class="fas fa-pen text-primary"></i>
+                                    </button>
+                                </a>
+                            @endcan
+                            @can('destroy_user', $user)
                                 <form action="/admin/users/{{$user->id}}" method="POST">
                                     @csrf
                                     @method('DELETE')
         
-                                    <button class="btn btn-sm btn-info" type="submit" name="delete">
+                                    <button class="btn btn-sm btn-link" type="submit" name="delete">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
                                 </form>

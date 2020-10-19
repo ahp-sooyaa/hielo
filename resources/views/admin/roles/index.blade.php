@@ -14,8 +14,8 @@
         <table id="datatable" class="table table-striped table-hover table-responsive-md">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Role Name</th>
+                    <th>Name</th>
+                    <th>Label</th>
                     <th>Abilities</th>
                     <th></th>
                 </tr>
@@ -23,8 +23,8 @@
             <tbody>
                 @forelse($roles as $role)
                     <tr>
-                        <td>{{ $role->id }}</td>
                         <td>{{ $role->name }}</td>
+                        <td>{{ $role->label }}</td>
                         <td>
                             @foreach ($role->abilities as $ability)
                                 <span class="badge badge-success">

@@ -33,7 +33,7 @@ class CommentsController extends Controller
     {
         $comment->update($request->validated());
 
-        return redirect('/admin/comments');
+        return redirect('/admin/comments')->with('status', 'Update Successfully');
     }
 
     /**
@@ -43,6 +43,6 @@ class CommentsController extends Controller
     {
         $comment->delete();
 
-        return back();
+        return back()->with('status', 'successfully deleted');
     }
 }

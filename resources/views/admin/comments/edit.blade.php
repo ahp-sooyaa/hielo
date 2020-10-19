@@ -1,20 +1,23 @@
 <x-admin.layouts.app>
     <div class="card p-3">
         <h1>Edit Comment</h1>
-        <div>
-            <span class="text-black-50 d-inline-block">Post Title: </span> {{$comment->post->title}}
-        </div>
-        <div>
-            <span class="text-black-50 d-inline-block">Post Author: </span> {{$comment->post->author->name}}
-        </div>
         <form action="/admin/comments/{{$comment->id}}" method="POST">
             @csrf
             @method('PATCH')
 
             <div class="form-group">
+                <label for="title">Post Title (* readonly)</label>
+                <input class="form-control" type="text" placeholder="{{$comment->post->title}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="name">Author Name (* readonly)</label>
+                <input class="form-control" type="text" placeholder="{{$comment->post->author->name}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="body">Comment Content</label>
                 <input
                     type="text" name="body" 
-                    class="form-control mt-3 @error('password') is-invalid @enderror"
+                    class="form-control @error('body') is-invalid @enderror"
                     value="{{$comment->body}}"
                 >
                 @error('body')
@@ -23,7 +26,6 @@
                     </span>
                 @enderror
             </div>
-            
             <button type="submit" class="btn btn-primary mr-3">
                 Update
             </button>

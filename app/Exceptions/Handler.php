@@ -60,12 +60,12 @@ class Handler extends ExceptionHandler
         //     }
         // }
 
-        if ($exception instanceof AuthorizationException) {
-            if ($request->expectsJson()) {
-                return response()->json(['error' => 'Unauthorized.'], 403);
-            }
-            return redirect()->back();
-        }
+        // if ($exception instanceof AuthorizationException) {
+        //     if ($request->expectsJson()) {
+        //         return response()->json(['error' => 'Unauthorized.'], 403);
+        //     }
+        //     return redirect()->back();
+        // }
 
         // request too much within one minute reponse
         if ($exception instanceof ThrottleException) {

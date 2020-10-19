@@ -93,7 +93,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasRole('admin');
     }
 
-    // $user->abilities();
     public function abilities()
     {
         return $this->roles->map->abilities->flatten()->pluck('name')->unique();
@@ -137,6 +136,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function path($append = '')
     {
         return $append ? "/{$this->name}/{$append}" : "/{$this->name}";
+    }
+
+    public function setRecentView($postId)
+    {
+        return request()->session()->push('posts.recently_viewed_' . $this->id, $postId);
+    }
+
+    public function getRecentView()
+    {
+        return session()->get('posts.recently_viewed_' . $this->id);
     }
 
     public function toSearchableArray()

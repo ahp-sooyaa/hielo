@@ -5,7 +5,7 @@
                 class="fas fa-envelope fa-3x text-white bg-primary position-absolute p-3 top-n35 shadow rounded-20"
             ></i>
         </div>
-        <div class="text-center">
+        <div class="text-center sp-1">
             <span class="text-dark-50">{{$posts->count()}}</span> 
             <h3>Posts</h3>
         </div>

@@ -1,5 +1,5 @@
 <x-admin.layouts.app>
-    <header>
+    <header class="sp-1">
         <h1>DashBoard</h1>
         <p class="text-black-50">Dashboard overview and content summary </p>
     </header>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="mx-auto">
-            @include('admin.dashboard._activityCard')
+            {{-- @include('admin.dashboard._activityCard') --}}
         </div>
     </div>
 </x-admin.layouts.app>

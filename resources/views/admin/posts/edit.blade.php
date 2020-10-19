@@ -1,12 +1,17 @@
 <x-admin.layouts.app>
     <div class="card p-3">
-        <h1>Create Post</h1>
+        <h1>Edit Post</h1>
         <form action="/admin/posts/{{$post->id}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 
             <div class="form-group">
-                <input name="featured_image" class="form-control" type="file">
+                <input name="featured_image" class="border-0 @error('featured_image') is-invalid @enderror" type="file">
+                @error('featured_image')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="form-group">
                 <input
@@ -34,8 +39,9 @@
             <div class="form-group">
                 <textarea 
                     name="content"
-                    class="editable @error('content') is-invalid @enderror"
-                >{{$post->content}}
+                    class="form-control @error('content') is-invalid @enderror"
+                    rows="10"
+                >{!! $post->content !!}
                 </textarea>
                 @error('content')
                     <span class="invalid-feedback" role="alert">
@@ -46,6 +52,20 @@
             <div class="form-group">
                 <input name="published_at" class="form-control @error('published_at') is-invalid @enderror" type="text" value="{{$post->published_at}}">
                 @error('published_at')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <select name="tags[]" class="form-control @error('tags') is-invalid @enderror" multiple>
+                    @foreach ($tags as $tag)
+                        <option value="{{$tag->id}}" {{$post->tags->contains($tag->id)? 'selected' : ''}}>
+                            {{$tag->name}}
+                        </option>
+                    @endforeach
+                </select>
+                @error('tags')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

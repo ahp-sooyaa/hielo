@@ -27,7 +27,7 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        request()->session()->push('posts.recently_viewed', $post->getKey());
+        current_user()->setRecentView($post->id);
 
         return view('posts.show', [
             'post' => $post,
@@ -44,7 +44,7 @@ class PostsController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $attributes = $request->validated();
+        $attributes = $request->except('tags');
 
         if ($request->hasFile('featured_image')) {
             $attributes['featured_image'] = request('featured_image')->store('featured-images');
@@ -64,16 +64,22 @@ class PostsController extends Controller
             $follower->notify(new PostPublished($post));
         }
 
+        \Session::flash('status', 'Create successful');
+
         return response()->json(['postId' => $post->id]);
     }
 
     public function edit(Post $post)
     {
+        $this->authorize('edit_post', $post);
+
         return view('posts.edit', compact('post'));
     }
 
     public function update(Post $post, StorePostRequest $request)
     {
+        $this->authorize('edit_post', $post);
+
         $attributes = $request->validated();
 
         if (request()->hasFile('featured_image')) {
@@ -90,12 +96,19 @@ class PostsController extends Controller
 
         $post->tags()->sync($tagsId);
 
-        // return redirect(current_user()->name . '/posts?type=all');
+        \Session::flash('status', 'Update successful');
+
         return response()->json(['postId' => $post->id]);
     }
 
-    public function delete(Post $post)
+    public function destroy(Post $post)
     {
-        # code ...
+        $this->authorize('destroy_post', $post);
+
+        current_user()->posts()->where('id', $post->id)->delete($post->id);
+
+        \Session::flash('status', 'Delete successful');
+
+        return back();
     }
 }

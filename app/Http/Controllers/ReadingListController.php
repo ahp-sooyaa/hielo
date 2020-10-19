@@ -11,6 +11,8 @@ class ReadingListController extends Controller
 {
     public function index(User $user)
     {
+        $this->authorize('access_route', $user);
+
         switch (request('type')) {
             case 'archieved':
                 $bookmarks = Bookmark::where([
@@ -21,8 +23,8 @@ class ReadingListController extends Controller
                 break;
 
             case 'recentlyViewed':
-                $posts_id = session()->get('posts.recently_viewed');
-                // need to check session exist or not otherwise it will throw error
+                $posts_id = current_user()->getRecentView();
+
                 $recentPosts = Post::whereIn('id', $posts_id)->take(10)->get();
 
                 return view('readinglist.recentlyViewed', compact('user', 'recentPosts'));

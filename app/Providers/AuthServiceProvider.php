@@ -27,8 +27,22 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('create-post', [PostPolicy::class, 'create']);
+        Gate::before(function ($user, $ability) {
+            if ($user->isSuperAdmin()) {
+                return true;
+            }
+        });
 
-        Gate::define('create-comment', [CommentPolicy::class, 'create']);
+        Gate::define('access_route', function ($user, $currentuser) {
+            if ($currentuser->is($user)) {
+                return true;
+            }
+        });
+
+        Gate::define('access_roles', function ($user) {
+            if ($user->abilities()->contains('access-roles')) {
+                return true;
+            }
+        });
     }
 }

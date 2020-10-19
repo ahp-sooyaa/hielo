@@ -9,6 +9,8 @@ class AuthorPostsController extends Controller
 {
     public function index(User $user)
     {
+        $this->authorize('access_route', $user);
+
         switch (request('type')) {
             case 'published':
                 $posts = Post::where([
@@ -35,13 +37,7 @@ class AuthorPostsController extends Controller
                 $posts = Post::orderBy('updated_at', 'desc')->where('author_id', $user->id)->get();
                 break;
         };
+
         return view('posts.posts', compact('posts'));
-    }
-
-    public function destroy($postId)
-    {
-        current_user()->posts()->where('id', $postId)->delete($postId);
-
-        return back();
     }
 }

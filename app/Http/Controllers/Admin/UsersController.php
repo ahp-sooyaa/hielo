@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -16,14 +17,25 @@ class UsersController extends Controller
         ]);
     }
 
+    public function show(User $user)
+    {
+        //
+    }
+
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.users.create', [
+            'roles' => Role::all()
+        ]);
     }
 
     public function store(StoreUserRequest $request)
     {
-        User::create($request->validated());
+        $attributes = $request->validated();
+
+        $attributes['password'] = Hash::make($attributes['password']);
+
+        User::create($attributes);
 
         return redirect('/admin/users');
     }

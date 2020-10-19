@@ -41,6 +41,10 @@ b{
     border: none;
 }
 
+.mw-200{
+    min-width: 200px !important;
+}
+
 .w{
     &-33{
         width: 33.3%;
@@ -184,36 +188,6 @@ select{
     padding: 5px 6px;
 }
 
-// medium-editor-element{
-//     padding-left: 1rem !important;
-// }
-
-// blockquote {
-// 	font-weight: 100;
-//     font-size: 18px;
-//     font-style: italic;
-//     max-width: 600px;
-//     text-align: justify;
-// 	margin-top: 20px;
-//     padding-left: 40px;
-// }
-
-// blockquote:before,
-// blockquote:after {
-// 	color: #f1efe6;
-// 	font-size: 2rem;
-// 	width: 1rem;
-// 	height: 1rem;
-// }
-
-// blockquote:before {
-// 	content: '“';
-// }
-
-// blockquote:after {
-// 	content: '”';
-// }
-
 /* comment hover */
 .comment-container:hover{
     background-color: white;
@@ -253,31 +227,6 @@ select{
 .ql-editor{
     color: black !important;
 }
-
-// .search-box{
-//     top: 50%;
-//     left: 50%;
-//     transform: translate(-50%, 0%);
-//     height: 40px;
-//     padding: 0px 4px;
-//     background-color: black;
-// }
-
-// .search-btn{
-//     justify-content: center;
-//     align-items: center;
-//     width: 40px;
-//     height: 40px;
-// }
-
-// .search-text, .search-text:focus{
-//     background: none;
-//     border: none;
-//     outline: none;
-//     color: white;
-//     transition: 0.4s;
-//     width: 0;
-// }
 
 .ais-Panel-header{
     border-bottom: none;

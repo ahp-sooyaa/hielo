@@ -44,7 +44,7 @@
                                     {{ str_limit(Auth::user()->name, 9, '...') }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right mw-200" aria-labelledby="navbarDropdown">
                                     <div class="d-flex dropdown-item align-items-center py-2">
                                         <img 
                                             src="{{current_user()->avatar}}" alt="avatar" class="avatar mr-2"

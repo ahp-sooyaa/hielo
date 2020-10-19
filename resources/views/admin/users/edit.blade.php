@@ -26,9 +26,11 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <select name="role">
+                    <label for="roles">Assign Role (* optional you can edit later)</label>
+                    <select name="roles" class="form-control">
+                        <option disabled selected value> -- select an role -- </option>
                         @foreach ($roles as $role)
-                            <option value="{{$role->name}}">{{$role->name}}</option>
+                            <option value="{{$role->id}}">{{$role->name}}</option>
                         @endforeach
                     </select>
                 </div>

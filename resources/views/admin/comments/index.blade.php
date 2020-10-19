@@ -7,19 +7,19 @@
         <table id="datatable" class="table table-striped table-responsive-md">
             <thead>
                 <tr>
-                    <th>Comment</th>
-                    <th>Post title</th>
                     <th>Author</th>
-                    <th>Posted_at</th>
+                    <th>Commented</th>
+                    <th>To: Post Title</th>
+                    <th>Commented_at</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($comments as $comment)
                     <tr>
-                        <td>{{ Str::limit($comment->body, 5) }}</td>
-                        <td>{{ $comment->post->title }}</td>
                         <td>{{ $comment->author->name }}</td>
+                        <td>{{ $comment->body }}</td>
+                        <td>{{ $comment->post->title }}</td>
                         <td>{{ $comment->created_at }}</td>
                         <td class="d-flex">
                             <a class="mr-3" href="/admin/comments/{{$comment->id}}/edit">

@@ -25,12 +25,11 @@
     <div id="app">
       <div class="d-flex">
           {{-- side bar menu --}}
-          <div class="bg-whitesmoke shadow px-3" id="sidebar">
+          <div class="shadow px-3" id="sidebar">
               <div class="d-flex align-items-center mt-3">
                   <a class="navbar-brand brand mr-auto" href="{{ url('/posts') }}">
                     <h2 class="m-0">{{ config('app.name', 'Hielo') }}</h2>
                   </a>
-                  {{--  --}}
               </div>
               <div class="text-center py-4">
                   <img 
@@ -57,18 +56,25 @@
                       <i class="fas fa-exclamation-circle mr-2"></i>Reports
                     </a>
                   </li>
-                  <li class="collapse-item collapsed" data-toggle="collapse" data-target="#expend">
-                      <a href="#expend" class="nav-link">
-                        <i class="fas fa-user-tag mr-2"></i>Roles & Abilities
-                      </a>
-                      <div class="collapse" id="expend">
-                        <div class="bg-info pl-4 py-2">
-                          <a class="text-white" href="/admin/roles">
-                            <i class="fas fa-user-tag mr-2"></i>Roles & Abilities
-                          </a>
-                        </div>
-                      </div>
+                  @can('access_roles', current_user())
+                  <li class="nav-item">
+                    <a class="nav-link">
+                      <i class="fas fa-user-tag mr-2"></i>Roles & Abilities
+                    </a>
+                    <ul style="display: none" class="submenu">
+                      <li>
+                        <a href="/admin/roles" class="nav-link {{ active_url(2, 'roles') }}">
+                          Roles
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/admin/abilities" class="nav-link {{ active_url(2, 'abilities') }}">
+                          Abilities
+                        </a>
+                      </li>
+                    </ul>
                   </li>
+                  @endcan
                   <li class="nav-item">
                     <a class="nav-link {{ active_url(2, 'users') }}" href="/admin/users">
                       <i class="fas fa-users mr-2"></i>Users
@@ -85,12 +91,9 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {{ active_url(2, 'tags') }}" href="/admin/comments">
+                    <a class="nav-link {{ active_url(2, 'tags') }}" href="/admin/tags">
                       <i class="fas fa-tags mr-2"></i>Tags
                     </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link {{ active_url(2, 'themes') }}" href="/admin/themes">Themes</a>
                   </li>
                   <hr class="border w-100">
                   <li class="nav-item">
@@ -119,6 +122,7 @@
               </footer>
           </main>
       </div>
+      <flash message="{{ session('status') }}"></flash>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -143,6 +147,11 @@
       $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
       });
+      $('.nav-link').on('click', function(){
+        var parent = $(this).parent();
+        $('ul', parent).slideToggle('fast');
+        $(parent).toggleClass('active');
+      })
   } );
 </script>
 </html>

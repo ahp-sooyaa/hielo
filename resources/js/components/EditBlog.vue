@@ -97,7 +97,6 @@ export default {
                 .post(`/posts/${this.postId}`, fd)
                 .then((res) => {
                     window.location.href = `https://hielo.dev/posts/${res.data.postId}`;
-                    flash("Updated Post successfully")
                 })
                 .catch((err) => this.errors.record(err.response.data.errors));
         },

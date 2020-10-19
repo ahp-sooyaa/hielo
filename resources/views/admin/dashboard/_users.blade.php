@@ -5,7 +5,7 @@
                 class="fas fa-users fa-3x text-white bg-info position-absolute top-n35 p-3 shadow rounded-20"
             ></i>
         </div>
-        <div class="text-center">
+        <div class="text-center sp-1">
             <span class="text-dark-50">{{$users->count()}}</span> 
             <h3>Users</h3>
         </div>

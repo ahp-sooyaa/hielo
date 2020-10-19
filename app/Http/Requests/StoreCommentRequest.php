@@ -16,7 +16,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('create-comment', new Comment);
+        return Gate::allows('create_comment', new Comment);
     }
 
     protected function failedAuthorization()

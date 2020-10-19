@@ -16,7 +16,6 @@
                 <tr>
                     <th>Title</th>
                     <th>Excerpt</th>
-                    <th>Content</th>
                     <th>Featured Image</th>
                     <th>Published at</th>
                     <th></th>
@@ -27,7 +26,6 @@
                     <tr>
                         <td>{{ Str::limit($post->title, 50) }}</td>
                         <td>{{ $post->excerpt }}</td>
-                        <td>{{ $post->content }}</td>
                         <td>
                             <img 
                                 class="rounded-20 featured-image shadow" 

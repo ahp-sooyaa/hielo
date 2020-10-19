@@ -16,7 +16,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('create-post', new Post);
+        return Gate::allows('create_post', new Post);
     }
 
     protected function failedAuthorization()
@@ -27,19 +27,38 @@ class StorePostRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'tags' => json_decode(request('tags')),
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
     public function rules()
     {
-        return [
+        $rules = [
             'title' => 'required|string|max:255',
             'excerpt' => 'required|string|max:255',
             'content' => 'required|string',
-            'featured_image' => 'sometimes|required|image|mimes:jpeg,png,jpg',
-            'published_at' => 'sometimes|required'
-            // 'tags' => 'required'
+            'published_at' => 'sometimes|required',
+            'tags' => 'required'
         ];
+
+        if (request()->isMethod('post')) {
+            $rules['featured_image'] = 'required|image|mimes:jpeg,png,jpg';
+        } else {
+            $rules['featured_image'] = 'image|mimes:jpeg,png,jpg';
+        }
+
+        return $rules;
     }
 }

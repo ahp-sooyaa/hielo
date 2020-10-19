@@ -5,6 +5,7 @@
 
 #sidebar{
     min-width: 250px;
+    background-color: $whitesmoke;
 }
 
 #sidebar.active {
@@ -15,27 +16,46 @@
     margin-bottom: 3px;
 }
 
-#sidebar .nav-link:hover, #sidebar .nav-item > .active{
+#sidebar .nav-item.active > a, .nav-link.active {
     background-color: $info;
     color: #fff;
     border-radius: 5px;
+}
+
+#sidebar .nav-link {
+    color: #000;
+}
+
+#sidebar .nav-item a.active{
+    color: #fff;
+}
+
+#sidebar .nav-item a:not(.active):hover {
+    padding-left: 30px !important;
+}
+
+#sidebar .nav-item a.active:hover {
+    color: #fff;
+    padding-left: 30px !important;
+}
+
+.sp-1{
+    letter-spacing: 0.1rem;
 }
 
 .bg-whitesmoke{
     background-color: $whitesmoke;
 }
 
-.collapse-item:not(.collapsed) {
-    background:#ff4f5a;
-    color: #fff;
-    border-radius: 5px;
+.submenu{
+    list-style: none;
+    margin-left: 5px;
+    margin: 10px 40px;
+    border-left: 2px solid;
+    padding-left: 10px;
 }
 
-.collapse-item.collapsed{
-    background: $whitesmoke;
-}
-
-.collapse-item:not(.collapsed) > .nav-link{
+.submenu li > a{
     color: #fff;
 }
 

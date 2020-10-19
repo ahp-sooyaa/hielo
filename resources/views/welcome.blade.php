@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -68,7 +68,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/posts') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Hielo
                 </div>
 
                 <div class="links">
@@ -97,65 +97,4 @@
             </div>
         </div>
     </body>
-</html> --}}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ config('app.name', 'Hielo') }}</title>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow-sm">
-            <div class="container">
-                <a class="navbar-brand brand" href="{{ url('/posts') }}">
-                    <h2 class="m-0 text-info">{{ config('app.name', 'Hielo') }}</h2>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-    
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-    
-                    </ul>
-    
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        @auth
-                            <li class="nav-item mt-3">
-                                <a href="{{ url('/home') }}" class="nav-link">Home</a>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a href="{{ route('login') }}" class="nav-link">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('register') }}" class="nav-link">Register</a>
-                            </li>
-                        @endauth
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            <div class="container">
-                <div class="row vh-100 justify-content-center align-items-center">
-                    <div class="col-md-12 text-center text-black-50">
-                        <h1>This is the welcome page of hielo.</h1>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-</body>
 </html>

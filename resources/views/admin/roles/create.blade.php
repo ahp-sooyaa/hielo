@@ -5,8 +5,28 @@
             @csrf
 
             <div class="form-group">
-                <input name="name" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Role name">
+                <input name="name" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Role name" value="{{old('name')}}">
                 @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <input name="label" class="form-control @error('label') is-invalid @enderror" type="text" placeholder="Role label" value="{{old('label')}}">
+                @error('label')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <select name="abilities[]" class="form-control @error('abilities') is-invalid @enderror" multiple>
+                    @foreach ($abilities as $ability)
+                        <option value="{{$ability->id}}">{{$ability->label}}</option>
+                    @endforeach
+                </select>
+                @error('abilities')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

@@ -30,12 +30,12 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            @can ('edit', $user)
-                            <a href="{{ $user->path('edit')}}">
-                                <button type="submit" class="btn btn-sm btn-info py-0">
-                                    Edit
-                                </button>
-                            </a>
+                            @can ('edit_user', $user)
+                                <a href="{{ $user->path('edit')}}">
+                                    <button type="submit" class="btn btn-sm btn-info py-0">
+                                        Edit
+                                    </button>
+                                </a>
                             @else
                                 <follow-button 
                                     :user="{{$user}}" class="pr-3"

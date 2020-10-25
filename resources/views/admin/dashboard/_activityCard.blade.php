@@ -2,7 +2,7 @@
     <div class="mx-auto">
         <h4 class="mb-4">Recent Activity</h4>
         <ul class="mb-0 list-unstyled">
-            @foreach ($activities->slice(0,5) as $activity)
+            @forelse ($activities->slice(0,5) as $activity)
             <li class="{{$loop->last ? '' : 'mb-2 pb-2 border-bottom-1'}}">
                 @if ($activity->subject_type == 'App\Post')
                     <x-activity.post :activity="$activity"></x-activity.post>
@@ -14,8 +14,10 @@
                     <x-activity.comment :activity="$activity"></x-activity.comment>
                     
                 @endif
-            </li>       
-            @endforeach
+            </li>      
+            @empty
+                There is no activity yet!
+            @endforelse
         </ul>
     </div>
 </div>

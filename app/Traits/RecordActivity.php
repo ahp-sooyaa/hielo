@@ -20,11 +20,15 @@ trait RecordActivity
                 }
             };
         }
+
+        static::deleting(function ($model) {
+            $model->activiy()->delete();
+        });
     }
 
     protected static function getActivitiesToRecord()
     {
-        return ['created', 'updated', 'deleted'];
+        return ['created', 'updated'];
     }
 
     protected function recordActivity($event)

@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="mx-auto">
-            {{-- @include('admin.dashboard._activityCard') --}}
+            @include('admin.dashboard._activityCard')
         </div>
     </div>
 </x-admin.layouts.app>

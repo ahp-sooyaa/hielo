@@ -33,9 +33,11 @@ class StorePostRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $this->merge([
-            'tags' => json_decode(request('tags')),
-        ]);
+        if (is_string(request('tags'))) {
+            $this->merge([
+                'tags' => json_decode(request('tags')),
+            ]);
+        }
     }
 
     /**
@@ -49,7 +51,6 @@ class StorePostRequest extends FormRequest
             'title' => 'required|string|max:255',
             'excerpt' => 'required|string|max:255',
             'content' => 'required|string',
-            // 'published_at' => 'string',
             'tags' => 'required'
         ];
 

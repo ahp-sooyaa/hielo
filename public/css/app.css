@@ -17200,10 +17200,13 @@ select {
 
 /* comment hover */
 
-.comment-container:hover {
-  background-color: white;
-  color: #000 !important;
+.comment-container {
   border-radius: 20px;
+}
+
+.comment-container:hover {
+  background-color: #F5F5F5;
+  color: #000 !important;
 }
 
 .comment-container:hover .badge-secondary {
@@ -17267,6 +17270,12 @@ select {
   color: #fff !important;
   background-color: #ff4f5a !important;
   display: inline-block;
+}
+
+.fit-content {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 /* this scss effecting nav bar styles at layouts/app */

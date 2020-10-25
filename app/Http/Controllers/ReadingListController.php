@@ -55,14 +55,4 @@ class ReadingListController extends Controller
 
         return back();
     }
-
-    public function collection(User $user, Collection $collection)
-    {
-        $bookmarks = Bookmark::where([
-            ['author_id', '=', $user->id],
-            ['collection', '=', $collection->name]
-        ])->get();
-
-        return view('readingList.collection', compact('bookmarks', 'user'));
-    }
 }

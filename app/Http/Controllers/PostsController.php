@@ -14,7 +14,7 @@ class PostsController extends Controller
         if (request('tag')) {
             $posts = Tag::where('name', request('tag'))
                 ->firstOrFail()
-                ->posts->where('published_at', '<=', date('Y-m-d H:i:s'));
+                ->posts->whereNotNull('published_at');
         } else {
             $posts = auth()->user()->timeline();
         }
@@ -50,7 +50,37 @@ class PostsController extends Controller
             $attributes['featured_image'] = request('featured_image')->store('featured-images');
         }
 
-        $post = current_user()->posts()->create($attributes);
+        if (request('published_at') != NULL) {
+            $attributes['published_at'] = request('published_at');
+
+            $post = current_user()->posts()->create($attributes);
+        } else {
+            $attributes['published_at'] = date('Y-m-d\TH:i:s');
+
+            $post = current_user()->posts()->create($attributes);
+        }
+
+        // switch (request('action')) {
+        //     case 'publish':
+        //         if (request('published_at')) {
+        //             $attributes['published_at'] = request('published_at');
+        //         } else {
+        //             $attributes['published_at'] = date('Y-m-d H:i:s');
+        //         }
+        //         $post = current_user()->posts()->updateOrCreate(
+        //             ['title' => request('title')],
+        //             [
+        //                 'excerpt' => request('excerpt'), 'featured_image' => $attributes['featured_image'],
+        //                 'content' => request('content'), 'published_at' => $attributes['published_at']
+        //             ]
+        //         );
+        //         break;
+
+        //     case 'draft':
+        //         $attributes['published_at'] = NULL;
+        //         $post = current_user()->posts()->updateOrCreate($attributes);
+        //         break;
+        // }
 
         $tags = json_decode(request('tags'));
 
@@ -64,7 +94,7 @@ class PostsController extends Controller
             $follower->notify(new PostPublished($post));
         }
 
-        \Session::flash('status', 'Create successful');
+        \Session::flash('status', 'Post created success');
 
         return response()->json(['postId' => $post->id]);
     }

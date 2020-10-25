@@ -21,7 +21,7 @@ trait Bookmarkable
 
     public function toggleBookmark($postId)
     {
-        if($this->isBookmark($postId)){
+        if ($this->isBookmark($postId)) {
             return $this->unbookmark($postId);
         }
         $this->bookmark($postId);
@@ -31,7 +31,7 @@ trait Bookmarkable
     {
         return $this->bookmarks()
             ->where([
-                ['post_id' , $postId],
+                ['post_id', $postId],
                 ['author_id', auth()->id()]
             ])
             ->exists();

@@ -35,10 +35,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto align-items-center">
                         @auth 
-                            <a href="/search" class="search-btn d-flex text-decoration-none">
+                            <a href="/search" class="search-btn d-flex text-decoration-none" data-toggle="tooltip" title="Go to Search page">
                                 <i class="fas fa-search text-dark"></i>
                             </a>
-                            <user-notification :user={{auth()->id()}}></user-notification>
+                            <user-notification :user={{auth()->id()}}>
+                            </user-notification>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ str_limit(Auth::user()->name, 9, '...') }} <span class="caret"></span>
@@ -119,6 +120,7 @@
             if(activeTab){
                 $('#myTab a[href="' + activeTab + '"]').tab('show');
             }
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>        
 </body>

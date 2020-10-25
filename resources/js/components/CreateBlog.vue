@@ -1,7 +1,6 @@
 <template>
   <div>
     <form @submit.prevent="Publish">
-      <h1 class="text-dark">Create new Post</h1>
       <div class="form-group">
         <input
           type="file"
@@ -12,16 +11,6 @@
           <img :src="previewImage" style="height: 200px" class="rounded" />
         </div>
         <span class="text-danger" v-text="errors.get('featured_image')"></span>
-      </div>
-      <div class="form-group text-dark">
-        <label for="published_at">Schedule your publish time </label>
-        <input
-          type="datetime-local"
-          step="1"
-          class="form-control"
-          v-model="published_at"
-        />
-        <span class="text-danger" v-text="errors.get('published_at')"></span>
       </div>
       <div class="form-group">
         <input
@@ -47,17 +36,42 @@
       </div>
       <div class="form-group">
         <multiselect
-          v-model="selectedTags"
-          :options="tagOptions"
-          :multiple="true"
-          track-by="id"
-          label="name"
-          placeholder="Search or add tags"
+          v-model="selectedTags" :options="tagOptions"
+          :multiple="true" track-by="id"
+          label="name" placeholder="Search or add tags"
         >
         </multiselect>
         <span class="text-danger" v-text="errors.get('tags')"></span>
       </div>
-      <button class="btn btn-sm btn-success mb-3">Publish</button>
+      <div v-if="isSchedule" class="form-group text-dark mb-3">
+        <label for="published_at">Schedule your publish time (* if you blank this field, post will publish with current time)</label>
+        <!-- <input
+          type="text" step="1" class="form-control"
+          v-model="published_at" placeholder="dd/mm/yyyy, H:i:s"
+          onfocus="(this.type='datetime-local')"
+        /> -->
+        <input
+          type="datetime-local" step="1" class="form-control"
+          v-model="published_at"
+        />
+        <span class="text-danger" v-text="errors.get('published_at')"></span>
+      </div>
+      <div class="mt-3">
+        <button class="btn btn-sm btn-success">
+          Publish
+        </button>
+        <!-- for next improvement :)
+          <button name="draft" type="submit" class="btn btn-sm btn-outline-success">
+          Save as draft
+        </button> -->
+        -Or-
+        <a class="btn btn-sm btn-link pl-0" v-if="isSchedule" @click="isSchedule = false">
+          Cancel scheduling
+        </a>
+        <a v-else class="btn btn-sm btn-link pl-0" @click="isSchedule = true">
+          Schedule for later
+        </a>
+      </div>
     </form>
   </div>
 </template>
@@ -74,18 +88,19 @@ export default {
     VueEditor,
     Multiselect,
   },
-  props: ["current"],
+  // props: ["current"],
   data() {
     return {
       title: "",
       excerpt: "",
       content: "",
       featured_image: "",
-      published_at: this.current,
+      published_at: "",
       previewImage: "",
       selectedTags: [],
       tagOptions: [],
       errors: new Errors(),
+      isSchedule: false,
     };
   },
   methods: {

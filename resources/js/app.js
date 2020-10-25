@@ -1,11 +1,9 @@
 require('./bootstrap');
 import VueInstantSearch from 'vue-instantsearch';
-import { firestorePlugin } from 'vuefire'
 import moment from 'moment'
 
 window.Vue = require('vue');
 
-Vue.use(firestorePlugin);
 Vue.use(VueInstantSearch);
 
 window.events = new Vue();

@@ -1,5 +1,5 @@
 <x-layouts.app>
     <div class="container">
-        <my-search></my-search>
+        <search></search>
     </div>
 </x-layouts.app>

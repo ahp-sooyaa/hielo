@@ -16,12 +16,12 @@
                                 href="/{{current_user()->name}}/posts?type=all"
                             >All</a>
                         </li>
-                        <li class="list-item">
+                        {{-- <li class="list-item">
                             <a 
                                 class="d-block {{ (request('type')=='drafts' ) ? 'active' : '' }} py-2 px-3"
                                 href="/{{current_user()->name}}/posts?type=drafts"
                             >Drafts</span></a>
-                        </li>
+                        </li> --}}
                         <li class="list-item">
                             <a 
                                 class="d-block {{ (request('type')=='published' ) ? 'active' : '' }} py-2 px-3"
@@ -77,6 +77,7 @@
                         <span>No {{request('type')}} Posts!</span>
                     </div>
                 @endforelse
+                {{$posts->links()}}
             </div>
         </div>
     </div>

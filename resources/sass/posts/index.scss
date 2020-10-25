@@ -189,10 +189,13 @@ select{
 }
 
 /* comment hover */
-.comment-container:hover{
-    background-color: white;
-    color: $font-color-base !important;
+.comment-container{
     border-radius: 20px;
+}
+
+.comment-container:hover{
+    background-color: $whitesmoke;
+    color: $font-color-base !important;
 }
 
 .comment-container:hover .badge-secondary{
@@ -253,4 +256,8 @@ select{
     color: #fff !important;
     background-color: $info !important;
     display: inline-block;
+}
+
+.fit-content{
+    height: fit-content;
 }

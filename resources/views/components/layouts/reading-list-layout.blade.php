@@ -29,29 +29,6 @@
                     </ul>
                 </div>
             </div>
-            {{-- <div>
-                <h3 class="mr-auto font-weight-bold mb-3">
-                    Collection 
-                </h3>
-                <div class="py-3 px-4 border rounded-20 d-inline-block w-218-px">
-                    <ul class="list-group">
-                        @foreach ($user->collections as $collection)
-                            <li class="list-item {{$loop->last ? 'mb-3' : ''}}">
-                                <a
-                                    href="{{'/'.$user->name.'/readingList/'.$collection->name}}" 
-                                    class="d-block {{request()->segment(3) == $collection->name ? 'active' : ''}} py-2 px-3"
-                                >
-                                    {{$collection->name}}
-                                </a>
-                            </li>
-                        @endforeach
-                        <form action="{{'/'.$user->name.'/collection'}}" method="POST">
-                            @csrf
-                            <input class="form-control" name="name" type="text" placeholder="create new collection">
-                        </form>
-                    </ul>
-                </div>
-            </div> --}}
         </div>
         <div class="col-md-8">
             {{ $slot }}

@@ -32,15 +32,12 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <i class="far fa-comment fa-lg"> {{$post->comments_count}}</i>
-                        <form 
-                            method="POST" action="{{ $post->path(). '/like'}}" 
-                            class="pt-1"
-                        >
-                            @csrf
-                            <button class="bg-border-none">
-                                <i class="{{ $post->isLiked() ? 'fas' : 'far'}} fa-heart fa-lg"> {{$post->likes_count}}</i> 
-                            </button>
-                        </form>
+                        <like
+                            :likes-count="{{ $post->likes_count }}"
+                            :liked="{{ json_encode($post->isLiked()) }}"
+                            :item-id="{{ $post->id }}"
+                            :logged-in="{{ json_encode(Auth::check()) }}"
+                        ></like>
                         |
                         <a href="{{$post->getShareUrl('twitter')}}">
                             <i class="fab fa-twitter-square fa-lg mx-2"></i>
@@ -48,17 +45,11 @@
                         <a href="{{$post->getShareUrl('facebook')}}">
                             <i class="fab fa-facebook-square fa-lg mr-2"></i>
                         </a>
-                        <form 
-                            method="POST" action="/readingList/{{$post->id}}" 
-                            class="pt-1"
-                        >
-                            @csrf
-                            <button class="bg-border-none">
-                                <i 
-                                    class="{{ current_user()->isBookmark($post->id) ? 'fas' : 'far'}} fa-bookmark fa-lg"
-                                ></i> 
-                            </button>
-                        </form>
+                        <bookmark 
+                            :post-id="{{$post->id}}"
+                            :bookmarked="{{ json_encode(current_user()->isBookmark($post->id))}}"
+                            :logged-in="{{json_encode(Auth::check())}}"
+                        ></bookmark>
                     </div>
                 </div>
                 <div style="font-size: 21px; line-height: 2rem;" class="overflow-hidden">
@@ -74,72 +65,11 @@
                     @endforeach
                 </div>
                 <div class="mt-4">
-                    {{$post->comments_count}} Comments
-                    <form action="{{ $post->path(). '/comment' }}" method="POST">
-                        @csrf
-                        <input class="form-control mt-3 rounded-pill p-4" type="text" name="body" placeholder="Contribute in Discussion ...">
-                    </form>
-
-                    {{-- comment and replies --}}
-                    <div>
-                        {{-- comment --}}
-                        @forelse ($post->comments as $comment)
-                            <div class="mt-3 px-4 py-3 comment-container">
-                                <div class="d-flex mr-auto">
-                                    <img src="{{$comment->author->avatar}}" alt="avatar" class="avatar mr-3">
-                                    <div>
-                                        <div class="mb-2">
-                                            <span class="font-weight-bold mr-2">
-                                                {{$comment->author->name}}
-                                            </span>
-                                            @if ($comment->author->name == $post->author->name)
-                                                <span 
-                                                    class="badge badge-secondary secondary-color mr-2"
-                                                >
-                                                    author
-                                                </span>
-                                            @endif
-                                            <span class="text-dark-50">
-                                                {{$comment->created_at->diffForHumans(null, true, true)}}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            {{$comment->body}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- need to check condition 
-                                <div class="text-center my-3">
-                                Load more comments <i class="fas fa-chevron-down"></i>
-                            </div> --}}
-                        @empty 
-                            <div class="text-center my-3">
-                                No comments Yet!
-                            </div>
-                        @endforelse
-                        {{-- reply --}}
-                        {{-- <div class="d-flex">
-                            <div style="width: 30px"></div>
-                            <div class="card text-dark mt-3 px-4 py-3 ml-5" style="width: 550px">
-                                <div class="d-flex mr-auto">
-                                    <i class="fas fa-user-circle fa-3x mr-3"></i>
-                                    <div>
-                                        <div class="mb-2">
-                                            <span class="font-weight-bold mr-2">
-                                                {{$post->author->name}}
-                                            </span>
-                                            <span class="text-muted">2 min ago</span>
-                                        </div>
-                                        <div>
-                                            Hello this is my first comment 
-                                            second text
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                    </div>
+                    <comment-list
+                        :post-id={{$post->id}}
+                        :author="{{$post->author}}"
+                        :user="{{json_encode(current_user())}}"
+                    ></comment-list>
                 </div>
             </main>
         </div>
@@ -150,7 +80,6 @@
                 <div class="d-flex mx-n5 mt-3">
                     @forelse ($relatedPosts as $relatedPost)
                         <div class="col-4 px-5">
-                            {{-- <img class="h-270-px" src="{{$relatedPost->featured_image}}" alt="relatingPost_featured_image"> --}}
                             <h5 class="text-muted">
                                 - 
                                 {{$relatedPost->tags->pluck('name')->join(', ')}}
@@ -169,8 +98,8 @@
                             </div>
                         </div>
                     @empty
-                        <div class="col-4">
-                            no related posts
+                        <div class="mx-auto">
+                            No related posts
                         </div>
                     @endforelse
                 </div>

@@ -22,4 +22,5 @@ Route::namespace('api')->group(function () {
     Route::get('/chart', 'ChartController@index');
     Route::get('/posts/{post}', 'PostController@edit');
     Route::get('/tags', 'TagController@index');
+    Route::get('/{post}/comments', 'CommentController@index');
 });

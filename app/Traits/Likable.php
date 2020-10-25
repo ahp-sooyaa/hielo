@@ -19,8 +19,6 @@ trait Likable
         return $this->likes()
             ->where('author_id', auth()->id())
             ->exists();
-        /* the below code work with collection */
-        // return $this->likes->contains(auth()->user());
     }
 
     public function like()

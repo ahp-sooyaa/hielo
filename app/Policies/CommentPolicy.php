@@ -19,10 +19,15 @@ class CommentPolicy
         return !$lastComment->wasJustLeft();
     }
 
-    public function destroy_comment(User $user, Comment $comment)
-    {
-        return $this->hasAbility($user, 'destroy-comment') || $user->id == $comment->author_id;
-    }
+    // public function update_comment(User $user, Comment $comment)
+    // {
+    //     return $this->hasAbility($user, 'update-comment') || $user->id == $comment->author_id;
+    // }
+
+    // public function destroy_comment(User $user, Comment $comment)
+    // {
+    //     return $this->hasAbility($user, 'destroy-comment') || $user->id == $comment->author_id;
+    // }
 
     protected function hasAbility($user, $ability)
     {

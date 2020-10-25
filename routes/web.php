@@ -110,13 +110,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/{user:name}/collection', 'CollectionController@store');
 
         /* individual user posts */
-        Route::get('/{user:name}/posts', 'AuthorPostsController@index');
+        Route::get('/{user:name}/posts', 'AuthorPostsController');
 
         /* post like routes */
-        Route::post('/posts/{post}/like', 'LikesController@store'); // at first segment '/posts' shouldn't use, it may cause route conflict with (eg. '/posts/search')
+        Route::post('/posts/{post}/likes', 'LikesController');
 
         /* post comments routes */
-        Route::post('/posts/{post}/comment', 'CommentsController@store');
+        Route::post('/posts/{post}/comment', 'PostCommentsController@store');
+        Route::patch('/comments/{comment}', 'PostCommentsController@update');
+        Route::delete('/comments/{comment}', 'PostCommentsController@destroy');
 
         /* report routes */
         Route::get('/userReports/{user}/create', 'UserReportsController@create');

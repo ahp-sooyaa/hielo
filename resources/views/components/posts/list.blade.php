@@ -9,17 +9,11 @@
                     {{$post->title}}
                 </a>
             </h4>
-            <form 
-                method="POST" action="/readingList/{{$post->id}}" 
-                class="pt-1"
-            >
-                @csrf
-                <button class="bg-border-none">
-                    <i 
-                        class="{{ current_user()->isBookmark($post->id) ? 'fas' : 'far'}} fa-bookmark fa-lg"
-                    ></i> 
-                </button>
-            </form>
+            <bookmark 
+                :post-id="{{$post->id}}"
+                :bookmarked="{{ json_encode(current_user()->isBookmark($post->id))}}"
+                :logged-in="{{json_encode(Auth::check())}}"
+            ></bookmark>
         </div>
         <div class="text-muted mb-auto">                    
             {{ Str::limit($post->excerpt, 80) }}

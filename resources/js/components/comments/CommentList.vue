@@ -56,7 +56,7 @@
                     })
             },
             addComment (comment) {
-                this.comments.unshift(comment)
+                this.comments.push(comment)
             },
             deleteComment (id) {
                 this.comments.splice(this.comments.findIndex(comment => comment.id === id), 1)

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 // use App\Providers\RouteServiceProvider;
-use Faker\Generator as Faker;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -101,13 +100,13 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function facebookCallback(Faker $faker)
+    public function facebookCallback()
     {
         $user = Socialite::driver('facebook')->user();
 
         $user = User::firstOrCreate(
             [
-                'email' => $user->getEmail() ? $user->getEmail() : $faker->unique()->safeEmail
+                'email' => $user->getEmail() ? $user->getEmail() : $user->getId() . '@facebook.com'
             ],
             [
                 'name' => $user->getName(),

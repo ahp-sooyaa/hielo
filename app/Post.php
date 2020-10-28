@@ -50,12 +50,12 @@ class Post extends Model
     {
         $comment = $this->comments()->create($comment);
 
-        $ids = current_user()->followers()->pluck('id');
+        // $ids = current_user()->followers()->pluck('id');
 
         foreach (current_user()->followers as $follower) {
-            if ($ids->contains($this->author->id)) {
-                $follower->notify(new NewComment($this, $comment));
-            }
+            // if ($ids->contains($this->author->id)) {
+            $follower->notify(new NewComment($this, $comment));
+            // }
         }
 
         return $comment;

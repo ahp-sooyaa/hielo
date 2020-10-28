@@ -44,7 +44,7 @@ class NewComment extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->comment->author->name . '  commented in ' . $this->post->title,
+            'message' => $this->comment->author->name . '  commented in "' . $this->post->title . '"',
             'link' => $this->post->path()
         ];
     }

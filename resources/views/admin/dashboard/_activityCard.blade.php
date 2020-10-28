@@ -11,8 +11,7 @@
                     <x-activity.user :activity="$activity"></x-activity.user>
 
                 @elseif ($activity->subject_type == 'App\Comment') 
-                    <x-activity.comment :activity="$activity"></x-activity.comment>
-                    
+                    <x-activity.comment :activity="$activity"></x-activity.comment> 
                 @endif
             </li>      
             @empty

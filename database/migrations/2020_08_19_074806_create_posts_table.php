@@ -17,11 +17,10 @@ class CreatePostsTable extends Migration
             $table->id();
             // $table->string('slug');
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
-            /* make the columns nullabel bcuz of save as draft feature */
-            $table->string('title')->nullable();
-            $table->text('excerpt')->nullable();
-            $table->longText('content')->nullable();
-            $table->binary('featured-image')->nullable();
+            $table->string('title');
+            $table->text('excerpt');
+            $table->longText('content');
+            $table->binary('featured_image');
             $table->dateTime('published_at')->nullable();
             $table->timestamps();
         });

@@ -26,13 +26,20 @@
             <div class="d-flex w-100 text-dark position-absolute fixed-bottom">
                 <div class="mr-auto text-muted">
                     <i 
-                        class="far fa-comment fa-lg mr-2"
-                    ></i>{{$post->comments_count}}
-                    <i 
-                        class="far fa-heart fa-lg mx-2"
-                    ></i>{{$post->likes_count}}
+                        class="far fa-comment fa-lg"
+                    > {{$post->comments_count}}</i>
+                    <like
+                        :likes-count="{{ $post->likes_count }}"
+                        :liked="{{ json_encode($post->isLiked()) }}"
+                        :item-id="{{ $post->id }}"
+                        :logged-in="{{ json_encode(Auth::check()) }}"
+                    ></like>
                 </div>
-                <i class="far fa-bookmark fa-lg mt-1"></i>
+                <bookmark 
+                    :post-id="{{$post->id}}"
+                    :bookmarked="{{ json_encode(current_user()->isBookmark($post->id))}}"
+                    :logged-in="{{json_encode(Auth::check())}}"
+                ></bookmark>
             </div>
         </div>
         <div>

@@ -17351,6 +17351,12 @@ select {
   border-radius: 50%;
 }
 
+.avatar-sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
 .avatar-1x {
   width: 60px;
   height: 60px;

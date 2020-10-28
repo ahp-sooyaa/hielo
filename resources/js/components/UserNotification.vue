@@ -1,11 +1,20 @@
 <template>
-    <li class="nav-item dropdown ml-3" v-if="notifications.length">
+    <li class="nav-item dropdown ml-3">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">
-            <i class="fas fa-bell fa-lg"></i> <span class="badge badge-info">{{notifications.length}}</span>
+            <i class="fas fa-bell fa-lg bell"/> 
+            <span class="badge badge-info noti-badge">{{notifications.length}}</span>
         </a>
-        <ul class="dropdown-menu dropdown-menu-right">
-            <li v-for="notification in notifications" class="dropdown-item">
+        <ul v-if="notifications.length" class="dropdown-menu dropdown-menu-right scrollable py-0">
+            <span 
+                class="noti-header dropdown-item p-3"
+            >Unread Notification {{notifications.length}}</span>
+            <li v-for="notification in notifications" class="dropdown-item p-3">
                 <a class="text-dark" :href="notification.data.link" v-text="notification.data.message" @click="markAsRead(notification)"></a>
+            </li>
+        </ul>
+        <ul v-else class="dropdown-menu dropdown-menu-right p-3">
+            <li class="dropdown-item">
+                No unread notifications yet!
             </li>
         </ul>
     </li>
@@ -35,3 +44,32 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    .bell{
+        position: relative;
+    }
+
+    .noti-badge{
+        position: absolute;
+        top: 5px;
+        left: 25px;
+        border-radius: 50%;
+    }
+
+    .noti-header{
+        background-color: #ff4f5a;
+        font-weight: 600;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+        color: #fff;
+        position: sticky;
+        top: 0;
+    }
+
+    .scrollable {
+        height: auto;
+        max-height: 500px;
+        overflow-x: hidden;
+    }
+</style>

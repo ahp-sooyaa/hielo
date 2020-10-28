@@ -88,12 +88,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/posts/{post}', 'PostsController@destroy');
 
         /* user profile */
-        Route::get('/{user:name}', 'ProfileController@show');
-        Route::get('/{user:name}/edit', 'ProfileController@edit');
-        Route::patch('/{user:name}', 'ProfileController@update');
+        Route::get('/{user:name}', 'UserController@show');
+        Route::get('/{user:name}/edit', 'UserController@edit');
+        Route::patch('/{user:name}', 'UserController@update');
         Route::patch('/{user:name}/password', 'UserPasswordController@update');
-        Route::get('/{user:name}/likes', 'ProfileController@likes');
-        Route::get('/{user:name}/comments', 'ProfileController@comments');
+        Route::get('/{user:name}/likes', 'UserController@likes');
+        Route::get('/{user:name}/comments', 'UserController@comments');
+        Route::delete('/{user:name}', 'UserController@destroy');
 
         Route::post('/{user:name}/follow', 'FollowsController@store');
         Route::get('/{user:name}/follow', 'FollowsController@index');

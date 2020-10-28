@@ -70,15 +70,11 @@
                                 </div>
     
                                 <div class="d-flex align-items-center mt-1"> 
-                                    <a href="/login/facebook">
-                                        <button class="btn btn-sm btn-warning badge-pill mr-2">
-                                            <i class="fab fa-facebook-f mr-1"></i>Facebook
-                                        </button>
+                                    <a href="/login/facebook" class="btn btn-sm btn-warning badge-pill mr-2">
+                                        <i class="fab fa-facebook-f mr-1"></i>Facebook
                                     </a>
-                                    <a href="/login/github">
-                                        <button class="btn btn-sm btn-dark badge-pill">
-                                            <i class="fab fa-github"> GitHub</i> 
-                                        </button>
+                                    <a href="/login/github" class="btn btn-sm btn-dark badge-pill">
+                                        <i class="fab fa-github"> GitHub</i> 
                                     </a> 
                                 </div>
                             </form>

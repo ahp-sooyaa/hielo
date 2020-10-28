@@ -24,8 +24,12 @@ class ReadingListController extends Controller
 
             case 'recentlyViewed':
                 $posts_id = current_user()->getRecentView();
-
-                $recentPosts = Post::whereIn('id', $posts_id)->take(10)->get();
+                // dd($posts_id);
+                if ($posts_id != NULL) {
+                    $recentPosts = Post::whereIn('id', $posts_id)->take(10)->get();
+                } else {
+                    $recentPosts = 'No recently viewed Posts';
+                }
 
                 return view('readinglist.recentlyViewed', compact('user', 'recentPosts'));
                 break;

@@ -51,9 +51,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
         $ids->push($this->id);
 
-        return Post::where('published_at', '<=', date('Y-m-d H:i:s'))
+        $posts = Post::where('published_at', '<=', date('Y-m-d H:i:s'))
             ->whereIn('author_id', $ids)
             ->latest('published_at')->paginate(10);
+
+        if ($posts->count() == 0) {
+            return Post::where('published_at', '<=', date('Y-m-d H:i:s'))
+                ->latest()->paginate(10);
+        } else {
+            return $posts;
+        }
     }
 
     public function roles()

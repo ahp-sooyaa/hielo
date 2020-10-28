@@ -65,7 +65,7 @@
                         
                         <h5 class="font-weight-bold mb-3">Change Password</h5>
                         <div class="form-group">
-                            <input class="form-control border-bottom-1 border-0" name="password" type="password" placeholder="New Password">
+                            <input class="form-control border-bottom-1 border-0 @error('password') is-invalid @enderror" name="password" type="password" placeholder="New Password">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -83,15 +83,20 @@
             </div>
             <div class="col-md-7">
                 <div class="card border-danger p-4 rounded-20">
-                    <div 
-                        class="text-danger font-weight-bold"
-                    >Delete Account</div>
-                    <div class="my-2">
-                        Once you delete your account, there is no going back. Please be certain.
-                    </div>
-                    <button type="submit" class="mr-auto btn btn-outline-danger border py-1">
-                        Delete
-                    </button>
+                    <form action="/{{$user->name}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <div 
+                            class="text-danger font-weight-bold"
+                        >Delete Account</div>
+                        <div class="my-2">
+                            Once you delete your account, there is no going back. Please be certain.
+                        </div>
+                        <button type="submit" class="mr-auto btn btn-outline-danger border py-1">
+                            Delete
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -5,15 +5,17 @@
             <div class="w-100">
                 <div class="mb-2 d-flex">
                     <div class="mr-auto">
-                        <a class="font-weight-bold" style="cursor: pointer">
-                        {{comment.author_name}} .
+                        <a :href="comment.author_url" class="font-weight-bold" style="cursor: pointer">
+                            {{comment.author_name}}
                         </a>
-                        <span 
-                            v-if="comment.author_name == author.name"
-                            class="badge badge-secondary secondary-color mr-2"
-                        >
+                        <div v-if="comment.author_name == author.name" class="d-inline">
+                            .   
+                            <span 
+                                class="badge badge-secondary secondary-color mr-2"
+                            >
                             author
-                        </span>
+                            </span>
+                        </div>
                     </div>
                     <div class="text-dark-50">
                         {{moment(comment.created_at).format('MMM DD,Y HH:mma')}}

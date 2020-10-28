@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Comment;
+use App\Notifications\NewComment;
 use App\Post;
 
 class PostCommentsController extends Controller

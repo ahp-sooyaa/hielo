@@ -19,9 +19,4 @@ class UserPasswordController extends Controller
 
         return redirect($user->path())->withSuccess('status', 'Successfully Password Changed');
     }
-
-    // protected function setUserPassword($user, $password)
-    // {
-    //     $user->password = Hash::make($password);
-    // }
 }

@@ -24,6 +24,7 @@ class Comment extends JsonResource
             'avatar' => $this->author->avatar,
             'author_id' => $this->author_id,
             'author_name' => $this->author->name,
+            'author_url' => '/' . $this->author->name
         ];
     }
 }

@@ -6,7 +6,7 @@
         </div>
         <div>
             <a href="{{$user->path()}}">{{$user->name}}</a>
-            <div class="text-black-50">{{$user->short_bio}}</div>
+            <div class="text-black-50">{{$user->short_bio ? $user->short_bio : 'No bio'}}</div>
         </div>
     </div>
 </div>

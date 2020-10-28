@@ -42,16 +42,19 @@
                             </user-notification>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ str_limit(Auth::user()->name, 9, '...') }} <span class="caret"></span>
+                                    <img 
+                                        src="{{current_user()->avatar}}" alt="avatar" class="avatar-sm"
+                                    >
+                                    {{ str_limit(Auth::user()->name, 9, '') }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right mw-200" aria-labelledby="navbarDropdown">
                                     <div class="d-flex dropdown-item align-items-center py-2">
-                                        <img 
+                                        {{-- <img 
                                             src="{{current_user()->avatar}}" alt="avatar" class="avatar mr-2"
-                                        >
+                                        > --}}
                                         <a href="/{{current_user()->name}}" class="text-dark">
-                                            {{str_limit(current_user()->name, 13, '')}}
+                                            {{current_user()->name}}
                                         </a>
                                     </div>
                                     <div class="text-center">

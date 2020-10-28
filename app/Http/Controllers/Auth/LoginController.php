@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 // use App\Providers\RouteServiceProvider;
+use Faker\Generator as Faker;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\User;
+use Illuminate\Auth\Events\Login;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -33,9 +35,7 @@ class LoginController extends Controller
     // protected $redirectTo = RouteServiceProvider::HOME;
     public function redirectTo()
     {
-        $role = auth()->user()->roles[0]->name;
-
-        if ($role == 'super-admin' || $role == 'admin') {
+        if (auth()->user()->roles) {
             return '/admin/dashboard';
         }
         return '/posts';
@@ -76,7 +76,9 @@ class LoginController extends Controller
             ],
             [
                 'name' => $user->nickname,
-                'password' => Hash::make(Str::random(24))
+                'password' => Hash::make(Str::random(24)),
+                'email_verified_at' => date('Y-m-d\TH:i:s'),
+                'avatar' => 'avatars/default.jpg'
             ]
         );
         auth()->login($user, true);
@@ -99,22 +101,23 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function facebookCallback()
+    public function facebookCallback(Faker $faker)
     {
         $user = Socialite::driver('facebook')->user();
 
         $user = User::firstOrCreate(
             [
-                'email' => $user->getEmail() ? $user->getEmail() : 'default@facebook.com'
+                'email' => $user->getEmail() ? $user->getEmail() : $faker->unique()->safeEmail
             ],
             [
                 'name' => $user->getName(),
                 'password' => Hash::make(Str::random(24)),
-                'avatar' => $user->getAvatar()
+                'email_verified_at' => date('Y-m-d\TH:i:s'),
+                'avatar' => 'avatars/default.jpg'
             ]
         );
 
-        auth()->login($user, false);
+        auth()->login($user, true);
 
         return redirect('/posts');
     }

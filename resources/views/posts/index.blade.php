@@ -23,7 +23,9 @@
                     No tags yet!
                 @endforelse
             </div>
-            {{-- <span class="text-dark">{{ $posts->links() }}</span> --}}
+            @if (!request('tag'))
+                <span class="text-dark pl-3">{{ $posts->links() }}</span>
+            @endif
         </main>
     </div>
 </x-layouts.app>

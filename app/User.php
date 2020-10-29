@@ -57,7 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         if ($posts->count() == 0) {
             return Post::where('published_at', '<=', date('Y-m-d H:i:s'))
-                ->latest()->paginate(10);
+                ->latest('published_at')->paginate(10);
         } else {
             return $posts;
         }

@@ -24,7 +24,6 @@
             {{$post->published_at->format('M d,Y')}}
         </div>
     </div>
-{{-- </div>   --}}
 @empty
     <div class="mx-auto text-center">
         <div>

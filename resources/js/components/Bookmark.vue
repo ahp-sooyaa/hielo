@@ -1,12 +1,10 @@
 <template>
-    <span>
-        <i 
-            class="fa-bookmark fa-lg"
-            :class="isBookmarked ? 'fas' : 'far'"
-            :style="isLoggedIn ? { cursor: 'pointer' } : ''"
-            @click="toggleBookmark"
-        ></i>
-    </span>
+    <i 
+        class="fa-bookmark fa-lg"
+        :class="isBookmarked ? 'fas' : 'far'"
+        :style="isLoggedIn ? { cursor: 'pointer' } : ''"
+        @click="toggleBookmark"
+    ></i>
 </template>
 
 <script>

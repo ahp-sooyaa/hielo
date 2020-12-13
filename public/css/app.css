@@ -17008,7 +17008,7 @@ a.text-dark:focus {
 body {
   font-family: "Fira Code", monospace;
   font-size: 0.9rem;
-  font-weight: 300;
+  font-weight: lighter;
   color: #000;
   background-color: #ffffff;
 }
@@ -17241,10 +17241,6 @@ select {
   border-bottom-left-radius: 5px;
 }
 
-.ql-editor {
-  color: black !important;
-}
-
 .ais-Panel-header {
   border-bottom: none;
 }
@@ -17276,6 +17272,20 @@ select {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.ql-editor {
+  color: black !important;
+}
+
+.ql-editor strong {
+  font-weight: 700 !important;
+}
+
+.ql-snow .ql-editor pre.ql-syntax {
+  background-color: #f5f7fa !important;
+  color: #000 !important;
+  box-shadow: 4px 4px 15px 0 rgba(36, 37, 38, 0.08) !important;
 }
 
 /* this scss effecting nav bar styles at layouts/app */

@@ -50,7 +50,7 @@ class PostsController extends Controller
             $attributes['featured_image'] = request('featured_image')->store('featured-images');
         }
 
-        if (request('published_at') != NULL) {
+        if (request('published_at') != null) {
             $attributes['published_at'] = request('published_at');
 
             $post = current_user()->posts()->create($attributes);

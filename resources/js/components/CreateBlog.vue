@@ -31,7 +31,7 @@
         <span class="text-danger" v-text="errors.get('excerpt')"></span>
       </div>
       <div class="form-group">
-        <vue-editor v-model="content"></vue-editor>
+        <vue-editor v-model="content"/>
         <span class="text-danger" v-text="errors.get('content')"></span>
       </div>
       <div class="form-group">
@@ -77,7 +77,7 @@
 </template>
 
 <script>
-// import moment from 'moment';
+// import Quill from 'quill'
 import Errors from "../form";
 import Multiselect from "vue-multiselect";
 import { VueEditor } from "vue2-editor";
@@ -124,7 +124,7 @@ export default {
       axios
         .post(`/posts`, fd)
         .then((response) => {
-          window.location.href = `https://hielo.dev/posts/${response.data.postId}`;
+          window.location.href = `https://hielo.test/posts/${response.data.postId}`;
         })
         .catch((err) => this.errors.record(err.response.data.errors));
     },

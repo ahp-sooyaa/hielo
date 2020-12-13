@@ -8,9 +8,6 @@
                             Updated at {{$post->updated_at->format('M d,Y')}}
                         </div>
                     @endif
-                    {{-- <a class="text-danger" href="/postReports/{{$post->id}}/create">
-                        report
-                    </a> --}}
                 </div>
                 <div>
                     <img src="{{ $post->featured_image }}" alt="Featured Image" class="mb-4 rounded-20 featured-image-sg">
@@ -18,8 +15,8 @@
                 <div class="mb-3">
                     <h1 class="font-weight-bold" style="font-size: 40px">{{$post->title}}</h1>
                 </div>
-                <div class="d-flex align-items-start mb-4">
-                    <div class="d-flex mr-auto">
+                <div class="d-flex justify-content-between align-items-start mb-4">
+                    <div class="d-flex">
                         <img src="{{$post->author->avatar}}" alt="avatar" class="avatar mr-3">
                         <div>
                             <div class="font-weight-bolder">
@@ -30,8 +27,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <i class="far fa-comment fa-lg"> {{$post->comments_count}}</i>
+                    <div class="d-flex align-items-baseline">
+                        <div>
+                            <i class="far fa-comment fa-lg"> {{$post->comments_count}}</i>
+                        </div>
                         <like
                             :likes-count="{{ $post->likes_count }}"
                             :liked="{{ json_encode($post->isLiked()) }}"
@@ -39,12 +38,14 @@
                             :logged-in="{{ json_encode(Auth::check()) }}"
                         ></like>
                         |
-                        <a href="{{$post->getShareUrl('twitter')}}">
-                            <i class="fab fa-twitter-square fa-lg mx-2"></i>
-                        </a>
-                        <a href="{{$post->getShareUrl('facebook')}}">
-                            <i class="fab fa-facebook-square fa-lg mr-2"></i>
-                        </a>
+                        <i class="fab fa-twitter-square fa-lg">
+                            <a href="{{$post->getShareUrl('twitter')}}">
+                            </a>
+                        </i>
+                        <i class="fab fa-facebook-square fa-lg mx-1">
+                            <a href="{{$post->getShareUrl('facebook')}}">
+                            </a>
+                        </i>
                         <bookmark 
                             :post-id="{{$post->id}}"
                             :bookmarked="{{ json_encode(current_user()->isBookmark($post->id))}}"
@@ -52,8 +53,10 @@
                         ></bookmark>
                     </div>
                 </div>
-                <div style="font-size: 21px; line-height: 2rem;" class="overflow-hidden">
-                    {!! $post->content !!}
+                <div class="rounded ql-snow">
+                    <div class="ql-editor px-0">
+                        {!! $post->content !!}
+                    </div>
                 </div>
                 <div>
                     @foreach ($post->tags as $tag)

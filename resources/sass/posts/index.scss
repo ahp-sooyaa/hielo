@@ -1,151 +1,165 @@
 ::-webkit-scrollbar {
     width: 0px;
-    background: transparent; /* make scrollbar transparent */
+    background: transparent;
+    /* make scrollbar transparent */
 }
 
-body{
+body {
     font-family: $font-family-fira-code;
     font-size: $font-size-base;
-    font-weight: 300;
+    font-weight: lighter;
     color: $font-color-base;
     background-color: $body-bg;
 }
 
-main{
+main {
     min-height: 100vh;
 }
 
-a{
+a {
     color: $font-color-base;
     text-decoration: none;
 }
 
-a:hover{
+a:hover {
     color: rgb(87, 86, 86);
     text-decoration: none;
 }
 
-.brand{
+.brand {
     font-family: $font-family-fira-code;
     font-size: $font-size-brand;
     font-weight: 900;
 }
 
 /* for post create text editor */
-b{
+b {
     font-weight: 700;
 }
 
-.bg-border-none{
+.bg-border-none {
     background: none;
     border: none;
 }
 
-.mw-200{
+.mw-200 {
     min-width: 200px !important;
 }
 
-.w{
-    &-33{
+.w {
+    &-33 {
         width: 33.3%;
     }
-    &-218-px{
+
+    &-218-px {
         width: 218px;
     }
-    &-240-px{
+
+    &-240-px {
         width: 240px;
     }
 }
 
-.h{
-    &-72{
+.h {
+    &-72 {
         height: 72%;
     }
-    &-100-px{
+
+    &-100-px {
         height: 100px;
     }
-    &-170-px{
+
+    &-170-px {
         height: 170px;
     }
-    &-200-px{
+
+    &-200-px {
         height: 200px;
     }
-    &-210-px{
+
+    &-210-px {
         height: 210px;
     }
-    &-270-px{
+
+    &-270-px {
         min-height: 270px;
     }
-    &-283-px{
+
+    &-283-px {
         min-height: 283px;
     }
-    &-300-px{
+
+    &-300-px {
         height: 300px;
     }
 }
 
-img{
+img {
     width: 100%;
 }
 
-.rounded{
-    &-10{
+.rounded {
+    &-10 {
         /* still no use just added as additional option :) */
         border-radius: 10px;
     }
-    &-20{
+
+    &-20 {
         border-radius: 20px;
     }
-    &-top-20{
+
+    &-top-20 {
         border-radius: 20px 20px 0px 0px;
     }
-    &-circle{
+
+    &-circle {
         border-radius: 100%;
     }
 }
 
-.overflow-y{
+.overflow-y {
     height: 100vh;
     overflow-y: scroll;
 }
 
-.border-left-3{
+.border-left-3 {
     border-left: 3px solid $info !important;
 }
 
-.border-info-3{
+.border-info-3 {
     border-right: 3px solid $info;
     border-top: 3px solid rgba($color: #ff4f5a, $alpha: 0);
     border-left: 3px solid $info;
     border-bottom: 3px solid rgba($color: #ff4f5a, $alpha: 0);
 }
 
-.bl-3{
-    &-success{
+.bl-3 {
+    &-success {
         border-left: 3px solid $primary !important;
     }
 }
 
 /* profile */
-.border-bottom-1{
+.border-bottom-1 {
     border-bottom: 1px solid $info !important;
 }
 
-.border-bottom-3{
+.border-bottom-3 {
     border-bottom: 3px solid $info !important;
 }
 
 /* little miss understanding hehe */
-.blue{
-    &-btn{
+.blue {
+    &-btn {
         background-color: #3b5998;
     }
-    &-bg{
+
+    &-bg {
         background-color: #3c4352;
     }
 }
 
-.profile{
+.profile {
     width: 140px;
     height: 140px;
     z-index: 1;
@@ -153,7 +167,7 @@ img{
     left: calc(50% - 70px);
 }
 
-input[type=file]{
+input[type=file] {
     border-bottom: 1px solid $secondary;
 }
 
@@ -162,26 +176,27 @@ input[type=file]{
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;
-  }
+}
 
-.text-box{
+.text-box {
     color: $secondary !important;
     background-color: $primary !important;
     border: none !important;
     font-size: 30px;
-    &-title{
+
+    &-title {
         font-size: 40px;
         font-weight: 900;
         border-bottom: 2px solid $secondary;
     }
 }
 
-:focus{
+:focus {
     outline: none;
 }
 
 /*select box in post create*/
-select{
+select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -189,75 +204,87 @@ select{
 }
 
 /* comment hover */
-.comment-container{
+.comment-container {
     border-radius: 20px;
 }
 
-.comment-container:hover{
+.comment-container:hover {
     background-color: $whitesmoke;
     color: $font-color-base !important;
 }
 
-.comment-container:hover .badge-secondary{
+.comment-container:hover .badge-secondary {
     background-color: black !important;
     color: white !important;
 }
 
 /* reading list */
-.list-item{
+.list-item {
     list-style: none;
-    a:hover{
+
+    a:hover {
         background-color: $info;
         border-radius: 5px;
         color: white;
     }
-    .active{
+
+    .active {
         color: $info;
         font-weight: 600;
     }
 }
 
-.b-r-tb{
+.b-r-tb {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-.b-l-tb{
+.b-l-tb {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
-.ql-editor{
-    color: black !important;
-}
-
-.ais-Panel-header{
+.ais-Panel-header {
     border-bottom: none;
 }
 
-.ais-RefinementList-checkbox{
+.ais-RefinementList-checkbox {
     margin-right: 10px;
 }
 
-.ais-RefinementList-label{
+.ais-RefinementList-label {
     display: flex;
     align-items: center;
 }
 
-.ais-RefinementList-labelText{
-    display:block;
-    width:200px;
-    word-wrap:break-word;
+.ais-RefinementList-labelText {
+    display: block;
+    width: 200px;
+    word-wrap: break-word;
     margin-right: auto;
     white-space: normal
 }
 
-.ais-RefinementList-count{
+.ais-RefinementList-count {
     color: #fff !important;
     background-color: $info !important;
     display: inline-block;
 }
 
-.fit-content{
+.fit-content {
     height: fit-content;
+}
+
+.ql-editor {
+    color: black !important;
+}
+
+.ql-editor strong {
+    font-weight: 700 !important;
+}
+
+.ql-snow .ql-editor pre.ql-syntax {
+    background-color: rgb(245, 247, 250) !important;
+    color: #000 !important;
+    box-shadow: 4px 4px 15px 0 rgba(36, 37, 38, .08) !important;
 }

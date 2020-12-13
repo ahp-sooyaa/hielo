@@ -2,9 +2,12 @@ require('./bootstrap');
 import VueInstantSearch from 'vue-instantsearch';
 import moment from 'moment'
 
+// import VueQuillEditor from 'vue-quill-editor'
+
 window.Vue = require('vue');
 
 Vue.use(VueInstantSearch);
+// Vue.use(VueQuillEditor, /* { default global options } */)
 
 window.events = new Vue();
 
@@ -21,5 +24,3 @@ const app = new Vue({
         moment: moment
     },
 });
-
-// var editor = new FroalaEditor('#editor')

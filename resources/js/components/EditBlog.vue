@@ -32,7 +32,7 @@
                 <span class="text-danger" v-text="errors.get('excerpt')"></span>
             </div>
             <div class="form-group">
-                <vue-editor v-model="post.content"></vue-editor>
+                <vue-editor v-model="post.content"/>
                 <span class="text-danger" v-text="errors.get('content')"></span>
             </div>
             <div class="form-group">
@@ -49,7 +49,6 @@
 </template>
 
 <script>
-// import moment from 'moment';
 import Errors from "../form";
 import Multiselect from "vue-multiselect";
 import { VueEditor } from "vue2-editor";

@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <div>
     <i
       class="fa-lg ml-2"
       :class="isLiked ? 'fas fa-heart' : 'far fa-heart'"
@@ -8,7 +8,7 @@
     >
     {{ count }}
     </i>
-  </span>
+  </div>
 </template>
 
 <script>

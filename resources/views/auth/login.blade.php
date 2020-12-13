@@ -5,7 +5,7 @@
                 <div class="card shadow border-0">
                     <div class="d-flex">
                         <div class="d-none d-lg-block d-xl-block col-6 p-0 position-relative">
-                            <img class="h-100 b-l-tb" src="https://hielo.dev/appImage/3255309.jpg" alt="" data-toggle="tooltip" title="Idea vector created by stories - www.freepik.com">
+                            <img class="h-100 b-l-tb" src="https://hielo.test/appImage/3255309.jpg" alt="" data-toggle="tooltip" title="Idea vector created by stories - www.freepik.com">
                         </div>
                         <div class="col-lg-6 col-md-12 p-5">
                             <div class="d-flex mx-auto justify-content-end mt-n4 mb-5">

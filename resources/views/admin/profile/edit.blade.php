@@ -1,4 +1,4 @@
-<x-admin.layouts.app>
+<x-admin.layouts.app tab="profile">
     <div class="card p-3">
         {{-- <div class="mx-auto"> --}}
             <form action="/admin/profile/{{current_user()->id}}" method="POST" enctype="multipart/form-data">

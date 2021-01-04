@@ -2,14 +2,14 @@
     <div>
         {{comments.length}} comments
         <div v-if="comments.length">
-            <comment
-                v-for="comment in comments"
-                :comment="comment"
-                :postAuthor="postAuthor"
-                :key="comment.id"
-                :authUser="authUser"
-                @deleted="deleteComment"
-            />
+            <div v-for="(comment, index) in comments">
+                <comment
+                    :comment="comment"
+                    :postAuthor="postAuthor"
+                    :authUser="authUser"
+                    @deleted="deleteComment(index)"
+                />
+            </div>
         </div>
         <div v-else class="text-center my-3">
             No comments Yet!
@@ -58,9 +58,8 @@
             addComment (comment) {
                 this.comments.push(comment)
             },
-            deleteComment (id) {
-                this.comments.splice(this.comments.findIndex(comment => comment.id === id), 1)
-                // Vue.delete(this.comments, id)
+            deleteComment (index) {
+                this.comments.splice(index, 1)
             }
         },
         mounted() {

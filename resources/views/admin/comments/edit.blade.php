@@ -1,4 +1,4 @@
-<x-admin.layouts.app>
+<x-admin.layouts.app tab="comments">
     <div class="card p-3">
         <h1>Edit Comment</h1>
         <form action="/admin/comments/{{$comment->id}}" method="POST">

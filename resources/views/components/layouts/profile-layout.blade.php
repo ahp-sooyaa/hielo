@@ -1,4 +1,3 @@
-<!-- Well begun is half done. - Aristotle -->
 <x-layouts.app>
     <div class="container">
         <div class="row justify-content-center">
@@ -14,14 +13,14 @@
                                 <div class="text-dark">{{$user->followers->count()}}</div>
                                 <a 
                                     href="{{'/'.$user->name.'/follower'}}"
-                                    class="text-black-50"
+                                    class="{{$tab == 'follower' ? 'text-black' : 'text-black-50'}}"
                                 >followers</a>
                             </div>
                             <div class="mx-3 text-center">
                                 <div class="text-dark">{{$user->follows->count()}}</div>
                                 <a 
                                     href="{{'/'.$user->name.'/following'}}"
-                                    class="text-black-50 font-weight-bold"
+                                    class="{{$tab == 'following' ? 'text-black' : 'text-black-50'}} font-weight-bold"
                                 >following</a>
                             </div>
                             <div class="mx-3 text-center">
@@ -54,23 +53,23 @@
                         <div>
                             <div class="font-weight-bold mr-3 d-inline-block text-dark">{{$user->name}}</div>
                         </div>
-                        <p class="text-dark">{{$user->short_bio ?? ''}}</p>
+                        <p class="text-dark">{{$user->short_bio ?: ''}}</p>
                     </div>
                     <div class="mx-auto mt-auto mb-n3">
                         <div class="d-flex">
-                            <div class="{{ request()->is($user->name) ? 'border-bottom-3' : ''}} px-2">
+                            <div class="{{ $tab == 'posts' ? 'border-bottom-3' : ''}} px-2">
                                 <a 
-                                    href="{{'/'.$user->name}}"
+                                    href="{{$user->path()}}"
                                 >Posts</a>
                             </div>
-                            <div class="{{ request()->segment(2) == 'likes' ? 'border-bottom-3' : ''}} mx-5 px-2">
+                            <div class="{{ $tab == 'likes' ? 'border-bottom-3' : ''}} mx-5 px-2">
                                 <a 
-                                    href="{{'/'.$user->name.'/likes'}}"
+                                    href="{{$user->path().'/likes'}}"
                                 >Likes</a>
                             </div>
-                            <div class="{{ request()->segment(2) == 'comments' ? 'border-bottom-3' : ''}} px-2">
+                            <div class="{{ $tab == 'comments' ? 'border-bottom-3' : ''}} px-2">
                                 <a 
-                                    href="{{'/'.$user->name.'/comments'}}"
+                                    href="{{$user->path().'/comments'}}"
                                 >Comments</a>
                             </div>
                         </div>

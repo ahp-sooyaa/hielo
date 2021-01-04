@@ -1,4 +1,4 @@
-<x-admin.layouts.app>
+<x-admin.layouts.app tab="tags">
     <div class="card p-3">
         <h1>Create Tag</h1>
         <form action="/admin/tags" method="POST">

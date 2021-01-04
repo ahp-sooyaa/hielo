@@ -142,7 +142,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function path($append = '')
     {
-        return $append ? "/{$this->name}/{$append}" : "/{$this->name}";
+        return $append ? "/profiles/{$this->name}/{$append}" : "/profiles/{$this->name}";
     }
 
     public function setRecentView($postId)

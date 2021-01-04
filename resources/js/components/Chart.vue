@@ -24,7 +24,7 @@ export default {
   mounted() {
     this.loaded = false;
     axios
-      .get(`https://hielo.dev/api/chart`)
+      .get(`/api/chart`)
       .then((response) => {
         this.chartdata = {
           labels: [

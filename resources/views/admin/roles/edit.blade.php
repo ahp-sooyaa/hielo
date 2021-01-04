@@ -1,4 +1,4 @@
-<x-admin.layouts.app>
+<x-admin.layouts.app tab="roles">
     <div class="card p-3">
         <h1>Edit Role</h1>
         <form action="/admin/roles/{{$role->id}}" method="POST">

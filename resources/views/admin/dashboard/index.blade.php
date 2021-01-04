@@ -1,4 +1,4 @@
-<x-admin.layouts.app>
+<x-admin.layouts.app tab="dashboard">
     <header class="sp-1">
         <h1>DashBoard</h1>
         <p class="text-black-50">Dashboard overview and content summary </p>

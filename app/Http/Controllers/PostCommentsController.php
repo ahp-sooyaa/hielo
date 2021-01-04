@@ -16,6 +16,12 @@ class PostCommentsController extends Controller
             'body' => request('body')
         ]);
 
+        foreach (current_user()->followers as $follower) {
+            // if ($ids->contains($this->author->id)) {
+            $follower->notify(new NewComment($this, $comment));
+            // }
+        }
+
         $comment['avatar'] = current_user()->avatar;
         $comment['author_name'] = current_user()->name;
 

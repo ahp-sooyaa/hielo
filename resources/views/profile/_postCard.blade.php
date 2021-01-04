@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="d-flex w-100 text-dark position-absolute fixed-bottom">
-                <div class="mr-auto text-muted">
+                <div class="d-flex align-items-baseline mr-auto text-muted">
                     <i 
                         class="far fa-comment fa-lg"
                     > {{$post->comments_count}}</i>

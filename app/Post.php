@@ -9,7 +9,6 @@ use App\Traits\Reportable;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use App\Notifications\NewComment;
 use Carbon\Carbon;
 
 class Post extends Model
@@ -50,14 +49,6 @@ class Post extends Model
     {
         $comment = $this->comments()->create($comment);
 
-        // $ids = current_user()->followers()->pluck('id');
-
-        foreach (current_user()->followers as $follower) {
-            // if ($ids->contains($this->author->id)) {
-            $follower->notify(new NewComment($this, $comment));
-            // }
-        }
-
         return $comment;
     }
 
@@ -72,7 +63,7 @@ class Post extends Model
             return $query->whereIn('name', $this->tags->pluck('name'));
         })->where([
             ['id', '!=', $this->id],
-            ['published_at', '!=', NULL]
+            ['published_at', '!=', null]
         ])->latest()->take(3)->get();
     }
 

@@ -3,38 +3,47 @@
 namespace Tests\Unit;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-// use PHPUnit\Framework\TestCase;
+use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 
 class PostTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function has_path()
+    public function setUp() :void
     {
-        $post = factory('App\Post')->create();
+        parent::setUp();
 
-        $this->assertEquals('/posts/' . $post->id, $post->path());
+        $this->post = factory('App\Post')->create();
     }
 
-    /** @test */
-    public function belongsTo_author()
+    public function testPostHasPath()
     {
-        $post = factory('App\Post')->create();
-
-        $this->assertInstanceOf('App\User', $post->author);
+        $this->assertEquals("/posts/{$this->post->id}", $this->post->path());
     }
 
-    /** @test */
-    public function can_add_comment()
+    public function testPostBelongsToAuthor()
     {
-        $post = factory('App\Post')->create();
+        $this->assertInstanceOf('App\User', $this->post->author);
+    }
 
-        $comment = $post->addComment(3, 'testing Comment');
+    public function testPostHasManyComments()
+    {
+        $this->assertInstanceOf(Collection::class, $this->post->comments);
+    }
 
-        $this->assertCount(1, $post->comments);
+    public function testPostBelongsToTags()
+    {
+        $this->assertInstanceOf(Collection::class, $this->post->tags);
+    }
 
-        $this->assertTrue($post->comments->contains($comment));
+    public function testPostCanAddComment()
+    {
+        $this->post->addComment([
+            'author_id' => 1,
+            'body' => 'hi'
+        ]);
+
+        $this->assertCount(1, $this->post->comments);
     }
 }

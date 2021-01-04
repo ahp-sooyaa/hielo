@@ -1,4 +1,4 @@
-<x-admin.layouts.app>
+<x-admin.layouts.app tab="users">
     <div class="card p-3">
         <header>
             <div class="d-flex align-items-center">

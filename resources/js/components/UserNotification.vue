@@ -1,6 +1,6 @@
 <template>
-    <li class="nav-item dropdown ml-3">
-        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle mb-2 mb-md-0" href="#" data-toggle="dropdown" role="button">
             <i class="fas fa-bell fa-lg bell"/> 
             <span class="badge badge-info noti-badge">{{notifications.length}}</span>
         </a>
@@ -52,9 +52,10 @@
 
     .noti-badge{
         position: absolute;
-        top: 5px;
-        left: 25px;
+        top: 4px;
+        left: 17px;
         border-radius: 50%;
+        border: 1px solid #fff;
     }
 
     .noti-header{

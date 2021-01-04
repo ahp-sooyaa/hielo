@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -79,22 +68,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/search', 'SearchController@show');
 
-        Route::get('/posts', 'PostsController@index');
-        Route::get('/posts/create', 'PostsController@create');
-        Route::post('/posts', 'PostsController@store');
-        Route::get('/posts/{post}', 'PostsController@show');
-        Route::get('/posts/{post}/edit', 'PostsController@edit');
-        Route::patch('/posts/{post}', 'PostsController@update');
-        Route::delete('/posts/{post}', 'PostsController@destroy');
-
+        // Route::get('/posts', 'PostsController@index');
+        // Route::get('/posts/create', 'PostsController@create');
+        // Route::post('/posts', 'PostsController@store');
+        // Route::get('/posts/{post}', 'PostsController@show');
+        // Route::get('/posts/{post}/edit', 'PostsController@edit');
+        // Route::patch('/posts/{post}', 'PostsController@update');
+        // Route::delete('/posts/{post}', 'PostsController@destroy');
+        Route::resource('posts', 'PostsController');
         /* user profile */
-        Route::get('/{user:name}', 'UserController@show');
-        Route::get('/{user:name}/edit', 'UserController@edit');
-        Route::patch('/{user:name}', 'UserController@update');
+        // Route::resource('users', 'UserController');
+        Route::get('profiles/{user:name}', 'ProfilesController@show');
+        Route::get('profiles/{user:name}/edit', 'ProfilesController@edit');
+        Route::patch('profiles/{user:name}', 'ProfilesController@update');
+        Route::get('profiles/{user:name}/likes', 'ProfilesController@likes');
+        Route::get('profiles/{user:name}/comments', 'ProfilesController@comments');
+        Route::delete('profiles/{user:name}', 'ProfilesController@destroy');
+
         Route::patch('/{user:name}/password', 'UserPasswordController@update');
-        Route::get('/{user:name}/likes', 'UserController@likes');
-        Route::get('/{user:name}/comments', 'UserController@comments');
-        Route::delete('/{user:name}', 'UserController@destroy');
 
         Route::post('/{user:name}/follow', 'FollowsController@store');
         Route::get('/{user:name}/follow', 'FollowsController@index');

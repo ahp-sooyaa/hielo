@@ -1,4 +1,4 @@
-<x-admin.layouts.app>
+<x-admin.layouts.app tab="comments">
     <div class="card p-3">
         <header>
             <h1>Comments</h1>

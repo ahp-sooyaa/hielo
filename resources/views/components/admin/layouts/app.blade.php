@@ -47,28 +47,23 @@
               </div>
               <ul class="navbar-nav flex-column">
                   <li class="nav-item">
-                    <a class="nav-link {{ active_url(2, 'dashboard') }}" href="/admin/dashboard">
+                    <a class="nav-link {{ $tab == 'dashboard' ? 'active' : '' }}" href="/admin/dashboard">
                       <i class="fas fa-tachometer-alt mr-2"></i>DashBoard
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link {{ active_url(2, 'reports') }}" href="/admin/reports">
-                      <i class="fas fa-exclamation-circle mr-2"></i>Reports
-                    </a>
-                  </li>
                   @can('access_roles', current_user())
-                  <li class="nav-item">
+                  <li class="nav-item {{ $tab == 'abilities' || $tab == 'roles' ? 'active' : '' }}">
                     <a class="nav-link">
                       <i class="fas fa-user-tag mr-2"></i>Roles & Abilities
                     </a>
                     <ul style="display: none" class="submenu">
                       <li>
-                        <a href="/admin/roles" class="nav-link {{ active_url(2, 'roles') }}">
+                        <a href="/admin/roles" class="nav-link {{ $tab == 'roles' ? 'active' : '' }}">
                           Roles
                         </a>
                       </li>
                       <li>
-                        <a href="/admin/abilities" class="nav-link {{ active_url(2, 'abilities') }}">
+                        <a href="/admin/abilities" class="nav-link {{ $tab == 'abilities' ? 'active' : '' }}">
                           Abilities
                         </a>
                       </li>
@@ -76,28 +71,28 @@
                   </li>
                   @endcan
                   <li class="nav-item">
-                    <a class="nav-link {{ active_url(2, 'users') }}" href="/admin/users">
+                    <a class="nav-link {{ $tab == 'users' ? 'active' : '' }}" href="/admin/users">
                       <i class="fas fa-users mr-2"></i>Users
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {{ active_url(2, 'posts') }}" href="/admin/posts">
+                    <a class="nav-link {{ $tab == 'posts' ? 'active' : '' }}" href="/admin/posts">
                       <i class="fas fa-file-alt mr-2"></i>Posts
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {{ active_url(2, 'comments') }}" href="/admin/comments">
+                    <a class="nav-link {{ $tab == 'comments' ? 'active' : '' }}" href="/admin/comments">
                       <i class="fas fa-comments mr-2"></i>Comments
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {{ active_url(2, 'tags') }}" href="/admin/tags">
+                    <a class="nav-link {{ $tab == 'tags' ? 'active' : '' }}" href="/admin/tags">
                       <i class="fas fa-tags mr-2"></i>Tags
                     </a>
                   </li>
                   <hr class="border w-100">
                   <li class="nav-item">
-                    <a class="nav-link {{ active_url(2, 'profile') }}" href="/admin/profile">
+                    <a class="nav-link {{ $tab == 'profile' ? 'active' : '' }}" href="/admin/profile">
                       <i class="fas fa-user-cog mr-2"></i>My account
                     </a>
                   </li>
@@ -150,6 +145,7 @@
       $('.nav-link').on('click', function(){
         var parent = $(this).parent();
         $('ul', parent).slideToggle('fast');
+        $('ul', parent).toggleClass('d-block');
         $(parent).toggleClass('active');
       })
   } );

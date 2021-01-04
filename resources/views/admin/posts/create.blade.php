@@ -1,4 +1,4 @@
-<x-admin.layouts.app>
+<x-admin.layouts.app tab="posts">
     <div class="card p-3">
         <h1>Create Post</h1>
         <form action="/admin/posts" method="POST" enctype="multipart/form-data">

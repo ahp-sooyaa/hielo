@@ -2,16 +2,16 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <main class="col-6">
-                <div class="d-flex align-items-center mb-3">
-                    @if ($post->isEdited())
+                @if ($post->isEdited())
+                    <div class="d-flex align-items-center mb-3">
                         <div class="btn btn-sm btn-light rounded-pill mr-auto">
                             Updated at {{$post->updated_at->format('M d,Y')}}
                         </div>
-                    @endif
-                </div>
-                <div>
-                    <img src="{{ $post->featured_image }}" alt="Featured Image" class="mb-4 rounded-20 featured-image-sg">
-                </div>
+                    </div>
+                @endif
+
+                <img src="{{ $post->featured_image }}" alt="Featured Image" class="mb-4 rounded-20 featured-image-sg">
+                
                 <div class="mb-3">
                     <h1 class="font-weight-bold" style="font-size: 40px">{{$post->title}}</h1>
                 </div>
@@ -53,6 +53,7 @@
                         ></bookmark>
                     </div>
                 </div>
+                hello
                 <div class="rounded ql-snow">
                     <div class="ql-editor px-0">
                         {!! $post->content !!}

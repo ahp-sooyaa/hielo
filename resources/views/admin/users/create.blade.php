@@ -1,5 +1,5 @@
-<x-admin.layouts.app>
-    <div class="col-md-5">
+<x-admin.layouts.app tab="users">
+    <div class="col-md-12 px-0">
         <div class="card p-3">
             <h1 class="text-black-50">
                 Add Users

@@ -7,13 +7,15 @@ use Illuminate\View\Component;
 class profileLayout extends Component
 {
     public $user;
+    public $tab;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($tab, $user)
     {
+        $this->tab = $tab;
         $this->user = $user;
     }
 

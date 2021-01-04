@@ -1,4 +1,4 @@
-<x-admin.layouts.app>
+<x-admin.layouts.app tab="abilities">
     <div class="card p-3">
         <header>
             <div class="d-flex align-items-center">
@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($abilities as $ability)
+                @foreach($abilities as $ability)
                     <tr>
                         <td>{{ $ability->name }}</td>
                         <td>{{ $ability->label }}</td>
@@ -40,11 +40,7 @@
                             </form>
                         </td>
                     </tr>
-                @empty
-                    <tr class="text-center">
-                        <td colspan="4">No abilities yet!</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -83,7 +83,7 @@
             </div>
             <div class="col-md-7">
                 <div class="card border-danger p-4 rounded-20">
-                    <form action="/{{$user->name}}" method="POST">
+                    <form action="{{$user->path()}}" method="POST">
                         @csrf
                         @method('DELETE')
 

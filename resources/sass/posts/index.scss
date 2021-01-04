@@ -167,6 +167,10 @@ img {
     left: calc(50% - 70px);
 }
 
+.nav > .active {
+    border-bottom: 0px;
+}
+
 input[type=file] {
     border-bottom: 1px solid $secondary;
 }
@@ -287,4 +291,13 @@ select {
     background-color: rgb(245, 247, 250) !important;
     color: #000 !important;
     box-shadow: 4px 4px 15px 0 rgba(36, 37, 38, .08) !important;
+}
+
+.navbar-nav .nav-link {
+    padding: 10px 10px;
+}
+
+.nav-link:hover{
+    background-color: $whitesmoke;
+    border-radius: 10px;
 }

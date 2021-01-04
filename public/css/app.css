@@ -17161,6 +17161,10 @@ img {
   left: calc(50% - 70px);
 }
 
+.nav > .active {
+  border-bottom: 0px;
+}
+
 input[type=file] {
   border-bottom: 1px solid #6c757d;
 }
@@ -17288,6 +17292,15 @@ select {
   box-shadow: 4px 4px 15px 0 rgba(36, 37, 38, 0.08) !important;
 }
 
+.navbar-nav .nav-link {
+  padding: 10px 10px;
+}
+
+.nav-link:hover {
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
 /* this scss effecting nav bar styles at layouts/app */
 
 * {
@@ -17351,10 +17364,6 @@ select {
   color: #fff;
 }
 
-.nav-link {
-  padding: 10px 15px 10px 15px !important;
-}
-
 .avatar {
   width: 45px;
   height: 45px;
@@ -17392,8 +17401,12 @@ select {
 }
 
 .featured-image-sg {
-  width: 680px;
+  width: 100%;
   height: 400px;
+}
+
+.page-item.disabled .page-link {
+  border: 1px solid #ff4f5a !important;
 }
 
 .page-link {

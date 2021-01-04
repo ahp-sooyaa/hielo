@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\User;
 
-class UserController extends Controller
+class ProfilesController extends Controller
 {
     public function show(User $user)
     {

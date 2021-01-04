@@ -83,7 +83,7 @@
                 <h3 class="font-weight-bold text-black-50 mb-5">Related posts</h3>
                 <div class="d-flex mx-n5 mt-3">
                     @forelse ($relatedPosts as $relatedPost)
-                        <div class="col-4 px-5">
+                        <div class="col-4 px-5 card">
                             <h5 class="text-muted">
                                 - 
                                 {{$relatedPost->tags->pluck('name')->join(', ')}}

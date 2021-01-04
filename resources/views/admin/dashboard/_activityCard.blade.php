@@ -1,22 +1,35 @@
 <div class="card py-3 px-5 mt-4">
     <div class="mx-auto">
         <h4 class="mb-4">Recent Activity</h4>
-        <ul class="mb-0 list-unstyled">
-            @forelse ($activities->slice(0,5) as $activity)
-            <li class="{{$loop->last ? '' : 'mb-2 pb-2 border-bottom-1'}}">
-                @if ($activity->subject_type == 'App\Post')
-                    <x-activity.post :activity="$activity"></x-activity.post>
+        @forelse ($dates as $date => $activities)
+            <div class="d-flex">
+                <div class="d-flex align-items-start rounded">
+                    @foreach (array_slice(explode('-', $date), 1,3) as $data)
+                        <div class="bg-white shadow px-2 mr-2 rounded-20 border border-primary">
+                            {{$data}}
+                        </div>
+                    @endforeach
+                </div>
+                <div class="w-100">
+                    @foreach ($activities as $activity)
+                        <div class="position-relative card border-0 shadow mb-3 rounded-20">
+                            @if ($activity->subject_type == 'App\Post')
+                                <x-activity.post :activity="$activity"></x-activity.post>
 
-                @elseif ($activity->subject_type == 'App\User') 
-                    <x-activity.user :activity="$activity"></x-activity.user>
+                            @elseif ($activity->subject_type == 'App\User') 
+                                <x-activity.user :activity="$activity"></x-activity.user>
 
-                @elseif ($activity->subject_type == 'App\Comment') 
-                    <x-activity.comment :activity="$activity"></x-activity.comment> 
-                @endif
-            </li>      
-            @empty
-                There is no activity yet!
-            @endforelse
-        </ul>
+                            @elseif ($activity->subject_type == 'App\Comment') 
+                                <x-activity.comment :activity="$activity"></x-activity.comment> 
+                            @endif
+                            <i class="position-absolute text-primary fas fa-dot-circle timeline-icon"></i>
+                            <div class="position-absolute timeline {{$loop->last ? 'h-0' : 'h-100'}}"></div>
+                        </div>      
+                    @endforeach
+                </div>
+            </div>
+        @empty
+            There is no activity yet!
+        @endforelse
     </div>
 </div>

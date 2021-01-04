@@ -12,12 +12,15 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // return Activity::all();
+        $dates = Activity::latest()->take(30)->get()->groupBy(function ($activity) {
+            return $activity->created_at->format('Y-M-d');
+        });
+
         return view('admin.dashboard.index', [
             'posts' => Post::all(),
             'users' => User::all(),
             'comments' => Comment::all(),
-            'activities' => Activity::latest()->get()
+            'dates' => $dates
         ]);
     }
 }

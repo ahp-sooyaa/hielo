@@ -17292,6 +17292,12 @@ select {
   box-shadow: 4px 4px 15px 0 rgba(36, 37, 38, 0.08) !important;
 }
 
+.ql-snow .ql-editor blockquote {
+  border-left: 4px solid #ccc;
+  margin: 0px !important;
+  padding-left: 16px;
+}
+
 .navbar-nav .nav-link {
   padding: 10px 10px;
 }
@@ -17420,6 +17426,17 @@ select {
   background-color: #ff4f5a;
   border: 1px solid #ff4f5a;
   color: #fff;
+}
+
+.timeline-icon {
+  top: 30px;
+  left: -26px;
+}
+
+.timeline {
+  border-left: 2px dashed #c3c0c0 !important;
+  top: 45px;
+  left: -20px;
 }
 
 .ais-Breadcrumb-list,

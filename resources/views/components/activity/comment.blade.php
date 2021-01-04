@@ -1,8 +1,8 @@
 <div class="d-flex align-items-center">
     <div class="mr-auto pr-4 font-weight-bold">
-        <span class="badge badge-success align-center">
+        {{-- <span class="badge badge-success align-center">
             {{$activity->causer_type}}
-        </span>
+        </span> --}}
         {{
             $activity->causer->name == current_user()->name ? "You" : $activity->causer->name
         }}

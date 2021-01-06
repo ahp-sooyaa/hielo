@@ -5,7 +5,7 @@ namespace App\Traits;
 use App\Activity;
 
 /**
- * 
+ *
  */
 trait RecordActivity
 {

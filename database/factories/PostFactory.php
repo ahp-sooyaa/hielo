@@ -12,7 +12,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' => $faker->sentence,
         'excerpt' => $faker->sentence,
         'content' => $faker->paragraph,
-        'featured_image' => 'featured_images/0aa186eb49f844476d7e2e9448f69496.jpg',
+        'featured_image' => 'images/0aa186eb49f844476d7e2e9448f69496.jpg',
         'published_at' => date('Y-m-d\TH:i:s')
     ];
 });

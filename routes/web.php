@@ -68,22 +68,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/search', 'SearchController@show');
 
-        // Route::get('/posts', 'PostsController@index');
-        // Route::get('/posts/create', 'PostsController@create');
-        // Route::post('/posts', 'PostsController@store');
-        // Route::get('/posts/{post}', 'PostsController@show');
-        // Route::get('/posts/{post}/edit', 'PostsController@edit');
-        // Route::patch('/posts/{post}', 'PostsController@update');
-        // Route::delete('/posts/{post}', 'PostsController@destroy');
         Route::resource('posts', 'PostsController');
         /* user profile */
-        // Route::resource('users', 'UserController');
         Route::get('profiles/{user:name}', 'ProfilesController@show');
         Route::get('profiles/{user:name}/edit', 'ProfilesController@edit');
         Route::patch('profiles/{user:name}', 'ProfilesController@update');
         Route::get('profiles/{user:name}/likes', 'ProfilesController@likes');
         Route::get('profiles/{user:name}/comments', 'ProfilesController@comments');
-        Route::delete('profiles/{user:name}', 'ProfilesController@destroy');
 
         Route::patch('/{user:name}/password', 'UserPasswordController@update');
 

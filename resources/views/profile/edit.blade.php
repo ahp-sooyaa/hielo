@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-7 my-5">
                 <div class="card p-4 rounded-20">
-                    <form action="{{ $user->path() }}/password" method="POST" enctype="multipart/form-data">
+                    <form action="/{{ $user->name }}/password" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         
@@ -81,7 +81,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-7">
+            {{-- <div class="col-md-7">
                 <div class="card border-danger p-4 rounded-20">
                     <form action="{{$user->path()}}" method="POST">
                         @csrf
@@ -98,7 +98,7 @@
                         </button>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </x-layouts.app>

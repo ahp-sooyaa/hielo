@@ -86,6 +86,9 @@ class Post extends Model
 
     public function toSearchableArray()
     {
-        return $this->toArray() + ['path' => $this->path()];
+        return $this->toArray() + [
+            'path' => $this->path(),
+            'author' => $this->author
+        ];
     }
 }

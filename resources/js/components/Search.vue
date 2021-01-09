@@ -64,10 +64,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .nav-pills .nav-link.active{
-    color: white;
-    background: #ff4f5a;
-  }
   .nav-pills a{
     color: black;
   }
@@ -76,5 +72,8 @@ export default {
   }
   .nav > .active{
     border-bottom: 3px solid #ff4f5a;
+    background-color: #fff !important;
+    border-radius: 0px;
+    color: #ff4f5a;
   }
 </style>

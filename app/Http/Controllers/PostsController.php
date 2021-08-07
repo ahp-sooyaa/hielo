@@ -16,7 +16,7 @@ class PostsController extends Controller
                 ->firstOrFail()
                 ->posts->whereNotNull('published_at');
         } else {
-            $posts = auth()->user()->timeline();
+            $posts = Post::latest()->paginate(20);
         }
 
         return view('posts.index', [

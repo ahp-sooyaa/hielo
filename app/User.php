@@ -45,24 +45,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return asset($value);
     }
 
-    public function timeline()
-    {
-        $ids = $this->follows()->pluck('id');
-
-        $ids->push($this->id);
-
-        $posts = Post::where('published_at', '<=', date('Y-m-d H:i:s'))
-            ->whereIn('author_id', $ids)
-            ->latest('published_at')->paginate(10);
-
-        if ($posts->count() == 0) {
-            return Post::where('published_at', '<=', date('Y-m-d H:i:s'))
-                ->latest('published_at')->paginate(10);
-        } else {
-            return $posts;
-        }
-    }
-
     public function roles()
     {
         return $this->belongsToMany(Role::class)->withTimestamps();

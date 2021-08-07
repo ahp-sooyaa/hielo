@@ -1,5 +1,12 @@
+/.idea
+/.vscode
 /node_modules
 /public/hot
+/public/css/app.css
+/public/fonts
+/public/js/app.js
+/public/storage
+/storage/*.key
 /vendor
 .env
 .env.backup

@@ -1,0 +1,23 @@
+// Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
+
+// Variables
+@import 'variables';
+
+// fontawesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// post
+@import 'posts/index.scss';
+
+// admin
+@import 'admin/index.scss';
+
+@import '~instantsearch.css/themes/algolia-min';

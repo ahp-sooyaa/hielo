@@ -1,0 +1,49 @@
+<?php
+
+namespace Tests\Unit;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Collection;
+use Tests\TestCase;
+
+class PostTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function setUp() :void
+    {
+        parent::setUp();
+
+        $this->post = factory('App\Post')->create();
+    }
+
+    public function testPostHasPath()
+    {
+        $this->assertEquals("/posts/{$this->post->id}", $this->post->path());
+    }
+
+    public function testPostBelongsToAuthor()
+    {
+        $this->assertInstanceOf('App\User', $this->post->author);
+    }
+
+    public function testPostHasManyComments()
+    {
+        $this->assertInstanceOf(Collection::class, $this->post->comments);
+    }
+
+    public function testPostBelongsToTags()
+    {
+        $this->assertInstanceOf(Collection::class, $this->post->tags);
+    }
+
+    public function testPostCanAddComment()
+    {
+        $this->post->addComment([
+            'author_id' => 1,
+            'body' => 'hi'
+        ]);
+
+        $this->assertCount(1, $this->post->comments);
+    }
+}

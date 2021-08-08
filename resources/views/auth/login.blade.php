@@ -1,8 +1,11 @@
-<x-layouts.app>
+<x-layouts.fullpage>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-9">
-                <div class="card shadow border-0">
+            <div class="col-md-9 text-center">
+                <a class="navbar-brand brand mb-3" href="{{ url('/posts') }}">
+                    <h1 class="m-0 text-info">{{ config('app.name', 'Hielo') }}</h1>
+                </a>
+                <div class="card shadow-sm border-0">
                     <div class="d-flex">
                         <div class="d-none d-lg-block d-xl-block col-6 p-0 position-relative">
                             <img class="h-100 b-l-tb object-contain" src="{{ asset('appImage/3255309.jpg') }}" alt="" data-toggle="tooltip" title="Idea vector created by stories - www.freepik.com">
@@ -85,4 +88,4 @@
             </div>
         </div>
     </div>
-</x-layouts.app>
+</x-layouts.fullpage>

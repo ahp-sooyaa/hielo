@@ -43,22 +43,26 @@ export default {
   },
   methods: {
     toggleLike() {
-      this.isLoading = true;
-      axios
-        .post(this.endpoint)
-        .then((response) => {
-            this.isLoading = false;
+      if (this.isLoggedIn) {
+        this.isLoading = true;
+        axios
+          .post(this.endpoint)
+          .then((response) => {
+              this.isLoading = false;
 
-            if (this.isLiked) {
-                this.count--;
-            } else {
-                this.count++;
-            }
-            this.isLiked = !this.isLiked;
-        })
-        .catch(() => {
-          this.isLoading = false;
-        });
+              if (this.isLiked) {
+                  this.count--;
+              } else {
+                  this.count++;
+              }
+              this.isLiked = !this.isLiked;
+          })
+          .catch(() => {
+            this.isLoading = false;
+          }); 
+      } else {
+        flash("Please Sign In to give like!")
+      }
     },
   },
 };

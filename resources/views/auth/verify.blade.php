@@ -5,6 +5,11 @@
                 <h3 class="font-weight-bold text-center">
                     Just One more Step, <br>Let's verify your email
                 </h3>
+                @if (session('resent'))
+                    <div class="alert alert-success position" role="alert">
+                        Successfully resent verification mail to your mail box.
+                    </div>
+                @endif
                 <div class="mt-4">
                     <div class="mb-3">
                         We already send a verification link to <span class="font-weight-bold">{{current_user()->email}}</span>, please check your email. 

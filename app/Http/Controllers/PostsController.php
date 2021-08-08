@@ -27,7 +27,9 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        current_user()->setRecentView($post->id);
+        if (current_user()) {
+            current_user()->setRecentView($post->id);
+        }
 
         return view('posts.show', [
             'post' => $post,
@@ -59,28 +61,6 @@ class PostsController extends Controller
 
             $post = current_user()->posts()->create($attributes);
         }
-
-        // switch (request('action')) {
-        //     case 'publish':
-        //         if (request('published_at')) {
-        //             $attributes['published_at'] = request('published_at');
-        //         } else {
-        //             $attributes['published_at'] = date('Y-m-d H:i:s');
-        //         }
-        //         $post = current_user()->posts()->updateOrCreate(
-        //             ['title' => request('title')],
-        //             [
-        //                 'excerpt' => request('excerpt'), 'featured_image' => $attributes['featured_image'],
-        //                 'content' => request('content'), 'published_at' => $attributes['published_at']
-        //             ]
-        //         );
-        //         break;
-
-        //     case 'draft':
-        //         $attributes['published_at'] = NULL;
-        //         $post = current_user()->posts()->updateOrCreate($attributes);
-        //         break;
-        // }
 
         $tags = json_decode(request('tags'));
 

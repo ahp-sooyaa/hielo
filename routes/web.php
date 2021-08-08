@@ -65,11 +65,14 @@ Route::group(['middleware' => ['auth', 'Admin'], 'prefix' => 'admin'], function 
 
 /* user routes */
 Route::get('/posts', 'PostsController@index')->name('posts.index');
+Route::get('/posts/create', 'PostsController@create')->name('posts.create')->middleware('auth');
+Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/search', 'SearchController@show');
 
-        Route::resource('posts', 'PostsController')->except(['index']);
+        Route::resource('posts', 'PostsController')->except(['index','show','create']);
         /* user profile */
         Route::get('profiles/{user:name}', 'ProfilesController@show');
         Route::get('profiles/{user:name}/edit', 'ProfilesController@edit');

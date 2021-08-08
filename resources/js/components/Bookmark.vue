@@ -33,7 +33,8 @@
         },
         methods: {
             toggleBookmark(){
-                axios
+                if (this.isLoggedIn) {
+                    axios
                     .post(this.endpoint)
                     .then((response) => {
                         this.isLoading = false;
@@ -43,6 +44,9 @@
                     .catch(() => {
                         this.isLoading = false;
                     });
+                } else {
+                    flash('Please sign in to bookmark!')
+                }
             }
         }
     }

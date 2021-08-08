@@ -101,6 +101,16 @@
                                     </div>
                                 </li>
                             </div>
+                        @else 
+                            <div class="links">
+                                <a href="{{ route('login') }}">SignIn</a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="btn-info px-3 py-2 rounded-10">
+                                        SignUp
+                                    </a>
+                                @endif
+                            </div>
                         @endauth
                     </ul>
                 </div>

@@ -17,6 +17,7 @@
         </div>
         <comment-form
             :post-id="this.postId"
+            :logged-in="this.authUser ? true : false"
         ></comment-form>
     </div>
 </template>

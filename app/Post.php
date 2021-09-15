@@ -6,10 +6,10 @@ use App\Traits\Shareable;
 use App\Traits\Likable;
 use App\Traits\RecordActivity;
 use App\Traits\Reportable;
+use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class Post extends Model
 {

@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostRequest;
-use App\Notifications\PostPublished;
 use App\Post;
 use App\Tag;
+use App\Http\Requests\StorePostForm;
+use App\Http\Requests\UpdatePostForm;
+use Illuminate\Support\Facades\Session;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('create');
+    }
+
     public function index()
     {
         if (request('tag')) {
@@ -44,37 +50,11 @@ class PostsController extends Controller
         ]);
     }
 
-    public function store(StorePostRequest $request)
+    public function store(StorePostForm $form)
     {
-        $attributes = $request->except('tags');
+        $post = $form->persist();
 
-        if ($request->hasFile('featured_image')) {
-            $attributes['featured_image'] = request('featured_image')->store('featured-images');
-        }
-
-        if (request('published_at') != null) {
-            $attributes['published_at'] = request('published_at');
-
-            $post = current_user()->posts()->create($attributes);
-        } else {
-            $attributes['published_at'] = date('Y-m-d\TH:i:s');
-
-            $post = current_user()->posts()->create($attributes);
-        }
-
-        $tags = json_decode(request('tags'));
-
-        foreach ($tags as $tag) {
-            $tagsId[$tag->id] = ['tag_id' => $tag->id];
-        }
-
-        $post->tags()->sync($tagsId);
-
-        foreach (current_user()->followers as $follower) {
-            $follower->notify(new PostPublished($post));
-        }
-
-        \Session::flash('status', 'Post created success');
+        Session::flash('status', 'Post created success');
 
         return response()->json(['postId' => $post->id]);
     }
@@ -86,27 +66,11 @@ class PostsController extends Controller
         return view('posts.edit', compact('post'));
     }
 
-    public function update(StorePostRequest $request, Post $post)
+    public function update(UpdatePostForm $form, Post $post)
     {
-        $this->authorize('edit_post', $post);
+        $form->persist($post);
 
-        $attributes = $request->validated();
-
-        if (request()->hasFile('featured_image')) {
-            $attributes['featured_image'] = request('featured_image')->store('featured_images');
-        }
-
-        $post->update($attributes);
-
-        $tags = json_decode(request('tags'));
-
-        foreach ($tags as $tag) {
-            $tagsId[$tag->id] = ['tag_id' => $tag->id];
-        }
-
-        $post->tags()->sync($tagsId);
-
-        \Session::flash('status', 'Update successful');
+        Session::flash('status', 'Update successful changed');
 
         return response()->json(['postId' => $post->id]);
     }
@@ -115,10 +79,8 @@ class PostsController extends Controller
     {
         $this->authorize('destroy_post', $post);
 
-        current_user()->posts()->where('id', $post->id)->delete($post->id);
+        $post->delete();
 
-        \Session::flash('status', 'Delete successful');
-
-        return back();
+        return back()->with('status', 'Successfully deleted your post');
     }
 }

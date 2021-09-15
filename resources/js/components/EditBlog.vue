@@ -95,7 +95,7 @@ export default {
             axios
                 .post(`/posts/${this.postId}`, fd)
                 .then((res) => {
-                    window.location.href = `https://hielo.dev/posts/${res.data.postId}`;
+                    window.location.href = `/posts/${res.data.postId}`;
                 })
                 .catch((err) => this.errors.record(err.response.data.errors));
         },

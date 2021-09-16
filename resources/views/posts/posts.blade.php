@@ -13,25 +13,19 @@
                         <li class="list-item">
                             <a 
                                 class="d-block {{ (request('type')=='all' ) ? 'active' : '' }} py-2 px-3"
-                                href="/{{current_user()->name}}/posts?type=all"
+                                href="/{{auth_user()->name}}/posts?type=all"
                             >All</a>
                         </li>
-                        {{-- <li class="list-item">
-                            <a 
-                                class="d-block {{ (request('type')=='drafts' ) ? 'active' : '' }} py-2 px-3"
-                                href="/{{current_user()->name}}/posts?type=drafts"
-                            >Drafts</span></a>
-                        </li> --}}
                         <li class="list-item">
                             <a 
                                 class="d-block {{ (request('type')=='published' ) ? 'active' : '' }} py-2 px-3"
-                                href="/{{current_user()->name}}/posts?type=published"
+                                href="/{{auth_user()->name}}/posts?type=published"
                             >Published</a>
                         </li>
                         <li class="list-item">
                             <a 
                                 class="d-block {{ (request('type')=='scheduled' ) ? 'active' : '' }} py-2 px-3"
-                                href="/{{current_user()->name}}/posts?type=scheduled"
+                                href="/{{auth_user()->name}}/posts?type=scheduled"
                             >Scheduled</a>
                         </li>
                     </ul>
@@ -47,10 +41,7 @@
                             </a>
                         </h5>
                         <div>
-                            <form 
-                                action="{{'/posts/'.$post->id}}"
-                                method="POST"
-                            >
+                            <form action="{{'/posts/'.$post->id}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-link text-sm p-0">

@@ -4,7 +4,7 @@
             {{$activity->causer_type}}
         </span> --}}
         {{
-            $activity->causer->name == current_user()->name ? "You" : $activity->causer->name
+            $activity->causer->name == auth_user()->name ? "You" : $activity->causer->name
         }}
         <span class="text-muted">
         {{$activity->description}} user

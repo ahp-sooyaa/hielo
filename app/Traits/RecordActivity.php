@@ -12,7 +12,7 @@ trait RecordActivity
     protected static function bootRecordActivity()
     {
         if (auth()->check()) {
-            if (current_user()->isSuperAdmin() || current_user()->isAdmin()) {
+            if (auth_user()->isSuperAdmin() || auth_user()->isAdmin()) {
                 foreach (static::getActivitiesToRecord() as $event) {
                     static::$event(function ($model) use ($event) {
                         $model->recordActivity($event);
@@ -34,8 +34,8 @@ trait RecordActivity
     protected function recordActivity($event)
     {
         $this->activiy()->create([
-            'causer_id' => current_user()->id,
-            'causer_type' => current_user()->roles[0]->name,
+            'causer_id' => auth_user()->id,
+            'causer_type' => auth_user()->roles[0]->name,
             'description' => $event
         ]);
     }

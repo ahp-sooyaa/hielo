@@ -34,14 +34,14 @@
               <div class="text-center py-4">
                   <img 
                     class="border-info-3 p-1 avatar-2x"
-                    src="{{current_user()->avatar}}" alt="avatar"
+                    src="{{auth_user()->avatar}}" alt="avatar"
                   >
                   <div class="">
                       <span class="badge badge-success mt-2">
-                        {{current_user()->roles[0]->label}}
+                        {{auth_user()->roles[0]->label}}
                       </span>   
                       <div>
-                        {{current_user()->name}}
+                        {{auth_user()->name}}
                       </div>                  
                   </div>
               </div>
@@ -51,7 +51,7 @@
                       <i class="fas fa-tachometer-alt mr-2"></i>DashBoard
                     </a>
                   </li>
-                  @can('access_roles', current_user())
+                  @can('access_roles', auth_user())
                   <li class="nav-item {{ $tab == 'abilities' || $tab == 'roles' ? 'active' : '' }}">
                     <a class="nav-link">
                       <i class="fas fa-user-tag mr-2"></i>Roles & Abilities

@@ -6,9 +6,14 @@ use App\User;
 
 class UserNotificationsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        return current_user()->unreadNotifications;
+        return auth_user()->unreadNotifications;
     }
 
     public function destroy(User $user, $notificationId)

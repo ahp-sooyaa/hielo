@@ -37,7 +37,7 @@
                 </div>
                 <bookmark 
                     :post-id="{{$post->id}}"
-                    :bookmarked="{{ json_encode(current_user()->isBookmark($post->id))}}"
+                    :bookmarked="{{ json_encode(auth_user()->isBookmark($post->id))}}"
                     :logged-in="{{json_encode(Auth::check())}}"
                 ></bookmark>
             </div>

@@ -12,7 +12,7 @@
                 @endif
                 <div class="mt-4">
                     <div class="mb-3">
-                        We already send a verification link to <span class="font-weight-bold">{{current_user()->email}}</span>, please check your email. 
+                        We already send a verification link to <span class="font-weight-bold">{{auth_user()->email}}</span>, please check your email. 
                     </div>
                         
                     Note: If you did not receive the email

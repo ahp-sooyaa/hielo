@@ -51,8 +51,8 @@ export default {
     return {
       moment,
       searchClient: algoliasearch(
-        process.env.MIX_ALGOLIA_APP_ID,
-        process.env.MIX_ALGOLIA_SEARCH
+        "C7TZ1DW92C",
+        "0152fce4df945b2d72cf8329c56e4e05"
       ),
       routing: {
         router: historyRouter(),

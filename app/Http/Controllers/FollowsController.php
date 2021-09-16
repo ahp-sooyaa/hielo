@@ -8,7 +8,7 @@ class FollowsController extends Controller
 {
     public function index()
     {
-        $follows = current_user()->follows->pluck('id');
+        $follows = auth_user()->follows->pluck('id');
 
         return response()->json(['follows' => $follows]);
     }

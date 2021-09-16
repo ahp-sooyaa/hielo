@@ -49,12 +49,12 @@
                         
                         <bookmark 
                             :post-id="{{$post->id}}"
-                            :bookmarked="{{ json_encode(current_user() ? current_user()->isBookmark($post->id) : false)}}"
+                            :bookmarked="{{ json_encode(auth_user() ? auth_user()->isBookmark($post->id) : false)}}"
                             :logged-in="{{ json_encode(Auth::check())}}"
                         ></bookmark>
                     </div>
                 </div>
-                hello
+                
                 <div class="rounded ql-snow">
                     <div class="ql-editor px-0">
                         {!! $post->content !!}
@@ -73,7 +73,7 @@
                     <comment-list
                         :post-id={{$post->id}}
                         :author="{{$post->author}}"
-                        :user="{{json_encode(current_user())}}"
+                        :user="{{json_encode(auth_user())}}"
                     ></comment-list>
                 </div>
             </main>

@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Post;
+use App\Observers\PostObserver;
 use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -47,7 +47,7 @@
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <img 
-                                            src="{{current_user()->avatar}}" alt="avatar" class="avatar-sm mr-2"
+                                            src="{{auth_user()->avatar}}" alt="avatar" class="avatar-sm mr-2"
                                         >
                                         {{ str_limit(Auth::user()->name, 9, '') }}
                                     </a>
@@ -55,10 +55,10 @@
                                     <div class="dropdown-menu dropdown-menu-right mw-200" aria-labelledby="navbarDropdown">
                                         <div class="d-flex dropdown-item align-items-center py-2">
                                             {{-- <img 
-                                                src="{{current_user()->avatar}}" alt="avatar" class="avatar mr-2"
+                                                src="{{auth_user()->avatar}}" alt="avatar" class="avatar mr-2"
                                             > --}}
-                                            <a href="{{current_user()->path()}}" class="text-dark">
-                                                {{current_user()->name}}
+                                            <a href="{{auth_user()->path()}}" class="text-dark">
+                                                {{auth_user()->name}}
                                             </a>
                                         </div>
                                         <div class="text-center">
@@ -71,22 +71,22 @@
                                         <div class="dropdown-divider"></div>
                                         <a 
                                             class="dropdown-item mb-2" 
-                                            href="/{{current_user()->name}}/posts?type=all">
+                                            href="/{{auth_user()->name}}/posts?type=all">
                                             Posts
                                         </a>
                                         <a 
                                             class="dropdown-item mb-2" 
-                                            href="/{{current_user()->name}}/readingList?type=saved">
+                                            href="/{{auth_user()->name}}/readingList?type=saved">
                                             ReadingList
                                         </a>
                                         <a 
                                             class="dropdown-item mb-2" 
-                                            href="{{current_user()->path()}}">
+                                            href="{{auth_user()->path()}}">
                                             Profile
                                         </a>
                                         <a 
                                             class="dropdown-item mb-2" 
-                                            href="{{current_user()->path('edit')}}">
+                                            href="{{auth_user()->path('edit')}}">
                                             Setting
                                         </a>
                                         <a class="dropdown-item pb-2" href="{{ route('logout') }}"

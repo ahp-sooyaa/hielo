@@ -16,7 +16,7 @@ trait Reportable
     public function report($description)
     {
         return $this->reports()->create([
-            'reporter_id' => current_user()->id,
+            'reporter_id' => auth_user()->id,
             'description' => $description
         ]);
     }

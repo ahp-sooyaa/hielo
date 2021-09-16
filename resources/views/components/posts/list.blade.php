@@ -11,7 +11,7 @@
             </h4>
             <bookmark 
                 :post-id="{{$post->id}}"
-                :bookmarked="{{ json_encode(current_user() ? current_user()->isBookmark($post->id): false)}}"
+                :bookmarked="{{ json_encode(auth_user() ? auth_user()->isBookmark($post->id): false)}}"
                 :logged-in="{{ json_encode(Auth::check())}}"
             ></bookmark>
         </div>

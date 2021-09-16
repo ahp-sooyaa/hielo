@@ -33,8 +33,8 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        if (current_user()) {
-            current_user()->setRecentView($post->id);
+        if (auth_user()) {
+            auth_user()->setRecentView($post->id);
         }
 
         return view('posts.show', [

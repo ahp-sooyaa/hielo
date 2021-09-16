@@ -46,7 +46,7 @@ class PostsController extends Controller
 
         $attributes['featured_image'] = request('featured_image')->store('featured-images');
 
-        $post = current_user()->posts()->create($attributes);
+        $post = auth_user()->posts()->create($attributes);
 
         $post->tags()->sync(request('tags'));
 

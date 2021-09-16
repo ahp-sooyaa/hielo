@@ -23,7 +23,7 @@ class ReadingListController extends Controller
                 break;
 
             case 'recentlyViewed':
-                $posts_id = current_user()->getRecentView();
+                $posts_id = auth_user()->getRecentView();
                 // dd($posts_id);
                 if ($posts_id != NULL) {
                     $recentPosts = Post::whereIn('id', $posts_id)->take(10)->get();
@@ -42,20 +42,20 @@ class ReadingListController extends Controller
 
     public function store($postId)
     {
-        current_user()->toggleBookmark($postId);
+        auth_user()->toggleBookmark($postId);
         return back();
     }
 
     public function destroy($postId)
     {
-        current_user()->unbookmark($postId);
+        auth_user()->unbookmark($postId);
 
         return back();
     }
 
     public function archieve($postId)
     {
-        current_user()->toggleArchieve($postId);
+        auth_user()->toggleArchieve($postId);
 
         return back();
     }

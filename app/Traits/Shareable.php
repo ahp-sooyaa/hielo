@@ -7,6 +7,18 @@ use Illuminate\Support\Str;
 
 trait Shareable
 {
+    protected $shareOptions = [
+        'columns' => [
+            'title' => 'title'
+        ],
+        'url' => null
+    ];
+
+    public function getUrlAttribute()
+    {
+        return route('posts.show', $this->title);
+    }
+    
     public function getShareUrl($type = 'facebook')
     {
         $url = $this->{Arr::get($this->shareOptions, 'url')} ? $this->{Arr::get($this->shareOptions, 'url')} : url()->current();

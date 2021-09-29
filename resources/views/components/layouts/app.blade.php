@@ -11,7 +11,12 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    
+    <script>
+      window.App = {!!json_encode([
+        'signIn' => Auth::check(),
+        'user' => Auth::user()
+      ])!!};
+    </script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -20,7 +25,9 @@
         <nav class="navbar navbar-expand-md sticky-top shadow-sm bg-white navbar-light">
             <div class="container">
                 <a class="navbar-brand brand" href="{{ url('/posts') }}">
-                    <h2 class="m-0 text-info">{{ config('app.name', 'Hielo') }}</h2>
+                    <h2 class="m-0 text-info">
+                        {{ config('app.name', 'BigBlog') }}
+                    </h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

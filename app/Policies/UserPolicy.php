@@ -9,6 +9,13 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    public function index(User $user, User $currentUser)
+    {
+        if ($currentUser->is($user)) {
+            return true;
+        }
+    }
+
     /**
      * To create new user records in admin panel: 
      * A user must have ability 'create-users'.

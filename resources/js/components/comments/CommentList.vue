@@ -1,13 +1,10 @@
 <template>
     <div>
-        <!-- {{comments.length}} comments -->
         {{comments.length | pluralize}}
         <div v-if="comments.length">
-            <div v-for="(comment, index) in comments">
+            <div v-for="(comment, index) in comments" :key="comment.id">
                 <comment
                     :comment="comment"
-                    :postAuthor="postAuthor"
-                    :authUser="authUser"
                     @deleted="deleteComment(index)"
                 />
             </div>
@@ -15,10 +12,7 @@
         <div v-else class="text-center my-3">
             No comments Yet!
         </div>
-        <comment-form
-            :post-id="this.postId"
-            :logged-in="this.authUser ? true : false"
-        ></comment-form>
+        <comment-form></comment-form>
     </div>
 </template>
 
@@ -32,43 +26,31 @@
                 type: Object,
                 required: true
             },
-            postId: {
-                type: Number,
-                required: true
-            },
             author: {
                 type: Object,
                 required: true
             }
         },
+
         data(){
             return{
                 comments: [],
-                postAuthor: this.author,
-                authUser: this.user,
-                endpoint: `/api/${this.postId}/comments/`,
+                endpoint: `${location.pathname}/comments`,
             }
         },
+
         filters: {
             pluralize(length){
                 return length > 1 ? length + " comments" : length + " comment"
             }
         },
-        // computed: {
-        //     pluralize(){
-        //         if(this.comments)
-        //         {
-        //             return this.comments.length > 1 ? this.comments.length+" comments" : this.comments.length+" comment"
-        //         }
-        //     }
-        // },
 
         methods: {
             fetchComments(){
                 axios
                     .get(this.endpoint)
                     .then((response) => {
-                        this.comments = response.data.data;
+                        this.comments = response.data;
                     })
             },
             addComment (comment) {
@@ -78,6 +60,7 @@
                 this.comments.splice(index, 1)
             }
         },
+
         mounted() {
             this.fetchComments()
             window.events.$on('created' , comment => this.addComment(comment) );

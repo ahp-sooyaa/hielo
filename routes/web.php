@@ -17,6 +17,8 @@ Route::group([
     Route::get('/search', 'SearchController@show');
 
     Route::resource('posts', 'PostsController')->except(['index', 'show', 'create']);
+
+    Route::get('/{user:name}/posts', 'AuthorPostsController'); // this could be like this author/{name}/posts
     
     Route::get('profiles/{user:name}', 'ProfilesController@show');
     Route::get('profiles/{user:name}/edit', 'ProfilesController@edit');
@@ -39,10 +41,9 @@ Route::group([
     Route::get('/{user:name}/readingList/{collection:name}', 'ReadingListController@collection');
     Route::post('/{user:name}/collection', 'CollectionController@store');
 
-    Route::get('/{user:name}/posts', 'AuthorPostsController');
-
     Route::post('/posts/{post}/likes', 'LikesController');
 
+    Route::get('/posts/{post}/comments', 'PostCommentsController@index');
     Route::post('/posts/{post}/comment', 'PostCommentsController@store');
     Route::patch('/comments/{comment}', 'PostCommentsController@update');
     Route::delete('/comments/{comment}', 'PostCommentsController@destroy');

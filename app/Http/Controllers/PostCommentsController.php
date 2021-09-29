@@ -2,28 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCommentRequest;
+use App\Post;
 use App\Comment;
 use App\Notifications\NewComment;
-use App\Post;
+use App\Http\Requests\StoreCommentRequest;
 
 class PostCommentsController extends Controller
 {
+    public function index(Post $post)
+    {
+        return $post->comments;
+    }
+
     public function store(StoreCommentRequest $request, Post $post)
     {
-        $comment = $post->addComment([
+        $comment = $post->comments()->create([
             'author_id' => auth()->id(),
-            'body' => request('body')
-        ]);
+            'body' => $request->body
+        ])->load('author');
 
-        foreach (auth_user()->followers as $follower) {
-            // if ($ids->contains($this->author->id)) {
-            $follower->notify(new NewComment($this, $comment));
-            // }
-        }
-
-        $comment['avatar'] = auth_user()->avatar;
-        $comment['author_name'] = auth_user()->name;
+        auth_user()->followers->each->notify(new NewComment($this, $comment));
 
         return $comment;
     }

@@ -11,6 +11,14 @@ class Tag extends Model
     protected $guarded = [];
     protected $withCount = ['posts'];
 
+    public function scopeWithPublishedPosts($query)
+    {
+        return $query->whereName(request('tag'))
+                ->firstOrFail()
+                ->posts
+                ->whereNotNull('published_at');
+    }
+
     public function posts()
     {
         return $this->belongsToMany(Post::class);

@@ -20,22 +20,12 @@
 <script>
     import axios from 'axios'
     export default {
-        props: {
-            postId: {
-                type: Number,
-                required: true
-            },
-            loggedIn: {
-                type: Boolean,
-                required: true
-            }
-        },
         data(){
             return {
                 isLoading: false,
-                isLoggedIn: this.loggedIn,
+                isLoggedIn: window.App.signIn,
                 body: '',
-                endpoint: `/posts/${this.postId}/comment`
+                endpoint: `${location.pathname}/comment`
             }
         },
         methods: {
@@ -48,6 +38,9 @@
                         this.body = ''
                         this.isLoading = false
                         flash('Success! comment posted')
+                    })
+                    .catch(err => {
+                        flash(err.response.data.errors.body[0])
                     })
             }
         }

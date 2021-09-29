@@ -29,6 +29,7 @@ class UpdatePostForm extends StorePostForm
         $rules = parent::rules();
 
         $rules['featured_image'] = 'nullable|image|mimes:jpeg,png,jpg';
+        $rules['tags'] = 'nullable|array|min:1';
 
         return $rules;
     }

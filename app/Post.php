@@ -24,7 +24,7 @@ class Post extends Model
     {
         return "/posts/{$this->id}";
     }
-
+    
     public function getFeaturedImageAttribute($value)
     {
         return asset($value);
@@ -45,13 +45,6 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function addComment($comment)
-    {
-        $comment = $this->comments()->create($comment);
-
-        return $comment;
-    }
-
     public function isEdited()
     {
         return $this->created_at < $this->updated_at;
@@ -67,21 +60,9 @@ class Post extends Model
         ])->latest()->take(3)->get();
     }
 
-    protected $shareOptions = [
-        'columns' => [
-            'title' => 'title'
-        ],
-        'url' => null
-    ];
-
     public function wasJustPublished()
     {
         return $this->created_at->gt(Carbon::now()->subMinute());
-    }
-
-    public function getUrlAttribute()
-    {
-        return route('posts.show', $this->title);
     }
 
     public function toSearchableArray()

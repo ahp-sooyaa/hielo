@@ -1,14 +1,14 @@
 <template>
-    <div class="shadow-sm mt-3 px-4 py-3 comment-container">
+    <div class="bg-white shadow-sm mt-3 px-4 py-3 comment-container">
         <div class="d-flex align-items-top">
-            <img :src="comment.avatar" alt="avatar" class="avatar mr-3">
+            <img :src="comment.author.avatar" alt="avatar" class="avatar mr-3">
             <div class="w-100">
                 <div class="mb-2 d-flex">
                     <div class="mr-auto">
-                        <a :href="comment.author_url" class="font-weight-bold" style="cursor: pointer">
-                            {{comment.author_name}}
+                        <a :href="'/profiles/'+comment.author.name" class="font-weight-bold" style="cursor: pointer">
+                            {{comment.author.name}}
                         </a>
-                        <div v-if="comment.author_name == author.name" class="d-inline">
+                        <div v-if="comment.author.name == $parent.name" class="d-inline">
                             .   
                             <span 
                                 class="badge badge-secondary secondary-color mr-2"
@@ -30,7 +30,7 @@
                 </div>
                 <div v-else>
                     <div class="mb-2" v-text="body"></div>
-                    <div v-if="comment.author_id == authUser.id">
+                    <div v-if="comment.author.id == auth.id">
                         <button class="btn btn-sm btn-outline-secondary ml-auto" @click="isEditing = true">
                             Edit
                         </button>
@@ -50,15 +50,7 @@
     import moment from 'moment'
     export default {
         props: {
-            authUser:{
-                type: Object,
-                required: true
-            },
             comment: {
-                type: Object,
-                required: true
-            },
-            postAuthor: {
                 type: Object,
                 required: true
             }
@@ -70,7 +62,7 @@
                 isEditing: false,
                 canUpdate: this.comment.can_update,
                 endPoint: `/comments/${this.comment.id}`,
-                author: this.postAuthor
+                auth: window.App.user
             }
         },
         methods: {

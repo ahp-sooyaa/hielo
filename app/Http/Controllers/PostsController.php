@@ -18,9 +18,7 @@ class PostsController extends Controller
     public function index()
     {
         if (request('tag')) {
-            $posts = Tag::where('name', request('tag'))
-                ->firstOrFail()
-                ->posts->whereNotNull('published_at');
+            $posts = Tag::withPublishedPosts();
         } else {
             $posts = Post::latest()->paginate(20);
         }
@@ -33,9 +31,7 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        if (auth_user()) {
-            auth_user()->setRecentView($post->id);
-        }
+        auth_user() ? auth_user()->setRecentView($post->id) : null;
 
         return view('posts.show', [
             'post' => $post,
@@ -45,9 +41,7 @@ class PostsController extends Controller
 
     public function create()
     {
-        return view('posts.create', [
-            'tags' => Tag::all()
-        ]);
+        return view('posts.create', ['tags' => Tag::all()]);
     }
 
     public function store(StorePostForm $form)

@@ -61,8 +61,9 @@ class StorePostForm extends FormRequest
     public function persist()
     {
         $attributes = $this->except('tags', 'featured_image', 'published_at');
+
         $post = $this->user()->posts()->create($attributes + [
-            'featured_image' => $this->hasFile('featured_image') ? $this->featured_image->store('featured_images') : null,
+            'featured_image' => $this->featured_image->store('featured_images'),
             'published_at' => $this->published_at ?: now()
         ]);
 

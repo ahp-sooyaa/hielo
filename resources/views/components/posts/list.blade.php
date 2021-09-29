@@ -1,7 +1,7 @@
 @forelse ($posts as $post)
     <div class="card shadow border-bottom-3 rounded-20 p-4 mb-4 border-0">
         <div class="m-n4">
-            <img src="{{ $post->featured_image }}" alt="Featured Image" class="rounded-top-20 h-300-px w-100">
+            <img src="{{ $post->featured_image }}" alt="Featured Image" class="rounded-top-20 h-300-px w-100" style="object-fit: cover; object-position: center;">
         </div>
         <div class="d-flex mt-5">
             <h4 class="mr-auto">

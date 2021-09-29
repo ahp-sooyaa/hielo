@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\Followable;
 use App\Traits\Bookmarkable;
 use App\Traits\RecordActivity;
 use App\Traits\Reportable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Scout\Searchable;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -40,6 +40,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function path($append = '')
+    {
+        return $append ? "/profiles/{$this->name}/{$append}" : "/profiles/{$this->name}";
+    }
+
     public function getAvatarAttribute($value)
     {
         return asset($value);
@@ -48,43 +53,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles()
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
-    }
-
-    public function assignRole($role)
-    {
-        if (is_string($role)) {
-            $role = Role::whereName($role)->firstOrFail();
-        }
-        return $this->roles()->sync($role);
-    }
-
-    /**
-     * Check if the user has a role
-     */
-    public function hasRole(string $role)
-    {
-        return $this->roles->where('name', $role)->isNotEmpty();
-    }
-
-    /**
-     * Check if the user has role super-admin
-     */
-    public function isSuperAdmin()
-    {
-        return $this->hasRole('super-admin');
-    }
-
-    /**
-     * Check if the user has role admin
-     */
-    public function isAdmin()
-    {
-        return $this->hasRole('admin');
-    }
-
-    public function abilities()
-    {
-        return $this->roles->map->abilities->flatten()->pluck('name')->unique();
     }
 
     public function posts()
@@ -107,6 +75,34 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Collection::class, 'author_id');
     }
 
+    public function assignRole($role)
+    {
+        if (is_string($role)) {
+            $role = Role::whereName($role)->firstOrFail();
+        }
+        return $this->roles()->sync($role);
+    }
+
+    public function hasRole(string $role)
+    {
+        return $this->roles->where('name', $role)->isNotEmpty();
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->hasRole('super-admin');
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
+    }
+
+    public function abilities()
+    {
+        return $this->roles->map->abilities->flatten()->pluck('name')->unique();
+    }
+
     public function addCollection($name)
     {
         return $this->collections()->create(compact('name'));
@@ -120,11 +116,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function lastComment()
     {
         return $this->hasOne(Comment::class, 'author_id')->latest();
-    }
-
-    public function path($append = '')
-    {
-        return $append ? "/profiles/{$this->name}/{$append}" : "/profiles/{$this->name}";
     }
 
     public function setRecentView($postId)

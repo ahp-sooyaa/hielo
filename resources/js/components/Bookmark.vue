@@ -1,55 +1,54 @@
 <template>
-    <i 
-        class="fa-bookmark fa-lg"
-        :class="isBookmarked ? 'fas' : 'far'"
-        :style="isLoggedIn ? { cursor: 'pointer' } : ''"
-        @click="toggleBookmark"
-    ></i>
+  <i 
+    @click="toggleBookmark"
+    class="fa-bookmark fa-lg"
+    :class="isBookmarked ? 'fas' : 'far'"
+    :style="isLoggedIn ? { cursor: 'pointer' } : ''"
+  />
 </template>
 
 <script>
-    import axios from 'axios'
-    export default {
-        props: {
-            bookmarked: {
-                type: Boolean,
-                required: true,
-            },
-            postId: {
-                type: Number,
-                required: true,
-            },
-            LoggedIn:{
-                type: Boolean,
-                required: true,
-            }
+export default {
+    props: {
+        bookmarked: {
+            type: Boolean,
+            required: true,
         },
-        data(){
-            return {
-                isBookmarked: this.bookmarked,
-                isLoggedIn: this.LoggedIn,
-                endpoint: `/readingList/${this.postId}`
-            }
+        postId: {
+            type: Number,
+            required: true,
         },
-        methods: {
-            toggleBookmark(){
-                if (this.isLoggedIn) {
-                    axios
+        loggedIn:{
+            type: Boolean,
+            required: true,
+        }
+    },
+    data(){
+        return {
+            isBookmarked: this.bookmarked,
+            isLoggedIn: this.loggedIn,
+            endpoint: `/readingList/${this.postId}`
+        }
+    },
+    methods: {
+        toggleBookmark(){
+            if (this.isLoggedIn) {
+                window.axios
                     .post(this.endpoint)
-                    .then((response) => {
-                        this.isLoading = false;
+                    .then(() => {
+                        this.isLoading = false
 
-                        this.isBookmarked = !this.isBookmarked;
+                        this.isBookmarked = !this.isBookmarked
                     })
                     .catch(() => {
-                        this.isLoading = false;
-                    });
-                } else {
-                    flash('Please sign in to bookmark!')
-                }
+                        this.isLoading = false
+                    })
+            } else {
+                window.flash('Please sign in to bookmark!')
             }
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

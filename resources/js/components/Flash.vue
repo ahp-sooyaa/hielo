@@ -1,43 +1,52 @@
 <template>
-    <div class="alert alert-success position" role="alert" v-if="show">
-        {{ body }}
-    </div>
+  <div
+    v-if="show"
+    class="alert alert-success position"
+    role="alert"
+  >
+    {{ body }}
+  </div>
 </template>
 
 <script>
-    export default {
-        props: ['message'],
+export default {
+    props: {
+        message: {
+            type: String,
+            required: true
+        }
+    },
 
-        data(){
-            return {
-                body: '',
-                show: false
-            }
+    data(){
+        return {
+            body: '',
+            show: false
+        }
+    },
+
+    created(){
+        if(this.message){
+            this.flash(this.message)
+        }
+
+        window.events.$on('flash' , message => this.flash(message) )
+    },
+
+    methods: {
+        flash(message){
+            this.body = message
+            this.show = true
+
+            this.hide()
         },
-
-        created(){
-            if(this.message){
-                this.flash(this.message);
-            }
-
-            window.events.$on('flash' , message => this.flash(message) );
-        },
-
-        methods: {
-            flash(message){
-                this.body = message;
-                this.show = true;
-
-                this.hide();
-            },
              
-            hide(){
-                setTimeout(() => {
-                    this.show = false
-                }, 3000);
-            }
+        hide(){
+            setTimeout(() => {
+                this.show = false
+            }, 3000)
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

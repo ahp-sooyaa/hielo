@@ -6,61 +6,113 @@
     <header class="row justify-content-center">
       <div class="col-md-10">
         <ais-search-box 
-          class="mb-3" placeholder="Search posts, tags & people" :autofocus='true'
-          :show-loading-indicator='true'
-        ></ais-search-box>
+          class="mb-3"
+          placeholder="Search posts, tags & people"
+          :autofocus="true"
+          :show-loading-indicator="true"
+        />
       </div>
     </header>
 
     <div class="row justify-content-center">
       <div class="col-md-10">
         <nav class="mb-3">
-          <div class="nav" id="myTab" role="tablist">
-            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Posts</a>
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tags" role="tab" aria-controls="profile" aria-selected="false">Tags</a>
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#people" role="tab" aria-controls="contact" aria-selected="false">People</a>
-            </div>
+          <div
+            id="myTab"
+            class="nav"
+            role="tablist"
+          >
+            <a
+              id="posts-tab"
+              class="nav-link active"
+              data-toggle="tab"
+              href="#posts"
+              role="tab"
+              aria-controls="posts"
+              aria-selected="true"
+            >Posts</a>
+            <a
+              id="profile-tab"
+              class="nav-link"
+              data-toggle="tab"
+              href="#tags"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >Tags</a>
+            <a
+              id="contact-tab"
+              class="nav-link"
+              data-toggle="tab"
+              href="#people"
+              role="tab"
+              aria-controls="contact"
+              aria-selected="false"
+            >People</a>
+          </div>
         </nav>
       </div>
     </div>
     
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-        <posts-search></posts-search>
+    <div
+      id="myTabContent"
+      class="tab-content"
+    >
+      <div
+        id="posts"
+        class="tab-pane fade show active"
+        role="tabpanel"
+        aria-labelledby="posts-tab"
+      >
+        <posts-search />
       </div>
-      <div class="tab-pane fade" id="tags" role="tabpanel" aria-labelledby="profile-tab">
-        <tags-search></tags-search>
+      <div
+        id="tags"
+        class="tab-pane fade"
+        role="tabpanel"
+        aria-labelledby="profile-tab"
+      >
+        <tags-search />
       </div>
-      <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="contact-tab">
-        <people-search></people-search>
+      <div
+        id="people"
+        class="tab-pane fade"
+        role="tabpanel"
+        aria-labelledby="contact-tab"
+      >
+        <people-search />
       </div>
     </div>
-    
   </ais-instant-search>
 </template>
 
 <script>
 import moment from 'moment'
-import algoliasearch from 'algoliasearch/lite';
-import { history as historyRouter } from 'instantsearch.js/es/lib/routers';
-import { simple as simpleStateMapping } from 'instantsearch.js/es/lib/stateMappings';
+import algoliasearch from 'algoliasearch/lite'
+import { history as historyRouter } from 'instantsearch.js/es/lib/routers'
+import { simple as simpleStateMapping } from 'instantsearch.js/es/lib/stateMappings'
 
 export default {
-  props: ['user'],
-  data() {
-    return {
-      moment,
-      searchClient: algoliasearch(
-        "C7TZ1DW92C",
-        "0152fce4df945b2d72cf8329c56e4e05"
-      ),
-      routing: {
-        router: historyRouter(),
-        stateMapping: simpleStateMapping(),
-      },
-    };
-  }
-};
+    props: {
+        user: {
+            type: String,
+            required: true
+        }
+    },
+    data() {
+        return {
+            moment,
+            searchClient: algoliasearch(
+                'C7TZ1DW92C',
+                '0152fce4df945b2d72cf8329c56e4e05'
+            ),
+            routing: {
+                router: historyRouter(),
+                stateMapping: simpleStateMapping(),
+            },
+        }
+    }
+}
 </script>
 
 <style lang="scss" scoped>

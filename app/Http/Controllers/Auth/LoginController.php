@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 // use App\Providers\RouteServiceProvider;
+use App\User;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\User;
-use Illuminate\Auth\Events\Login;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -34,7 +34,7 @@ class LoginController extends Controller
     // protected $redirectTo = RouteServiceProvider::HOME;
     public function redirectTo()
     {
-        if (auth()->user()->roles) {
+        if (auth_user()->isSuperAdmin() || auth_user()->isAdmin()) {
             return '/admin/dashboard';
         }
         return '/posts';

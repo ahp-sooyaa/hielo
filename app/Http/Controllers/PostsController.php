@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Post;
-use App\Tag;
 use App\Http\Requests\StorePostForm;
 use App\Http\Requests\UpdatePostForm;
+use App\Post;
+use App\Tag;
 use Illuminate\Support\Facades\Session;
 
 class PostsController extends Controller

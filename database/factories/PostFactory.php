@@ -16,3 +16,15 @@ $factory->define(Post::class, function (Faker $faker) {
         'published_at' => now()
     ];
 });
+
+// $factory->state(Post::class, 'published', function ($faker) {
+//     return [
+//         'published_at' => now(),
+//     ];
+// });
+
+// $factory->state(Post::class, 'unpublished', function ($faker) {
+//     return [
+//         'published_at' => null,
+//     ];
+// });

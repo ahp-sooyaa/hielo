@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use App\Traits\Shareable;
@@ -24,7 +23,7 @@ class Post extends Model
     {
         return "/posts/{$this->id}";
     }
-    
+
     public function getFeaturedImageAttribute($value)
     {
         return asset($value);

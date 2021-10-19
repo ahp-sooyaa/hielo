@@ -4,6 +4,52 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
+/* admin routes */
+Route::group([
+    'middleware' => 'Admin',
+    'prefix' => 'admin',
+    'namespace' => 'Admin'
+], function () {
+    Route::get('/dashboard', 'DashboardController@index');
+
+    Route::get('/profile', 'ProfileController@show');
+    Route::get('/profile/edit', 'ProfileController@edit');
+    Route::patch('/profile/{user}', 'ProfileController@update');
+
+    Route::get('/users', 'UsersController@index');
+    Route::get('/users/create', 'UsersController@create');
+    Route::post('/users', 'UsersController@store');
+    Route::get('/users/{user}/edit', 'UsersController@edit');
+    Route::patch('/users/{user}', 'UsersController@update');
+    Route::delete('/users/{user}', 'UsersController@destroy');
+
+    Route::get('/posts', 'PostsController@index');
+    Route::get('/posts/create', 'PostsController@create');
+    Route::post('/posts', 'PostsController@store');
+    Route::get('/posts/{post}/edit', 'PostsController@edit');
+    Route::patch('/posts/{post}', 'PostsController@update');
+    Route::delete('/posts/{post}', 'PostsController@destroy');
+
+    Route::get('/comments', 'CommentsController@index');
+    Route::get('/comments/{comment}/edit', 'CommentsController@edit');
+    Route::patch('/comments/{comment}', 'CommentsController@update');
+    Route::delete('/comments/{comment}', 'CommentsController@destroy');
+
+    Route::get('/roles', 'RolesController@index');
+    Route::get('/roles/create', 'RolesController@create');
+    Route::post('/roles', 'RolesController@store');
+    Route::get('/roles/{role}/edit', 'RolesController@edit');
+    Route::patch('/roles/{role}', 'RolesController@update');
+    Route::delete('/roles/{role}', 'RolesController@destroy');
+
+    Route::resource('abilities', 'AbilitiesController');
+
+    Route::resource('tags', 'TagsController');
+
+    Route::get('/reports', 'ReportsController@index');
+});
+
+// user routes
 Route::get('/posts', 'PostsController@index')->name('posts.index');
 Route::get('/posts/create', 'PostsController@create')->name('posts.create');
 Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
@@ -13,13 +59,13 @@ Route::delete('/{user}/notifications/{notifications}', 'UserNotificationsControl
 
 Route::group([
     'middleware' => ['auth', 'verified']
-] , function () {
+], function () {
     Route::get('/search', 'SearchController@show');
 
     Route::resource('posts', 'PostsController')->except(['index', 'show', 'create']);
 
     Route::get('/{user:name}/posts', 'AuthorPostsController'); // this could be like this author/{name}/posts
-    
+
     Route::get('profiles/{user:name}', 'ProfilesController@show');
     Route::get('profiles/{user:name}/edit', 'ProfilesController@edit');
     Route::patch('profiles/{user:name}', 'ProfilesController@update');
@@ -61,52 +107,3 @@ Route::get('login/github/callback', 'Auth\LoginController@githubCallback');
 
 Route::get('login/facebook', 'Auth\LoginController@redirectFacebook');
 Route::get('login/facebook/callback', 'Auth\LoginController@facebookCallback');
-
-
-
-
-
-/* admin routes */
-Route::group([
-    'middleware' => 'Admin', 
-    'prefix' => 'admin',
-    'namespace' => 'Admin'
-], function () {
-    Route::get('/dashboard', 'DashboardController@index');
-    
-    Route::get('/profile', 'ProfileController@show');
-    Route::get('/profile/edit', 'ProfileController@edit');
-    Route::patch('/profile/{user}', 'ProfileController@update');
-
-    Route::get('/users', 'UsersController@index');
-    Route::get('/users/create', 'UsersController@create');
-    Route::post('/users', 'UsersController@store');
-    Route::get('/users/{user}/edit', 'UsersController@edit');
-    Route::patch('/users/{user}', 'UsersController@update');
-    Route::delete('/users/{user}', 'UsersController@destroy');
-
-    Route::get('/posts', 'PostsController@index');
-    Route::get('/posts/create', 'PostsController@create');
-    Route::post('/posts', 'PostsController@store');
-    Route::get('/posts/{post}/edit', 'PostsController@edit');
-    Route::patch('/posts/{post}', 'PostsController@update');
-    Route::delete('/posts/{post}', 'PostsController@destroy');
-
-    Route::get('/comments', 'CommentsController@index');
-    Route::get('/comments/{comment}/edit', 'CommentsController@edit');
-    Route::patch('/comments/{comment}', 'CommentsController@update');
-    Route::delete('/comments/{comment}', 'CommentsController@destroy');
-
-    Route::get('/roles', 'RolesController@index');
-    Route::get('/roles/create', 'RolesController@create');
-    Route::post('/roles', 'RolesController@store');
-    Route::get('/roles/{role}/edit', 'RolesController@edit');
-    Route::patch('/roles/{role}', 'RolesController@update');
-    Route::delete('/roles/{role}', 'RolesController@destroy');
-
-    Route::resource('abilities', 'AbilitiesController');
-
-    Route::resource('tags', 'TagsController');
-
-    Route::get('/reports', 'ReportsController@index');
-});

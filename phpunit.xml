@@ -28,6 +28,6 @@
         <server name="SESSION_DRIVER" value="array"/>
         <server name="TELESCOPE_ENABLED" value="false"/>
         <server name="SCOUT_DRIVER" value="null"/>
-        <!-- <env name="FILESYSTEM_DRIVER" value="images"/> -->
+        <env name="FILESYSTEM_DRIVER" value="featured_images"/>
     </php>
 </phpunit>

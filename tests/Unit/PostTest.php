@@ -14,7 +14,7 @@ class PostTest extends TestCase
     {
         parent::setUp();
 
-        $this->post = factory('App\Post')->create();
+        $this->post = create('App\Post');        
     }
 
     public function testPostHasPath()
@@ -35,15 +35,5 @@ class PostTest extends TestCase
     public function testPostBelongsToTags()
     {
         $this->assertInstanceOf(Collection::class, $this->post->tags);
-    }
-
-    public function testPostCanAddComment()
-    {
-        $this->post->addComment([
-            'author_id' => 1,
-            'body' => 'hi'
-        ]);
-
-        $this->assertCount(1, $this->post->comments);
     }
 }
